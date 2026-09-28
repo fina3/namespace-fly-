@@ -1,393 +1,341 @@
 {
-  "control": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.7915742242496997,
-      "turn_mean_signed_deg_per_tic": 1.7915742242496997,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.80666633829532,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.9063625450180072
+  "stimuli": {
+    "s1": {
+      "seed": 41027,
+      "sweep": 2.0
     },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.97478991596434,
-      "DNp20_L_10162": 25.042016806721406,
-      "DNpe017_L_10527": 25.042016806721406,
-      "DNpe017_R_555871": 23.588235294116437
+    "s2": {
+      "seed": 7,
+      "sweep": -3.0
     },
-    "network": {
-      "other_neurons_changed": 0,
-      "sum_abs_spike_change": 0,
-      "total_spikes_pct_vs_control": 0.0,
-      "watch_spikes": {
-        "DNp20": 7737,
-        "DNpe017": 5787,
-        "w-cHIN": 1472,
-        "MeVP9": 7737
-      }
+    "s3": {
+      "seed": 123,
+      "sweep": 1.0
     }
   },
-  "control-rep": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.7915742242496997,
-      "turn_mean_signed_deg_per_tic": 1.7915742242496997,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.80666633829532,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.9063625450180072
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.97478991596434,
-      "DNp20_L_10162": 25.042016806721406,
-      "DNpe017_L_10527": 25.042016806721406,
-      "DNpe017_R_555871": 23.588235294116437
-    },
-    "network": {
-      "other_neurons_changed": 0,
-      "sum_abs_spike_change": 0,
-      "total_spikes_pct_vs_control": 0.0,
-      "watch_spikes": {
-        "DNp20": 7737,
-        "DNpe017": 5787,
-        "w-cHIN": 1472,
-        "MeVP9": 7737
+  "shams": [
+    "sham-01",
+    "sham-02",
+    "sham-03",
+    "sham-04",
+    "sham-05",
+    "sham-06",
+    "sham-07",
+    "sham-08",
+    "sham-09",
+    "sham-10",
+    "sham-11",
+    "sham-12",
+    "sham-13",
+    "sham-14",
+    "sham-15",
+    "sham-16",
+    "sham-17",
+    "sham-18",
+    "sham-19",
+    "sham-20",
+    "sham-21",
+    "sham-22",
+    "sham-23",
+    "sham-24"
+  ],
+  "arms": {
+    "dnp20-off": {
+      "specific_measures": {
+        "turn_delta": [
+          -1.7915742242496997,
+          -1.8297963054021609,
+          -1.7159972297719086
+        ]
+      },
+      "specific_cell_types": [],
+      "per_stimulus": {
+        "s1": {
+          "turn_delta": -1.7915742242496997,
+          "forward_delta": 0.0,
+          "attack_delta": 0.0,
+          "other_neurons_changed": 0,
+          "sum_abs_spike_change": 0
+        },
+        "s2": {
+          "turn_delta": -1.8297963054021609,
+          "forward_delta": 0.0,
+          "attack_delta": 0.0,
+          "other_neurons_changed": 0,
+          "sum_abs_spike_change": 0
+        },
+        "s3": {
+          "turn_delta": -1.7159972297719086,
+          "forward_delta": 0.0,
+          "attack_delta": 0.0,
+          "other_neurons_changed": 0,
+          "sum_abs_spike_change": 0
+        }
       }
-    }
-  },
-  "dnp20-off": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 0.0,
-      "turn_mean_signed_deg_per_tic": 0.0,
-      "turn_nonzero_frac": 0.0,
-      "forward_mean": 18.80666633829532,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.9063625450180072
     },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 0.0,
-      "DNp20_L_10162": 0.0,
-      "DNpe017_L_10527": 25.042016806721406,
-      "DNpe017_R_555871": 23.588235294116437
-    },
-    "network": {
-      "other_neurons_changed": 0,
-      "sum_abs_spike_change": 0,
-      "total_spikes_pct_vs_control": -0.013103102380075156,
-      "watch_spikes": {
-        "DNp20": 0,
-        "DNpe017": 5787,
-        "w-cHIN": 1472,
-        "MeVP9": 7737
+    "dnpe017-off": {
+      "specific_measures": {
+        "forward_delta": [
+          -18.80666633829532,
+          -18.774376608883557,
+          -18.368963753661465
+        ],
+        "attack_delta": [
+          -0.9063625450180072,
+          -0.8998799519807923,
+          -0.8943577430972389
+        ]
+      },
+      "specific_cell_types": [
+        {
+          "cell_type": "w-cHIN",
+          "superclass": "vnc_intrinsic",
+          "delta_hz": {
+            "s1": -0.8835534213685474,
+            "s2": -0.8745498199279712,
+            "s3": -0.7995198079231692
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.02040816326530612,
+              0.02460984393757503
+            ],
+            "s2": [
+              -0.012605042016806723,
+              0.04801920768307323
+            ],
+            "s3": [
+              -0.00900360144057623,
+              0.048619447779111646
+            ]
+          }
+        }
+      ],
+      "per_stimulus": {
+        "s1": {
+          "turn_delta": -0.02357602472989173,
+          "forward_delta": -18.80666633829532,
+          "attack_delta": -0.9063625450180072,
+          "other_neurons_changed": 8247,
+          "sum_abs_spike_change": 70208
+        },
+        "s2": {
+          "turn_delta": -0.04219961992797128,
+          "forward_delta": -18.774376608883557,
+          "attack_delta": -0.8998799519807923,
+          "other_neurons_changed": 8118,
+          "sum_abs_spike_change": 71038
+        },
+        "s3": {
+          "turn_delta": -0.02410978751500581,
+          "forward_delta": -18.368963753661465,
+          "attack_delta": -0.8943577430972389,
+          "other_neurons_changed": 8153,
+          "sum_abs_spike_change": 71262
+        }
       }
-    }
-  },
-  "dnpe017-off": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.767998199519808,
-      "turn_mean_signed_deg_per_tic": 1.7679778701080435,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 0.0,
-      "forward_nonzero_frac": 0.0,
-      "attack_frac": 0.0
     },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.74789915966183,
-      "DNp20_L_10162": 25.016806722687793,
-      "DNpe017_L_10527": 0.0,
-      "DNpe017_R_555871": 0.0
-    },
-    "network": {
-      "other_neurons_changed": 8247,
-      "sum_abs_spike_change": 70208,
-      "total_spikes_pct_vs_control": -0.011551798026947478,
-      "watch_spikes": {
-        "DNp20": 7707,
-        "DNpe017": 0,
-        "w-cHIN": 0,
-        "MeVP9": 7708
+    "both-off": {
+      "specific_measures": {
+        "turn_delta": [
+          -1.7915742242496997,
+          -1.8297963054021609,
+          -1.7159972297719086
+        ],
+        "forward_delta": [
+          -18.80666633829532,
+          -18.774376608883557,
+          -18.368963753661465
+        ],
+        "attack_delta": [
+          -0.9063625450180072,
+          -0.8998799519807923,
+          -0.8943577430972389
+        ]
+      },
+      "specific_cell_types": [
+        {
+          "cell_type": "w-cHIN",
+          "superclass": "vnc_intrinsic",
+          "delta_hz": {
+            "s1": -0.8835534213685474,
+            "s2": -0.8745498199279712,
+            "s3": -0.7995198079231692
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.02040816326530612,
+              0.02460984393757503
+            ],
+            "s2": [
+              -0.012605042016806723,
+              0.04801920768307323
+            ],
+            "s3": [
+              -0.00900360144057623,
+              0.048619447779111646
+            ]
+          }
+        }
+      ],
+      "per_stimulus": {
+        "s1": {
+          "turn_delta": -1.7915742242496997,
+          "forward_delta": -18.80666633829532,
+          "attack_delta": -0.9063625450180072,
+          "other_neurons_changed": 8245,
+          "sum_abs_spike_change": 70178
+        },
+        "s2": {
+          "turn_delta": -1.8297963054021609,
+          "forward_delta": -18.774376608883557,
+          "attack_delta": -0.8998799519807923,
+          "other_neurons_changed": 8116,
+          "sum_abs_spike_change": 70996
+        },
+        "s3": {
+          "turn_delta": -1.7159972297719086,
+          "forward_delta": -18.368963753661465,
+          "attack_delta": -0.8943577430972389,
+          "other_neurons_changed": 8151,
+          "sum_abs_spike_change": 71231
+        }
       }
-    }
-  },
-  "both-off": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 0.0,
-      "turn_mean_signed_deg_per_tic": 0.0,
-      "turn_nonzero_frac": 0.0,
-      "forward_mean": 0.0,
-      "forward_nonzero_frac": 0.0,
-      "attack_frac": 0.0
     },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 0.0,
-      "DNp20_L_10162": 0.0,
-      "DNpe017_L_10527": 0.0,
-      "DNpe017_R_555871": 0.0
-    },
-    "network": {
-      "other_neurons_changed": 8245,
-      "sum_abs_spike_change": 70178,
-      "total_spikes_pct_vs_control": -0.024604093495893996,
-      "watch_spikes": {
-        "DNp20": 0,
-        "DNpe017": 0,
-        "w-cHIN": 0,
-        "MeVP9": 7708
-      }
-    }
-  },
-  "mevp9-off": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 0.0,
-      "turn_mean_signed_deg_per_tic": 0.0,
-      "turn_nonzero_frac": 0.0,
-      "forward_mean": 0.0,
-      "forward_nonzero_frac": 0.0,
-      "attack_frac": 0.0
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 0.0,
-      "DNp20_L_10162": 0.0,
-      "DNpe017_L_10527": 0.0,
-      "DNpe017_R_555871": 0.0
-    },
-    "network": {
-      "other_neurons_changed": 8150,
-      "sum_abs_spike_change": 83123,
-      "total_spikes_pct_vs_control": -0.04121117918014073,
-      "watch_spikes": {
-        "DNp20": 0,
-        "DNpe017": 0,
-        "w-cHIN": 0,
-        "MeVP9": 0
-      }
-    }
-  },
-  "sham-a": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.7915858256902761,
-      "turn_mean_signed_deg_per_tic": 1.7915858256902761,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.78532440408163,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.9032412965186074
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.9663865546198,
-      "DNp20_L_10162": 25.03361344537687,
-      "DNpe017_L_10527": 25.042016806721406,
-      "DNpe017_R_555871": 23.504201680671066
-    },
-    "network": {
-      "other_neurons_changed": 8235,
-      "sum_abs_spike_change": 89460,
-      "total_spikes_pct_vs_control": -0.002084776919978353,
-      "watch_spikes": {
-        "DNp20": 7735,
-        "DNpe017": 5777,
-        "w-cHIN": 1460,
-        "MeVP9": 7735
-      }
-    }
-  },
-  "sham-b": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.8171090031212482,
-      "turn_mean_signed_deg_per_tic": 1.8167230170468187,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.78007498919568,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.9003601440576231
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 40.058823529409715,
-      "DNp20_L_10162": 24.915966386553347,
-      "DNpe017_L_10527": 24.915966386553347,
-      "DNpe017_R_555871": 23.571428571427365
-    },
-    "network": {
-      "other_neurons_changed": 8188,
-      "sum_abs_spike_change": 89352,
-      "total_spikes_pct_vs_control": 0.005913924455373199,
-      "watch_spikes": {
-        "DNp20": 7732,
-        "DNpe017": 5770,
-        "w-cHIN": 1455,
-        "MeVP9": 7731
-      }
-    }
-  },
-  "sham-c": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.7951017202881152,
-      "turn_mean_signed_deg_per_tic": 1.7951017202881152,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.756184739495797,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.8989195678271309
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.941176470586186,
-      "DNp20_L_10162": 24.983193277309645,
-      "DNpe017_L_10527": 24.983193277309645,
-      "DNpe017_R_555871": 23.445378151259302
-    },
-    "network": {
-      "other_neurons_changed": 8169,
-      "sum_abs_spike_change": 125297,
-      "total_spikes_pct_vs_control": 0.016825555402099866,
-      "watch_spikes": {
-        "DNp20": 7726,
-        "DNpe017": 5763,
-        "w-cHIN": 1456,
-        "MeVP9": 7725
-      }
-    }
-  },
-  "blank-vision": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.3845763522208883,
-      "turn_mean_signed_deg_per_tic": 1.3814140266506605,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 6.952789871788715,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.4391356542617047
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 19.26890756302422,
-      "DNp20_L_10162": 7.7478991596634685,
-      "DNpe017_L_10527": 7.7478991596634685,
-      "DNpe017_R_555871": 9.630252100839844
-    },
-    "network": {
-      "other_neurons_changed": 11783,
-      "sum_abs_spike_change": 41274529,
-      "total_spikes_pct_vs_control": -46.134499272910766,
-      "watch_spikes": {
-        "DNp20": 3215,
-        "DNpe017": 2068,
-        "w-cHIN": 0,
-        "MeVP9": 3215
-      }
-    }
-  },
-  "frozen-vision": {
-    "control": "control",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.9386806859543817,
-      "turn_mean_signed_deg_per_tic": 1.9386806859543817,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 17.168750440576233,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.8422569027611044
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 37.69747899159471,
-      "DNp20_L_10162": 21.537815126049317,
-      "DNpe017_L_10527": 21.537815126049317,
-      "DNpe017_R_555871": 21.512605042015704
-    },
-    "network": {
-      "other_neurons_changed": 11448,
-      "sum_abs_spike_change": 7361781,
-      "total_spikes_pct_vs_control": -1.7123944391158343,
-      "watch_spikes": {
-        "DNp20": 7049,
-        "DNpe017": 5123,
-        "w-cHIN": 1238,
-        "MeVP9": 7050
-      }
-    }
-  },
-  "control-s2": {
-    "control": "control-s2",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.8297963054021609,
-      "turn_mean_signed_deg_per_tic": 1.8297681762304923,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 18.774376608883557,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.8998799519807923
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 40.04201680672064,
-      "DNp20_L_10162": 24.79831932772982,
-      "DNpe017_L_10527": 24.79831932772982,
-      "DNpe017_R_555871": 23.55462184873829
-    },
-    "network": {
-      "other_neurons_changed": 0,
-      "sum_abs_spike_change": 0,
-      "total_spikes_pct_vs_control": 0.0,
-      "watch_spikes": {
-        "DNp20": 7716,
-        "DNpe017": 5754,
-        "w-cHIN": 1457,
-        "MeVP9": 7715
-      }
-    }
-  },
-  "dnp20-off-s2": {
-    "control": "control-s2",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 0.0,
-      "turn_mean_signed_deg_per_tic": 0.0,
-      "turn_nonzero_frac": 0.0,
-      "forward_mean": 18.774376608883557,
-      "forward_nonzero_frac": 1.0,
-      "attack_frac": 0.8998799519807923
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 0.0,
-      "DNp20_L_10162": 0.0,
-      "DNpe017_L_10527": 24.79831932772982,
-      "DNpe017_R_555871": 23.55462184873829
-    },
-    "network": {
-      "other_neurons_changed": 0,
-      "sum_abs_spike_change": 0,
-      "total_spikes_pct_vs_control": -0.013114556603741837,
-      "watch_spikes": {
-        "DNp20": 0,
-        "DNpe017": 5754,
-        "w-cHIN": 1457,
-        "MeVP9": 7715
-      }
-    }
-  },
-  "dnpe017-off-s2": {
-    "control": "control-s2",
-    "behavior": {
-      "turn_mean_abs_deg_per_tic": 1.7875966854741896,
-      "turn_mean_signed_deg_per_tic": 1.7875965942376952,
-      "turn_nonzero_frac": 1.0,
-      "forward_mean": 0.0,
-      "forward_nonzero_frac": 0.0,
-      "attack_frac": 0.0
-    },
-    "decoder_rates_hz": {
-      "DNp20_R_10059": 39.73109243697275,
-      "DNp20_L_10162": 24.84033613445251,
-      "DNpe017_L_10527": 0.0,
-      "DNpe017_R_555871": 0.0
-    },
-    "network": {
-      "other_neurons_changed": 8118,
-      "sum_abs_spike_change": 71038,
-      "total_spikes_pct_vs_control": -0.012295321730361386,
-      "watch_spikes": {
-        "DNp20": 7684,
-        "DNpe017": 0,
-        "w-cHIN": 0,
-        "MeVP9": 7684
+    "mevp9-off": {
+      "specific_measures": {
+        "turn_delta": [
+          -1.7915742242496997,
+          -1.8297963054021609,
+          -1.7159972297719086
+        ],
+        "forward_delta": [
+          -18.80666633829532,
+          -18.774376608883557,
+          -18.368963753661465
+        ],
+        "attack_delta": [
+          -0.9063625450180072,
+          -0.8998799519807923,
+          -0.8943577430972389
+        ]
+      },
+      "specific_cell_types": [
+        {
+          "cell_type": "DNp20",
+          "superclass": "descending_neuron",
+          "delta_hz": {
+            "s1": -32.50840336134454,
+            "s2": -32.42016806722689,
+            "s3": -31.794117647058822
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.13865546218487396,
+              0.24369747899159663
+            ],
+            "s2": [
+              -0.1092436974789916,
+              0.31092436974789917
+            ],
+            "s3": [
+              -0.09243697478991597,
+              0.36554621848739494
+            ]
+          }
+        },
+        {
+          "cell_type": "DNpe017",
+          "superclass": "descending_neuron",
+          "delta_hz": {
+            "s1": -24.31512605042017,
+            "s2": -24.176470588235293,
+            "s3": -23.516806722689076
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.18067226890756302,
+              0.18907563025210083
+            ],
+            "s2": [
+              -0.12184873949579832,
+              0.3025210084033613
+            ],
+            "s3": [
+              -0.012605042016806723,
+              0.42857142857142855
+            ]
+          }
+        },
+        {
+          "cell_type": "w-cHIN",
+          "superclass": "vnc_intrinsic",
+          "delta_hz": {
+            "s1": -0.8835534213685474,
+            "s2": -0.8745498199279712,
+            "s3": -0.7995198079231692
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.02040816326530612,
+              0.02460984393757503
+            ],
+            "s2": [
+              -0.012605042016806723,
+              0.04801920768307323
+            ],
+            "s3": [
+              -0.00900360144057623,
+              0.048619447779111646
+            ]
+          }
+        },
+        {
+          "cell_type": "PS278",
+          "superclass": "cb_intrinsic",
+          "delta_hz": {
+            "s1": -0.07142857142857142,
+            "s2": -0.07563025210084033,
+            "s3": -0.05042016806722689
+          },
+          "sham_range_hz": {
+            "s1": [
+              -0.01680672268907563,
+              0.029411764705882353
+            ],
+            "s2": [
+              -0.029411764705882353,
+              0.008403361344537815
+            ],
+            "s3": [
+              -0.025210084033613446,
+              0.01680672268907563
+            ]
+          }
+        }
+      ],
+      "per_stimulus": {
+        "s1": {
+          "turn_delta": -1.7915742242496997,
+          "forward_delta": -18.80666633829532,
+          "attack_delta": -0.9063625450180072,
+          "other_neurons_changed": 8150,
+          "sum_abs_spike_change": 83123
+        },
+        "s2": {
+          "turn_delta": -1.8297963054021609,
+          "forward_delta": -18.774376608883557,
+          "attack_delta": -0.8998799519807923,
+          "other_neurons_changed": 8053,
+          "sum_abs_spike_change": 82049
+        },
+        "s3": {
+          "turn_delta": -1.7159972297719086,
+          "forward_delta": -18.368963753661465,
+          "attack_delta": -0.8943577430972389,
+          "other_neurons_changed": 8217,
+          "sum_abs_spike_change": 82633
+        }
       }
     }
   }

@@ -1,129 +1,147 @@
-# namespace-fly: which fly neurons change Doom behavior?
+# namespace-fly: a Devbox swarm for fly-brain knockout experiments
 
-A controlled neural-intervention experiment on [DOOMFLY](https://github.com/nftechie/doomfly), a
-simulation of the MaleCNS v1.0 fruit-fly connectome (166,700 neurons, 25,582,938 connections)
-wired to a Doom arena. A head agent spins up **four Namespace Devboxes**. Each runs the same brain
-on the same Doom frames, with a different set of neurons silenced.
+A simulated fly-brain intervention experiment on [DOOMFLY](https://github.com/nftechie/doomfly),
+which runs the MaleCNS v1.0 fruit-fly connectome (166,700 neurons, 25,582,938 connections) on Doom
+frames. A head agent creates **four Namespace Devboxes**. Each runs the same brain on the same
+frames, with a different set of neurons silenced. The agent then compares every knockout against
+24 sham knockouts.
 
 ```text
-                        HEAD AGENT (launch.sh)
-                                 |
-          +---------------+------+--------+---------------+
-          v               v               v               v
-     fly-control    fly-dnp20-off   fly-dnpe017-off   fly-both-off
-          |               |               |               |
-          +------ identical Doom frames (hash-verified) ---+
-                                 |
-                            compare.py
+                              one question
+                                   |
+                         HEAD AGENT (launch.sh)
+                                   |
+        +-------------+------------+-------------+--------------+
+        v             v                          v              v
+   fly-control   fly-dnp20-off           fly-dnpe017-off   fly-both-off
+   + MeVP9-off follow-up                                              
+   + blank/frozen vision         each box: 3 stimuli (s1, s2, s3)
+        |             |                          |              |
+        +------ 24 sham knockouts × 3 stimuli, spread over all 4 ------+
+                                   |
+            identical Doom frames in every run (hash-verified)
+                                   |
+                    compare.py → one combined result
 ```
 
-## Results (120 s per arm, open loop)
+**93 runs × 120 s of simulated time, about 13 minutes of wall time on 4 Devboxes.** A full rerun
+reproduced all 79 overlapping runs from an earlier launch byte for byte, including all 166,700
+neuron counts, even though many ran on a different Devbox the second time.
 
-Full tables: [`results/comparison.md`](results/comparison.md).
+## The arms
 
-### Main arms
-
-| Arm | silenced | turn (deg/tic) | forward | attack tics |
-|---|---|---|---|---|
-| control | none | 1.792 | 18.81 | 90.6% |
-| dnp20-off | DNp20 L+R (10162, 10059) | **0** | 18.81 | 90.6% |
-| dnpe017-off | DNpe017 L+R (10527, 555871) | 1.768 | **0** | **0%** |
-| both-off | all four | **0** | **0** | **0%** |
-
-### Verification arms
-
-| Arm | what it tests | result |
+| Arm | Silenced | Role |
 |---|---|---|
-| control-rep | same run on a different machine | bit-identical to control, all 166,700 neurons |
-| sham-a, -b, -c | knock out two unrelated optic-lobe cells | decoder output intact; **8,169–8,235 other neurons change**; turning shifts −0.0%, +1.4%, +0.2% |
-| mevp9-off | knock out MeVP9 12764 + 12356, upstream of the decoder | turning, forward and attack all go to **0** |
-| blank-vision | receptors see black | still turns 1.38, moves 6.95, attacks 43.9% of tics |
-| frozen-vision | receptors see the first frame forever | turns 1.94, moves 17.17, attacks 84.2% |
-| control-s2 / dnp20-off-s2 / dnpe017-off-s2 | different Doom seed and sweep direction | same pattern as the main arms |
+| control | nothing | baseline |
+| dnp20-off | DNp20 L+R (10162, 10059) | sanity check: the decoder reads turning from DNp20 |
+| dnpe017-off | DNpe017 L+R (10527, 555871) | sanity check: the decoder reads movement and firing from DNpe017 |
+| both-off | DNp20 + DNpe017 together | both decoder pathways at once |
+| mevp9-off | MeVP9 12764 + 12356 | **follow-up**: silence the input to the decoder rather than the decoder itself |
+| sham-01 … sham-24 | 24 random pairs of comparable, unrelated neurons | null: what does *any* two-neuron knockout do? |
+| blank-vision / frozen-vision | nothing; receptors see black / the first frame forever | does output depend on the image? |
 
-## What is established
+## How "specific" is decided
 
-1. **The knockouts work and the runs are reproducible.** Silenced neurons fire zero spikes (asserted
-   in code). Re-running on the same or a different machine gives byte-identical output.
-2. **DNp20 off removes turning. DNpe017 off removes movement and firing.** This is **true by
-   construction**: DOOMFLY's controller computes turning from DNp20 and movement/fire from DNpe017.
-   It confirms the intervention, and it is not a discovery about flies.
-3. **DNp20's downstream targets never fire in this model.** DNp20 has 73 output connections onto 71
-   cells (mostly neck motor neurons), and none of those cells spikes in control. So silencing DNp20
-   changes no other neuron's spike count.
-4. **DNpe017 drives w-cHIN.** Two of the 14 w-cHIN cells fire in control (1,472 spikes). They stop
-   completely when DNpe017 is silenced, in both stimuli. They keep firing in all three shams
-   (1,455–1,460 spikes). DNpe017 supplies about 98% of their active excitatory drive.
-5. **The decoder neurons are relays of two MeVP9 visual projection neurons.** MeVP9 12764 (40.0 Hz)
-   and 12356 (25.0 Hz) supply essentially all active input to DNp20 and DNpe017. DNp20's spike count
-   equals MeVP9's in every arm. Silencing those two cells removes all decoded behavior.
+The model is deterministic, so there is no run-to-run noise to test against. The 24 shams take
+that role. An effect counts as **specific** only if, **on all three stimuli**, it is **larger in
+size than the largest effect of any sham**, with the same sign each time. Rules for picking the
+shams (`select_shams.py`) were fixed before any sham result was seen: active at 15–45 Hz, 300–900
+outgoing connections, no external input, and neither one of the watched cell types nor directly
+wired into them. The picks use a fixed seed.
 
-## What is NOT established
+## Results
 
-- **"Silencing DNpe017 perturbs 8,247 other neurons" is not specific to DNpe017.** Sham knockouts of
-  unrelated cells perturb the same number (about 8,200). The network is deterministic and recurrent,
-  so any small change reshuffles spike timing across the active optic-lobe population. The count
-  measures sensitivity to perturbation, not DNpe017's wiring.
-- **"Turning drops 1.3%" is within sham range.** Shams moved turning by up to 1.4%. DNp20 lost 30
-  spikes with DNpe017 off and 32 in the second stimulus, against 2–11 in the shams. That is
-  suggestive, but three shams are too few to call it an effect.
-- **The double knockout being "additive" carries no information**, given that DNp20 off changes
-  nothing else.
+Full tables: [`results/comparison.md`](results/comparison.md). Hop distances:
+[`results/propagation.json`](results/propagation.json).
 
-## Limits of the model that affect interpretation
+| Arm | Decoded behavior | Specific effects on the rest of the network | Synapses away |
+|---|---|---|---|
+| dnp20-off | turning → 0. Movement and firing unchanged | **none**: no other neuron's spike count changes | — |
+| dnpe017-off | movement and firing → 0. Turning within sham range | **w-cHIN** (the 2 active cells go silent) | 1 |
+| both-off | all output → 0 | **w-cHIN** only, identical to dnpe017-off | 1 |
+| mevp9-off | all output → 0 | **DNp20, DNpe017, w-cHIN, PS278** | 1, 1, 2, 1 |
 
-- **Only the visual system is active.** 11,677 of 166,700 neurons fire at all. The central brain,
-  the ventral nerve cord and the motor neurons are silent. "Whole-brain simulation" is accurate
-  about what is loaded, not about what participates.
-- **Behavior depends only weakly on the image.** With a black screen the brain still turns, moves
-  and fires, driven by DOOMFLY's constant 12 mV lamina bias. A frozen frame gives nearly the same
-  output as live video. The brain turns right on more than 99.9% of tics in both stimuli, including
-  the second one, which sweeps the other way.
-- **Open loop.** Commands are decoded and recorded, never applied to the game. The player stands
-  still, gets killed and respawns (21 rounds in 120 s). All arms see the same frames for this reason.
-- **No noise, no replicates, no p-values.** One connectome, deterministic dynamics. Shams are the
-  only yardstick for what counts as a meaningful difference.
+w-cHIN spikes in 120 s (control / knockout / sham range):
+
+| | s1 | s2 | s3 |
+|---|---|---|---|
+| dnpe017-off | 1,472 → **0** (shams 1,438–1,513) | 1,457 → **0** (1,436–1,537) | 1,332 → **0** (1,317–1,413) |
+
+### What this shows
+
+1. **The knockout method works and is exactly reproducible.** Silenced cells never fire (asserted
+   in code). Frames are identical in every run of a stimulus. Reruns on other machines are
+   byte-identical.
+2. **DNp20 off → no turning. DNpe017 off → no movement or firing. Both off → nothing.** These are
+   **true by construction**, because the Doom controller reads its commands directly from these
+   cells. They validate the setup and are not neuroscience findings.
+3. **DNpe017 → w-cHIN is the one specific downstream effect of a decoder knockout.** It holds on
+   all 3 stimuli, is 16–36× larger than any sham, and w-cHIN is a direct synaptic target.
+4. **The upstream follow-up propagates exactly one or two synapses.** Silencing the two MeVP9
+   cells silences their direct targets (DNp20, DNpe017, PS278), then DNpe017's target (w-cHIN).
+   Nothing else passes the sham test.
+5. **Nothing propagates far.** No knockout produced a specific effect more than two synapses
+   away. The only other change is network-wide spike-timing reshuffling of about 8,100–8,300
+   neurons. Shams cause the same amount, so it isn't specific to any target.
+
+### What this does not show
+
+- **"Silencing DNpe017 changes turning" does not hold up.** The first run suggested −1.3%. On all
+  three stimuli the change sits inside the sham range.
+- **Both-off adds nothing.** It is exactly DNp20-off plus DNpe017-off. The two pathways don't interact.
+- **PS278 is weak evidence.** It is one cell firing 12–18 spikes per 120 s, which drops to 0.
+  It passes the test, but the absolute numbers are tiny.
+
+## Limitations
+
+- **This is a simulated fly-brain intervention experiment, not a fly brain playing Doom.** The
+  loop is open. The brain watches Doom frames (a seeded game with a scripted camera sweep, not
+  recorded footage), and its commands are recorded but never applied. The player stands still and
+  respawns about 20 times per run.
+- **Only the visual system is active.** About 11,700 of 166,700 neurons fire. The central brain,
+  the ventral nerve cord and the motor neurons are almost entirely silent.
+- **Output depends only weakly on the image.** With a black screen the brain still turns (1.38°/tic),
+  moves (6.95) and fires (44% of tics), driven by DOOMFLY's constant 12 mV lamina bias. A frozen
+  frame gives nearly the same output as live video. The brain turns right on nearly every tic,
+  even when the camera sweeps left.
+- **The null distribution is 24 optic-lobe cells**, because those are the only active cells that
+  qualify. Shams and targets are not interchangeable anatomically.
+- **No run-to-run noise.** One connectome and deterministic dynamics. The shams stand in for
+  noise, but this is not a statistical test on replicate animals.
+- The blank and frozen controls are identical across stimuli (black is black, and all three
+  seeds start from the same spawn view), so they are effectively one control run three times.
 - LIF dynamics, inferred transmitter signs and an approximate retina mapping. See DOOMFLY's own
   [model review](https://github.com/nftechie/doomfly/blob/main/docs/doom-neuroscience-review.md).
-
-## Method
-
-- **Stimulus**: ViZDoom `combat_survival`, seed 41027, scripted camera sweep of 2°/tic (second
-  stimulus: seed 7, −3°/tic). Each arm regenerates the frames. `compare.py` refuses to run unless
-  every per-frame hash matches its control.
-- **Silencing**: every incoming and outgoing synapse of the target cells is set to weight 0. The
-  targets receive no external current, so they rest at −52 mV, below the −45 mV threshold.
-- **Shams**: chosen with a fixed random seed from non-input neurons firing 15–45 Hz with 300–900
-  output connections. Only optic-lobe cells meet that, so the shams sit upstream of the decoder.
-- **Window**: using MaleCNS v1.0 wiring and the fixed stimulus, decoded commands are measured over
-  119 s of neural time starting at t = 1 s. The first 35 tics are warm-up and are excluded.
-- **Pinned**: DOOMFLY `71ecf53`, MaleCNS files checked against DOOMFLY's sha256 lockfile. Kernel and
-  data hashes are recorded in each `results/<arm>/summary.json`.
-- **Cost**: size `l` Devbox (16 vCPU / 32 GB), about 1 minute to set up, about 1.07× real time.
 
 ## Reproduce
 
 ```sh
-./launch.sh 120        # 4 main arms on 4 devboxes in parallel, then compare
-python3 compare.py     # re-run the comparison on downloaded results
+./launch.sh 120     # creates/reuses 4 Devboxes, runs all 93 jobs, writes results/comparison.md
+python3 compare.py  # re-run the comparison on downloaded results
 ```
 
-Verification arms run the same way on any set-up devbox:
+| File | What it does |
+|---|---|
+| `setup.sh` | per box: pinned DOOMFLY `71ecf53`, Python 3.11, MaleCNS data (sha256-checked), graph + kernel |
+| `run_condition.py` | one arm on one stimulus. Silences cells, asserts they never fire, writes per-tic output and all neuron counts |
+| `run_batch.sh` | runs a job list 12 at a time on a box (0.5 GB and one core per run) |
+| `select_shams.py` | picks the 24 sham pairs by fixed rules and seed. Exports cell-type labels |
+| `compare.py` | checks frame hashes, applies the sham test, writes `results/comparison.{md,json}` |
+| `propagation.py` | synaptic distance from each knockout to each specific effect (runs on a box) |
+| `audit_wiring.py` | the connectome queries behind the MeVP9 and w-cHIN wiring claims (runs on a box) |
+| `conditions.json`, `stimuli.json`, `shams.json` | the arms, the 3 stimuli and the 24 sham pairs |
 
-```sh
-python run_condition.py --condition sham-a                                  # also sham-b, sham-c, mevp9-off, blank-vision, frozen-vision
-python run_condition.py --condition control --tag control-s2 --seed 7 --sweep -3.0
-```
+Each run writes `results/<stimulus>/<arm>/`: `summary.json` (behavior, rates and provenance,
+including data and kernel hashes), `ticks.csv` (per-tic commands, decoder spikes and frame hash),
+`neuron_counts.npz` (spikes per neuron after warm-up) and `celltype_spikes.json`.
 
-`audit_wiring.py` holds the connectome queries behind findings 3–5. It runs on a devbox after
-`setup.sh` and a control run.
+Each run uses MaleCNS v1.0 wiring and one fixed stimulus, and measures decoded commands and neural
+activity over 119 s of simulated time starting at t = 1 s. The first 35 tics are warm-up and are excluded.
 
 ## Next
 
-- Add membrane noise and run 10+ seeds per arm, so that effects get confidence intervals.
-- Run 20+ shams to build a proper null distribution for off-target effects.
-- Replace spike-count diffs with rate changes averaged over noise seeds.
-- Close the loop: apply the decoded commands, and compare survival time and kills across arms.
-- Screen upstream: silence visual cell types one at a time and rank them by effect on MeVP9.
+- Close the loop: apply the decoded commands, and compare survival and kills across arms.
+- Screen upstream systematically: silence each visual cell type in turn and rank them by effect on MeVP9.
+- Add membrane noise so each arm gets real replicates and confidence intervals.
 
 DOOMFLY is MIT licensed. The MaleCNS data are CC-BY 4.0 (Janelia/Google).

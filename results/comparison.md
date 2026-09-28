@@ -1,98 +1,121 @@
-# Results: DOOMFLY descending-neuron suppression
+# Results: DOOMFLY knockout experiment
 
-## Stimulus: seed 41027, sweep 2.0 deg/tic
+3 stimuli × (4 target knockouts + 24 sham knockouts + control + 2 vision controls) = 93 runs, 120 s each. Frame hashes match within every stimulus.
 
-Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).
+**Specific** = larger in size than the largest effect of any of the 24 shams, same direction, in every stimulus.
 
-Identical game frames in all 11 arms: sha256 `839dfceddda5e5c6d9d138f52d13bdd6e231045bbaceb036cfea153ab075c366` (4200 frames, 3522 distinct, every per-frame hash matches). In the blank and frozen arms the game frames are the same but the receptors are fed black / the first frame.
+- **s1**: seed 41027, sweep 2.0°/tic, 3522 distinct frames, sha256 `839dfceddda5e5c6…`. Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).
+- **s2**: seed 7, sweep -3.0°/tic, 3337 distinct frames, sha256 `f307b2df41ec594b…`. Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 7, -3.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).
+- **s3**: seed 123, sweep 1.0°/tic, 3410 distinct frames, sha256 `535ca039b520540a…`. Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 123, 1.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).
 
-### Decoded behavior
+## Decoded behavior and network change vs control
 
-| Arm | silenced | mean abs turn (deg/tic) | Δ turn vs control | mean forward | attack tics |
+Δ turn in deg/tic, Δ forward in decoder units, Δ attack as a fraction of tics. Network columns exclude the knocked-out cells themselves.
+
+### s1 (control: turn 1.792, forward 18.81, attack 0.906)
+
+| Arm | turn_delta | forward_delta | attack_delta | other_neurons_changed | sum_abs_spike_change |
 |---|---|---|---|---|---|
-| control | — | 1.7916 | +0.00% | 18.807 | 90.6% |
-| control-rep | — | 1.7916 | +0.00% | 18.807 | 90.6% |
-| dnp20-off | DNp20 10059, DNp20 10162 | 0.0000 | -100.00% | 18.807 | 90.6% |
-| dnpe017-off | DNpe017 10527, DNpe017 555871 | 1.7680 | -1.32% | 0.000 | 0.0% |
-| both-off | DNp20 10059, DNp20 10162, DNpe017 10527, DNpe017 555871 | 0.0000 | -100.00% | 0.000 | 0.0% |
-| mevp9-off | MeVP9 12356, MeVP9 12764 | 0.0000 | -100.00% | 0.000 | 0.0% |
-| sham-a | Dm6 13346, Dm20 23131 | 1.7916 | +0.00% | 18.785 | 90.3% |
-| sham-b | Dm20 26982, Dm1 547692 | 1.8171 | +1.43% | 18.780 | 90.0% |
-| sham-c | Dm6 12132, Dm6 15801 | 1.7951 | +0.20% | 18.756 | 89.9% |
-| blank-vision | — | 1.3846 | -22.72% | 6.953 | 43.9% |
-| frozen-vision | — | 1.9387 | +8.21% | 17.169 | 84.2% |
+| **sham range** | -0.0900 … +0.0658 | -0.099 … +0.098 | -0.007 … +0.011 | 8,128 … 8,310 | 73,104 … 172,860 |
+| dnp20-off | -1.7916 ◆ | +0.000 | +0.000 | 0 | 0 |
+| dnpe017-off | -0.0236 | -18.807 ◆ | -0.906 ◆ | 8,247 | 70,208 |
+| both-off | -1.7916 ◆ | -18.807 ◆ | -0.906 ◆ | 8,245 | 70,178 |
+| mevp9-off | -1.7916 ◆ | -18.807 ◆ | -0.906 ◆ | 8,150 | 83,123 |
+| blank-vision | -0.4070 ◆ | -11.854 ◆ | -0.467 ◆ | 11,783 ◆ | 41,274,529 ◆ |
+| frozen-vision | +0.1471 ◆ | -1.638 ◆ | -0.064 ◆ | 11,448 ◆ | 7,361,781 ◆ |
 
-### Decoder neuron firing rates (Hz)
+### s2 (control: turn 1.830, forward 18.77, attack 0.900)
 
-| Arm | DNp20_R_10059 | DNp20_L_10162 | DNpe017_L_10527 | DNpe017_R_555871 |
-|---|---|---|---|---|
-| control | 39.97 | 25.04 | 25.04 | 23.59 |
-| control-rep | 39.97 | 25.04 | 25.04 | 23.59 |
-| dnp20-off | 0.00 | 0.00 | 25.04 | 23.59 |
-| dnpe017-off | 39.75 | 25.02 | 0.00 | 0.00 |
-| both-off | 0.00 | 0.00 | 0.00 | 0.00 |
-| mevp9-off | 0.00 | 0.00 | 0.00 | 0.00 |
-| sham-a | 39.97 | 25.03 | 25.04 | 23.50 |
-| sham-b | 40.06 | 24.92 | 24.92 | 23.57 |
-| sham-c | 39.94 | 24.98 | 24.98 | 23.45 |
-| blank-vision | 19.27 | 7.75 | 7.75 | 9.63 |
-| frozen-vision | 37.70 | 21.54 | 21.54 | 21.51 |
-
-### Rest of the network vs control (silenced neurons excluded)
-
-| Arm | other neurons with changed spike count | sum of abs spike changes | total spikes Δ | DNp20 spikes | DNpe017 spikes | w-cHIN spikes | MeVP9 spikes |
-|---|---|---|---|---|---|---|---|
-| control | 0 | 0 | +0.000% | 7737 | 5787 | 1472 | 7737 |
-| control-rep | 0 | 0 | +0.000% | 7737 | 5787 | 1472 | 7737 |
-| dnp20-off | 0 | 0 | -0.013% | 0 | 5787 | 1472 | 7737 |
-| dnpe017-off | 8,247 | 70,208 | -0.012% | 7707 | 0 | 0 | 7708 |
-| both-off | 8,245 | 70,178 | -0.025% | 0 | 0 | 0 | 7708 |
-| mevp9-off | 8,150 | 83,123 | -0.041% | 0 | 0 | 0 | 0 |
-| sham-a | 8,235 | 89,460 | -0.002% | 7735 | 5777 | 1460 | 7735 |
-| sham-b | 8,188 | 89,352 | +0.006% | 7732 | 5770 | 1455 | 7731 |
-| sham-c | 8,169 | 125,297 | +0.017% | 7726 | 5763 | 1456 | 7725 |
-| blank-vision | 11,783 | 41,274,529 | -46.134% | 3215 | 2068 | 0 | 3215 |
-| frozen-vision | 11,448 | 7,361,781 | -1.712% | 7049 | 5123 | 1238 | 7050 |
-
-## Stimulus: seed 7, sweep -3.0 deg/tic
-
-Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 7, -3.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).
-
-Identical game frames in all 3 arms: sha256 `f307b2df41ec594b76abce12f876ba34d6932556646b176824ffa29717f840f6` (4200 frames, 3337 distinct, every per-frame hash matches). In the blank and frozen arms the game frames are the same but the receptors are fed black / the first frame.
-
-### Decoded behavior
-
-| Arm | silenced | mean abs turn (deg/tic) | Δ turn vs control | mean forward | attack tics |
+| Arm | turn_delta | forward_delta | attack_delta | other_neurons_changed | sum_abs_spike_change |
 |---|---|---|---|---|---|
-| control-s2 | — | 1.8298 | +0.00% | 18.774 | 90.0% |
-| dnp20-off-s2 | DNp20 10059, DNp20 10162 | 0.0000 | -100.00% | 18.774 | 90.0% |
-| dnpe017-off-s2 | DNpe017 10527, DNpe017 555871 | 1.7876 | -2.31% | 0.000 | 0.0% |
+| **sham range** | -0.0954 … +0.0703 | -0.054 … +0.135 | -0.002 … +0.010 | 8,079 … 8,170 | 71,828 … 169,528 |
+| dnp20-off | -1.8298 ◆ | +0.000 | +0.000 | 0 | 0 |
+| dnpe017-off | -0.0422 | -18.774 ◆ | -0.900 ◆ | 8,118 | 71,038 |
+| both-off | -1.8298 ◆ | -18.774 ◆ | -0.900 ◆ | 8,116 | 70,996 |
+| mevp9-off | -1.8298 ◆ | -18.774 ◆ | -0.900 ◆ | 8,053 | 82,049 |
+| blank-vision | -0.4452 ◆ | -11.822 ◆ | -0.461 ◆ | 11,781 ◆ | 41,019,702 ◆ |
+| frozen-vision | +0.1089 ◆ | -1.606 ◆ | -0.058 ◆ | 11,407 ◆ | 6,999,124 ◆ |
 
-### Decoder neuron firing rates (Hz)
+### s3 (control: turn 1.716, forward 18.37, attack 0.894)
 
-| Arm | DNp20_R_10059 | DNp20_L_10162 | DNpe017_L_10527 | DNpe017_R_555871 |
+| Arm | turn_delta | forward_delta | attack_delta | other_neurons_changed | sum_abs_spike_change |
+|---|---|---|---|---|---|
+| **sham range** | -0.0535 … +0.0674 | +0.004 … +0.226 | -0.009 … +0.008 | 8,151 … 8,269 | 72,372 … 170,982 |
+| dnp20-off | -1.7160 ◆ | +0.000 | +0.000 | 0 | 0 |
+| dnpe017-off | -0.0241 | -18.369 ◆ | -0.894 ◆ | 8,153 | 71,262 |
+| both-off | -1.7160 ◆ | -18.369 ◆ | -0.894 ◆ | 8,151 | 71,231 |
+| mevp9-off | -1.7160 ◆ | -18.369 ◆ | -0.894 ◆ | 8,217 | 82,633 |
+| blank-vision | -0.3314 ◆ | -11.416 ◆ | -0.455 ◆ | 11,802 ◆ | 39,551,296 ◆ |
+| frozen-vision | +0.2227 ◆ | -1.200 ◆ | -0.052 ◆ | 11,482 ◆ | 7,309,234 ◆ |
+
+◆ = larger in size than every sham on this stimulus.
+
+## Specific effects (all stimuli, same direction)
+
+### dnp20-off
+
+- **turn_delta**: s1 -1.7916, s2 -1.8298, s3 -1.7160
+
+0 cell types changed rate more than any sham, in every stimulus:
+
+
+### dnpe017-off
+
+- **forward_delta**: s1 -18.807, s2 -18.774, s3 -18.369
+- **attack_delta**: s1 -0.906, s2 -0.900, s3 -0.894
+
+1 cell types changed rate more than any sham, in every stimulus:
+
+| Cell type | superclass | Δ Hz s1 (sham range) | Δ Hz s2 (sham range) | Δ Hz s3 (sham range) |
 |---|---|---|---|---|
-| control-s2 | 40.04 | 24.80 | 24.80 | 23.55 |
-| dnp20-off-s2 | 0.00 | 0.00 | 24.80 | 23.55 |
-| dnpe017-off-s2 | 39.73 | 24.84 | 0.00 | 0.00 |
+| w-cHIN | vnc_intrinsic | -0.884 (-0.020 … +0.025) | -0.875 (-0.013 … +0.048) | -0.800 (-0.009 … +0.049) |
 
-### Rest of the network vs control (silenced neurons excluded)
+### both-off
 
-| Arm | other neurons with changed spike count | sum of abs spike changes | total spikes Δ | DNp20 spikes | DNpe017 spikes | w-cHIN spikes | MeVP9 spikes |
-|---|---|---|---|---|---|---|---|
-| control-s2 | 0 | 0 | +0.000% | 7716 | 5754 | 1457 | 7715 |
-| dnp20-off-s2 | 0 | 0 | -0.013% | 0 | 5754 | 1457 | 7715 |
-| dnpe017-off-s2 | 8,118 | 71,038 | -0.012% | 7684 | 0 | 0 | 7684 |
+- **turn_delta**: s1 -1.7916, s2 -1.8298, s3 -1.7160
+- **forward_delta**: s1 -18.807, s2 -18.774, s3 -18.369
+- **attack_delta**: s1 -0.906, s2 -0.900, s3 -0.894
 
-## Where the activity is (control)
+1 cell types changed rate more than any sham, in every stimulus:
 
-| Superclass | neurons | mean rate (Hz) |
-|---|---|---|
-| ol_sensory | 6,098 | 44.771 |
-| ol_intrinsic | 89,403 | 2.491 |
-| visual_centrifugal | 563 | 0.390 |
-| descending_neuron | 1,314 | 0.086 |
-| visual_projection | 9,201 | 0.010 |
-| vnc_intrinsic | 13,161 | 0.001 |
-| cb_intrinsic | 32,164 | 0.000 |
-| all other superclasses | 14,796 | 0 (no spikes at all) |
+| Cell type | superclass | Δ Hz s1 (sham range) | Δ Hz s2 (sham range) | Δ Hz s3 (sham range) |
+|---|---|---|---|---|
+| w-cHIN | vnc_intrinsic | -0.884 (-0.020 … +0.025) | -0.875 (-0.013 … +0.048) | -0.800 (-0.009 … +0.049) |
+
+### mevp9-off
+
+- **turn_delta**: s1 -1.7916, s2 -1.8298, s3 -1.7160
+- **forward_delta**: s1 -18.807, s2 -18.774, s3 -18.369
+- **attack_delta**: s1 -0.906, s2 -0.900, s3 -0.894
+
+4 cell types changed rate more than any sham, in every stimulus:
+
+| Cell type | superclass | Δ Hz s1 (sham range) | Δ Hz s2 (sham range) | Δ Hz s3 (sham range) |
+|---|---|---|---|---|
+| DNp20 | descending_neuron | -32.508 (-0.139 … +0.244) | -32.420 (-0.109 … +0.311) | -31.794 (-0.092 … +0.366) |
+| DNpe017 | descending_neuron | -24.315 (-0.181 … +0.189) | -24.176 (-0.122 … +0.303) | -23.517 (-0.013 … +0.429) |
+| w-cHIN | vnc_intrinsic | -0.884 (-0.020 … +0.025) | -0.875 (-0.013 … +0.048) | -0.800 (-0.009 … +0.049) |
+| PS278 | cb_intrinsic | -0.071 (-0.017 … +0.029) | -0.076 (-0.029 … +0.008) | -0.050 (-0.025 … +0.017) |
+
+## Watched cell types: total spikes
+
+| Stimulus | Arm | DNp20 | DNpe017 | MeVP9 | w-cHIN |
+|---|---|---|---|---|---|
+| s1 | control | 7737 | 5787 | 7737 | 1472 |
+| s1 | dnp20-off | 0 | 5787 | 7737 | 1472 |
+| s1 | dnpe017-off | 7707 | 0 | 7708 | 0 |
+| s1 | both-off | 0 | 0 | 7708 | 0 |
+| s1 | mevp9-off | 0 | 0 | 0 | 0 |
+| s1 | sham range | 7704 … 7795 | 5744 … 5832 | 7704 … 7795 | 1438 … 1513 |
+| s2 | control | 7716 | 5754 | 7715 | 1457 |
+| s2 | dnp20-off | 0 | 5754 | 7715 | 1457 |
+| s2 | dnpe017-off | 7684 | 0 | 7684 | 0 |
+| s2 | both-off | 0 | 0 | 7684 | 0 |
+| s2 | mevp9-off | 0 | 0 | 0 | 0 |
+| s2 | sham range | 7690 … 7790 | 5725 … 5826 | 7690 … 7790 | 1436 … 1537 |
+| s3 | control | 7567 | 5597 | 7566 | 1332 |
+| s3 | dnp20-off | 0 | 5597 | 7566 | 1332 |
+| s3 | dnpe017-off | 7536 | 0 | 7536 | 0 |
+| s3 | both-off | 0 | 0 | 7536 | 0 |
+| s3 | mevp9-off | 0 | 0 | 0 | 0 |
+| s3 | sham range | 7545 … 7654 | 5594 … 5699 | 7546 … 7655 | 1317 … 1413 |

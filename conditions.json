@@ -1,13 +1,9 @@
 {
-  "control":       {"silence": [],                   "question": "Baseline decoded behavior under the recorded stimulus."},
-  "dnp20-off":     {"silence": ["DNp20"],            "question": "Does turning decrease when DNp20 activity is removed?"},
-  "dnpe017-off":   {"silence": ["DNpe017"],          "question": "Does forward movement / firing decrease when DNpe017 is removed?"},
-  "both-off":      {"silence": ["DNp20", "DNpe017"], "question": "What remains when both decoder outputs are removed?"},
-
-  "sham-a":        {"silence": [], "silence_ids": [23131, 13346],  "question": "Sham: two rate-matched optic-lobe cells (Dm20, Dm6). How much does any knockout perturb the network?"},
-  "sham-b":        {"silence": [], "silence_ids": [547692, 26982], "question": "Sham: two rate-matched optic-lobe cells (Dm1, Dm20)."},
-  "sham-c":        {"silence": [], "silence_ids": [15801, 12132],  "question": "Sham: two rate-matched optic-lobe cells (Dm6, Dm6)."},
-  "mevp9-off":     {"silence": [], "silence_ids": [12764, 12356],  "question": "Upstream: the two MeVP9 cells that supply nearly all drive to the decoder neurons."},
-  "blank-vision":  {"silence": [], "vision": "blank",  "question": "Does decoded behavior depend on the image at all? All receptors see black."},
+  "control": {"silence": [], "question": "Baseline decoded behavior under the recorded stimulus."},
+  "dnp20-off": {"silence": ["DNp20"], "question": "Does turning decrease when DNp20 activity is removed?"},
+  "dnpe017-off": {"silence": ["DNpe017"], "question": "Does forward movement / firing decrease when DNpe017 is removed?"},
+  "both-off": {"silence": ["DNp20", "DNpe017"], "question": "What remains when both decoder outputs are removed?"},
+  "mevp9-off": {"silence": [], "silence_ids": [12764, 12356], "question": "Upstream: the two MeVP9 cells that supply nearly all drive to the decoder neurons."},
+  "blank-vision": {"silence": [], "vision": "blank", "question": "Does decoded behavior depend on the image at all? All receptors see black."},
   "frozen-vision": {"silence": [], "vision": "frozen", "question": "Does decoded behavior depend on image changes? Receptors see the first frame forever."}
 }

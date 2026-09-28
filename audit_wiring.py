@@ -6,7 +6,7 @@ ptr,post,w,ids=g['ptr'],g['post'],g['weight'],g['ids']
 n=len(ids);pre=np.repeat(np.arange(n),np.diff(ptr))
 nodes=feather.read_table('/workspaces/doomfly/connectome_data/malecns_v1/normalized/neurons.feather').to_pandas()
 ct=nodes.cell_type.fillna('?').astype(str).to_numpy();sc=nodes.superclass.fillna('?').astype(str).to_numpy()
-cnt=np.load('/workspaces/results/control/neuron_counts.npz')['counts']
+cnt=np.load('/workspaces/results/s1/control/neuron_counts.npz')['counts']
 def idx(t):return np.flatnonzero(ct==t)
 p20,pe,wc=idx('DNp20'),idx('DNpe017'),idx('w-cHIN')
 print('DNp20',ids[p20],'DNpe017',ids[pe],'w-cHIN n',len(wc))

@@ -1,107 +1,180 @@
-"""Compare every arm against its control. Refuses to run if stimuli differ.
+"""Compare every arm against its control and against the sham knockouts.
 
-Arms are grouped by stimulus. Sham knockouts measure how much ANY two-neuron
-knockout perturbs the network, which is the yardstick for off-target effects.
+Layout: results/<stimulus>/<arm>/. Refuses to run if any arm's frames differ
+from its control's.
+
+The model is deterministic, so there is no noise to test against. The 24 sham
+knockouts (random pairs of comparable neurons) are the null: they show how much
+ANY two-neuron knockout moves each measure. An effect is called SPECIFIC only if,
+in every stimulus, its size exceeds the largest size produced by any sham
+(|arm delta| > max |sham delta|), with the same sign every time.
+
+Why size and not "outside the sham range": every sham is an optic-lobe cell (the
+only active cells that qualify), and shams shift some measures the same way every
+time (all 24 raise Dm17, for example). An arm that merely fails to do that would
+sit outside the range without having any effect of its own.
+Cell-type screens test hundreds of types, so read single-type hits with that in mind.
 """
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 
-RESULTS = Path(__file__).resolve().parent / 'results'
-GROUPS = {  # control arm -> arms sharing its stimulus
-    'control': ['control-rep', 'dnp20-off', 'dnpe017-off', 'both-off', 'mevp9-off',
-                'sham-a', 'sham-b', 'sham-c', 'blank-vision', 'frozen-vision'],
-    'control-s2': ['dnp20-off-s2', 'dnpe017-off-s2'],
-}
-DECODER = ['DNp20_R_10059', 'DNp20_L_10162', 'DNpe017_L_10527', 'DNpe017_R_555871']
-WATCH = ['DNp20', 'DNpe017', 'w-cHIN', 'MeVP9']
+HERE = Path(__file__).resolve().parent
+RESULTS = HERE / 'results'
+TARGETS = ['dnp20-off', 'dnpe017-off', 'both-off', 'mevp9-off']  # mevp9-off is the upstream follow-up
+VISION = ['blank-vision', 'frozen-vision']
+WATCH = ['DNp20', 'DNpe017', 'MeVP9', 'w-cHIN']
+BEHAVIOR = [('turn_mean_abs_deg_per_tic', 'turn'), ('forward_mean', 'forward'), ('attack_frac', 'attack')]
 
 
-def load(arm):
-    d = RESULTS / arm
+def load(stim, arm):
+    d = RESULTS / stim / arm
     if not (d / 'summary.json').exists():
         return None
     with open(d / 'ticks.csv') as f:
-        ticks = list(csv.DictReader(f))
-    return {'summary': json.loads((d / 'summary.json').read_text()),
-            'types': json.loads((d / 'celltype_spikes.json').read_text()),
-            'counts': np.load(d / 'neuron_counts.npz'),
-            'ticks': ticks}
+        frames = [row['frame_sha16'] for row in csv.DictReader(f)]
+    c = np.load(d / 'neuron_counts.npz')
+    return {'summary': json.loads((d / 'summary.json').read_text()), 'frames': frames,
+            'ids': c['ids'], 'counts': c['counts'].astype(np.int64)}
 
 
-def pct(x, base):
-    return float('nan') if base == 0 else 100 * (x - base) / base
+def measures(r, ctl, type_index, n_types):
+    """Everything compared against shams, for one arm on one stimulus."""
+    s = r['summary']
+    silenced = np.isin(r['ids'], [int(n['id']) for n in s['intervention']['silenced_neurons']])
+    if r['counts'][silenced].any():
+        sys.exit(f"silenced neurons spiked in {s['tag']}")
+    window_s = s['config']['seconds'] - s['config']['warmup']
+    delta = r['counts'] - ctl['counts']
+    keep = ~silenced  # a knockout's own cells are excluded from every network measure
+    type_delta = np.bincount(type_index[keep], weights=delta[keep], minlength=n_types)
+    type_size = np.bincount(type_index[keep], minlength=n_types)
+    b, b0 = s['behavior'], ctl['summary']['behavior']
+    m = {f'{name}_delta': b[key] - b0[key] for key, name in BEHAVIOR}
+    m['other_neurons_changed'] = int(((delta != 0) & keep).sum())
+    m['sum_abs_spike_change'] = int(np.abs(delta[keep]).sum())
+    return m, np.divide(type_delta, type_size * window_s, out=np.zeros(n_types), where=type_size > 0)
 
 
 def main():
-    lines = ['# Results: DOOMFLY descending-neuron suppression', '']
-    out = {}
-    for control, members in GROUPS.items():
-        ctl = load(control)
+    stimuli = json.loads((HERE / 'stimuli.json').read_text())
+    shams = sorted(json.loads((HERE / 'shams.json').read_text()))
+    types = np.load(HERE / 'neuron_types.npz')
+    type_names, type_index = np.unique(types['cell_type'], return_inverse=True)
+    n_types = len(type_names)
+    superclass_of = {}
+    for t, sc in zip(types['cell_type'], types['superclass']):
+        superclass_of.setdefault(t, sc)
+
+    data = {}  # stim -> arm -> {'measures', 'type_delta', 'summary'}
+    for stim in stimuli:
+        ctl = load(stim, 'control')
         if ctl is None:
-            if control == 'control':
-                sys.exit('control arm missing')
-            continue
-        arms = {control: ctl} | {a: r for a in members if (r := load(a)) is not None}
+            sys.exit(f'{stim}/control missing')
+        if not (ctl['ids'] == types['ids']).all():
+            sys.exit('neuron order differs from neuron_types.npz')
+        data[stim] = {}
+        for arm in ['control'] + TARGETS + VISION + shams:
+            r = load(stim, arm)
+            if r is None:
+                sys.exit(f'{stim}/{arm} missing')
+            if r['summary']['stimulus_sha256'] != ctl['summary']['stimulus_sha256'] or r['frames'] != ctl['frames']:
+                sys.exit(f'STIMULUS MISMATCH: {stim}/{arm}')
+            m, td = measures(r, ctl, type_index, n_types)
+            data[stim][arm] = {'measures': m, 'type_delta': td, 'summary': r['summary']}
 
-        # Same stimulus, or the comparison is meaningless.
-        frames = [t['frame_sha16'] for t in ctl['ticks']]
-        for a, r in arms.items():
-            if (r['summary']['stimulus_sha256'] != ctl['summary']['stimulus_sha256']
-                    or [t['frame_sha16'] for t in r['ticks']] != frames):
-                sys.exit(f'STIMULUS MISMATCH: {a} vs {control}')
+    def sham_range(stim, key):
+        v = [data[stim][s]['measures'][key] for s in shams]
+        return min(v), max(v)
 
-        cfg = ctl['summary']['config']
-        lines += [f"## Stimulus: seed {cfg['seed']}, sweep {cfg['sweep_deg_per_tic']} deg/tic", '',
-                  ctl['summary']['window'], '',
-                  f"Identical game frames in all {len(arms)} arms: sha256 `{ctl['summary']['stimulus_sha256']}` "
-                  f"({len(frames)} frames, {len(set(frames))} distinct, every per-frame hash matches). "
-                  'In the blank and frozen arms the game frames are the same but the receptors are fed black / the first frame.', '',
-                  '### Decoded behavior', '',
-                  '| Arm | silenced | mean abs turn (deg/tic) | Δ turn vs control | mean forward | attack tics |',
-                  '|---|---|---|---|---|---|']
-        b0 = ctl['summary']['behavior']
-        for a, r in arms.items():
-            b = r['summary']['behavior']
-            sil = ', '.join(f"{n['type']} {n['id']}" for n in r['summary']['intervention']['silenced_neurons']) or '—'
-            lines.append(f"| {a} | {sil} | {b['turn_mean_abs_deg_per_tic']:.4f} | "
-                         f"{pct(b['turn_mean_abs_deg_per_tic'], b0['turn_mean_abs_deg_per_tic']):+.2f}% | "
-                         f"{b['forward_mean']:.3f} | {100*b['attack_frac']:.1f}% |")
-            out[a] = {'control': control, 'behavior': b}
+    def sham_max_abs(stim, key):
+        return max(abs(data[stim][s]['measures'][key]) for s in shams)
 
-        lines += ['', '### Decoder neuron firing rates (Hz)', '',
-                  '| Arm | ' + ' | '.join(DECODER) + ' |', '|---|' + '---|' * len(DECODER)]
-        for a, r in arms.items():
-            rates = r['summary']['readout_rates_hz']
-            lines.append(f'| {a} | ' + ' | '.join(f'{rates[n]:.2f}' for n in DECODER) + ' |')
-            out[a]['decoder_rates_hz'] = {n: rates[n] for n in DECODER}
+    def beyond(stim, arm, key):  # sign of the effect if its size beats every sham, else 0
+        v = data[stim][arm]['measures'][key]
+        return (1 if v > 0 else -1) if abs(v) > sham_max_abs(stim, key) else 0
 
-        # Off-target effects, excluding the silenced neurons themselves.
-        lines += ['', '### Rest of the network vs control (silenced neurons excluded)', '',
-                  '| Arm | other neurons with changed spike count | sum of abs spike changes | total spikes Δ | '
-                  + ' | '.join(f'{t} spikes' for t in WATCH) + ' |', '|---|---|---|---|' + '---|' * len(WATCH)]
-        ids, c0 = ctl['counts']['ids'], ctl['counts']['counts']
-        for a, r in arms.items():
-            c = r['counts']['counts']
-            assert (r['counts']['ids'] == ids).all()
-            silenced = [int(n['id']) for n in r['summary']['intervention']['silenced_neurons']]
-            other = (c != c0) & ~np.isin(ids, silenced)
-            lines.append(f"| {a} | {int(other.sum()):,} | {int(np.abs(c - c0)[other].sum()):,} | "
-                         f"{pct(c.sum(), c0.sum()):+.3f}% | "
-                         + ' | '.join(str(r['types'][t]['spikes']) for t in WATCH) + ' |')
-            out[a]['network'] = {'other_neurons_changed': int(other.sum()),
-                                 'sum_abs_spike_change': int(np.abs(c - c0)[other].sum()),
-                                 'total_spikes_pct_vs_control': pct(c.sum(), c0.sum()),
-                                 'watch_spikes': {t: r['types'][t]['spikes'] for t in WATCH}}
+    lines = ['# Results: DOOMFLY knockout experiment', '',
+             f'{len(stimuli)} stimuli × ({len(TARGETS)} target knockouts + {len(shams)} sham knockouts + control '
+             f'+ {len(VISION)} vision controls) = {len(stimuli) * (1 + len(TARGETS) + len(shams) + len(VISION))} runs, '
+             f"120 s each. Frame hashes match within every stimulus.", '',
+             '**Specific** = larger in size than the largest effect of any of the 24 shams, same direction, '
+             'in every stimulus.', '']
+    for stim, cfg in stimuli.items():
+        ctl = data[stim]['control']['summary']
+        lines.append(f"- **{stim}**: seed {cfg['seed']}, sweep {cfg['sweep']}°/tic, {len(set(load(stim, 'control')['frames']))} "
+                     f"distinct frames, sha256 `{ctl['stimulus_sha256'][:16]}…`. {ctl['window']}")
+    out = {'stimuli': stimuli, 'shams': shams, 'arms': {}}
+
+    # 1. Behavior and network-size measures, per stimulus, against the sham range.
+    keys = [f'{n}_delta' for _, n in BEHAVIOR] + ['other_neurons_changed', 'sum_abs_spike_change']
+    fmt = {'turn_delta': '{:+.4f}', 'forward_delta': '{:+.3f}', 'attack_delta': '{:+.3f}',
+           'other_neurons_changed': '{:,}', 'sum_abs_spike_change': '{:,}'}
+    lines += ['', '## Decoded behavior and network change vs control', '',
+              'Δ turn in deg/tic, Δ forward in decoder units, Δ attack as a fraction of tics. '
+              'Network columns exclude the knocked-out cells themselves.', '']
+    for stim in stimuli:
+        c0 = data[stim]['control']['summary']['behavior']
+        lines += [f"### {stim} (control: turn {c0['turn_mean_abs_deg_per_tic']:.3f}, forward {c0['forward_mean']:.2f}, "
+                  f"attack {c0['attack_frac']:.3f})", '',
+                  '| Arm | ' + ' | '.join(keys) + ' |', '|---|' + '---|' * len(keys),
+                  '| **sham range** | ' + ' | '.join(
+                      f"{fmt[k].format(sham_range(stim, k)[0])} … {fmt[k].format(sham_range(stim, k)[1])}" for k in keys) + ' |']
+        for arm in TARGETS + VISION:
+            m = data[stim][arm]['measures']
+            lines.append(f'| {arm} | ' + ' | '.join(
+                fmt[k].format(m[k]) + (' ◆' if beyond(stim, arm, k) else '') for k in keys) + ' |')
         lines.append('')
+    lines.append('◆ = larger in size than every sham on this stimulus.')
 
-    lines += ['## Where the activity is (control)', '', '| Superclass | neurons | mean rate (Hz) |', '|---|---|---|']
-    sc = load('control')['summary']['network']['superclass']
-    for k, v in sorted(sc.items(), key=lambda x: -x[1]['spikes']):
-        if v['spikes']:
-            lines.append(f"| {k} | {v['neurons']:,} | {v['mean_rate_hz']:.3f} |")
-    silent = sum(v['neurons'] for v in sc.values() if not v['spikes'])
-    lines.append(f'| all other superclasses | {silent:,} | 0 (no spikes at all) |')
+    # 2. Specific effects: every stimulus, same sign.
+    lines += ['', '## Specific effects (all stimuli, same direction)', '']
+    for arm in TARGETS:
+        found = []
+        for k in keys:
+            sides = [beyond(s, arm, k) for s in stimuli]
+            if sides[0] and all(x == sides[0] for x in sides):
+                found.append((k, [data[s][arm]['measures'][k] for s in stimuli]))
+        sham_td = {s: np.stack([data[s][x]['type_delta'] for x in shams]) for s in stimuli}
+        sides = np.stack([np.where(np.abs(data[s][arm]['type_delta']) > np.abs(sham_td[s]).max(0),
+                                   np.sign(data[s][arm]['type_delta']), 0) for s in stimuli])
+        # Knocked-out cells are already excluded from type_delta, so their own type can't pass trivially.
+        specific = np.flatnonzero((sides[0] != 0) & (sides == sides[0]).all(0))
+        rows = sorted(specific, key=lambda i: -abs(np.mean([data[s][arm]['type_delta'][i] for s in stimuli])))
+        lines += [f'### {arm}', '']
+        lines += [f"- **{k}**: " + ', '.join(f'{s} {fmt[k].format(v)}' for s, v in zip(stimuli, vals)) for k, vals in found]
+        if not found:
+            lines.append('- No behavior or network-size measure is specific.')
+        lines += ['', f'{len(rows)} cell types changed rate more than any sham, in every stimulus:', '']
+        if rows:
+            lines += ['| Cell type | superclass | ' + ' | '.join(f'Δ Hz {s} (sham range)' for s in stimuli) + ' |',
+                      '|---|---|' + '---|' * len(stimuli)]
+            for i in rows[:25]:
+                lines.append(f'| {type_names[i]} | {superclass_of[type_names[i]]} | ' + ' | '.join(
+                    f"{data[s][arm]['type_delta'][i]:+.3f} ({sham_td[s][:, i].min():+.3f} … {sham_td[s][:, i].max():+.3f})"
+                    for s in stimuli) + ' |')
+            if len(rows) > 25:
+                lines.append(f'| … {len(rows) - 25} more in comparison.json | | ' + ' | ' * (len(stimuli) - 1) + ' |')
+        lines.append('')
+        out['arms'][arm] = {
+            'specific_measures': {k: v for k, v in found},
+            'specific_cell_types': [{'cell_type': str(type_names[i]), 'superclass': str(superclass_of[type_names[i]]),
+                                     'delta_hz': {s: float(data[s][arm]['type_delta'][i]) for s in stimuli},
+                                     'sham_range_hz': {s: [float(sham_td[s][:, i].min()), float(sham_td[s][:, i].max())]
+                                                       for s in stimuli}} for i in rows],
+            'per_stimulus': {s: data[s][arm]['measures'] for s in stimuli}}
+
+    # 3. Spike totals of the watched cell types, so the w-cHIN question has its own table.
+    lines += ['## Watched cell types: total spikes', '',
+              '| Stimulus | Arm | ' + ' | '.join(WATCH) + ' |', '|---|---|' + '---|' * len(WATCH)]
+    for stim in stimuli:
+        def spikes(arm, t):
+            r = load(stim, arm)
+            return int(r['counts'][types['cell_type'] == t].sum())
+        for arm in ['control'] + TARGETS:
+            lines.append(f'| {stim} | {arm} | ' + ' | '.join(str(spikes(arm, t)) for t in WATCH) + ' |')
+        sham_vals = {t: [spikes(x, t) for x in shams] for t in WATCH}
+        lines.append(f'| {stim} | sham range | ' + ' | '.join(f'{min(v)} … {max(v)}' for v in sham_vals.values()) + ' |')
 
     (RESULTS / 'comparison.md').write_text('\n'.join(lines) + '\n')
     (RESULTS / 'comparison.json').write_text(json.dumps(out, indent=2) + '\n')

@@ -1,0 +1,39 @@
+{
+  "dnp20-off": {},
+  "dnpe017-off": {
+    "w-cHIN": {
+      "hops_any_path": 1,
+      "hops_via_active_cells": 1,
+      "active_cells_of_type": 2
+    }
+  },
+  "both-off": {
+    "w-cHIN": {
+      "hops_any_path": 1,
+      "hops_via_active_cells": 1,
+      "active_cells_of_type": 2
+    }
+  },
+  "mevp9-off": {
+    "DNp20": {
+      "hops_any_path": 1,
+      "hops_via_active_cells": 1,
+      "active_cells_of_type": 2
+    },
+    "DNpe017": {
+      "hops_any_path": 1,
+      "hops_via_active_cells": 1,
+      "active_cells_of_type": 2
+    },
+    "w-cHIN": {
+      "hops_any_path": 2,
+      "hops_via_active_cells": 2,
+      "active_cells_of_type": 2
+    },
+    "PS278": {
+      "hops_any_path": 1,
+      "hops_via_active_cells": 1,
+      "active_cells_of_type": 1
+    }
+  }
+}

@@ -29,6 +29,8 @@ def main():
     args = p.parse_args()
 
     conditions = json.loads((HERE / 'conditions.json').read_text())
+    if (HERE / 'shams.json').exists():  # written by select_shams.py
+        conditions |= json.loads((HERE / 'shams.json').read_text())
     if args.condition not in conditions:
         p.error(f'unknown condition; choose from {list(conditions)}')
     silence = conditions[args.condition]['silence']
