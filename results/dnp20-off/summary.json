@@ -1,5 +1,6 @@
 {
   "condition": "dnp20-off",
+  "tag": "dnp20-off",
   "question": "Does turning decrease when DNp20 activity is removed?",
   "window": "Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).",
   "intervention": {
@@ -9,15 +10,14 @@
     "silenced_neurons": [
       {
         "id": "10059",
-        "type": "DNp20",
-        "side": "R"
+        "type": "DNp20"
       },
       {
         "id": "10162",
-        "type": "DNp20",
-        "side": "L"
+        "type": "DNp20"
       }
     ],
+    "vision": "live",
     "incoming_synapse_rows_zeroed": 300,
     "outgoing_synapse_rows_zeroed": 73,
     "method": "All incoming and outgoing edge weights of target neurons set to 0; no other change."
@@ -230,8 +230,8 @@
     }
   },
   "runtime": {
-    "wall_seconds": 115.3,
-    "speed_x_realtime": 1.041,
+    "wall_seconds": 120.6,
+    "speed_x_realtime": 0.9947,
     "host": "fly-dnp20-off"
   }
 }

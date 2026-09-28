@@ -1,5 +1,6 @@
 {
   "condition": "dnpe017-off",
+  "tag": "dnpe017-off",
   "question": "Does forward movement / firing decrease when DNpe017 is removed?",
   "window": "Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).",
   "intervention": {
@@ -9,15 +10,14 @@
     "silenced_neurons": [
       {
         "id": "10527",
-        "type": "DNpe017",
-        "side": "L"
+        "type": "DNpe017"
       },
       {
         "id": "555871",
-        "type": "DNpe017",
-        "side": "R"
+        "type": "DNpe017"
       }
     ],
+    "vision": "live",
     "incoming_synapse_rows_zeroed": 1271,
     "outgoing_synapse_rows_zeroed": 1161,
     "method": "All incoming and outgoing edge weights of target neurons set to 0; no other change."
@@ -230,8 +230,8 @@
     }
   },
   "runtime": {
-    "wall_seconds": 112.0,
-    "speed_x_realtime": 1.0713,
+    "wall_seconds": 119.8,
+    "speed_x_realtime": 1.0021,
     "host": "fly-dnpe017-off"
   }
 }

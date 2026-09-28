@@ -25,12 +25,16 @@ def main():
     p.add_argument('--seed', type=int, default=41027, help='ViZDoom seed (DOOMFLY default)')
     p.add_argument('--sweep', type=float, default=2.0, help='scripted camera turn, degrees per tic')
     p.add_argument('--out', default=str(HERE / 'results'))
+    p.add_argument('--tag', help='output directory name (default: the condition name)')
     args = p.parse_args()
 
     conditions = json.loads((HERE / 'conditions.json').read_text())
     if args.condition not in conditions:
         p.error(f'unknown condition; choose from {list(conditions)}')
     silence = conditions[args.condition]['silence']
+    silence_ids = conditions[args.condition].get('silence_ids', [])
+    vision = conditions[args.condition].get('vision', 'live')
+    tag = args.tag or args.condition
 
     sys.path.insert(0, args.doomfly)
     from doom.native import NativeBrain, BUILD
@@ -47,7 +51,8 @@ def main():
     assert len(nodes) == brain.n
 
     # --- intervention -------------------------------------------------------
-    targets = np.asarray(sorted(r['index'] for r in readouts if r['type'] in silence), dtype=np.int32)
+    by_id = [int(np.flatnonzero(brain.ids == i)[0]) for i in silence_ids]  # IndexError if an id is absent
+    targets = np.asarray(sorted({r['index'] for r in readouts if r['type'] in silence} | set(by_id)), dtype=np.int32)
     missing = set(silence) - {r['type'] for r in readouts}
     if missing:
         raise RuntimeError(f'No readout neurons of type {missing} in manifest')
@@ -61,12 +66,13 @@ def main():
     brain.weight[incoming | outgoing] = 0
     intervention = {
         'silenced_types': silence,
-        'silenced_neurons': [{k: r[k] for k in ['id', 'type', 'side']} for r in readouts if r['index'] in set(targets)],
+        'silenced_neurons': [{'id': str(brain.ids[i]), 'type': str(nodes.cell_type.iloc[i])} for i in targets],
+        'vision': vision,
         'incoming_synapse_rows_zeroed': int(incoming.sum()),
         'outgoing_synapse_rows_zeroed': int(outgoing.sum()),
         'method': 'All incoming and outgoing edge weights of target neurons set to 0; no other change.',
     }
-    print(json.dumps({'condition': args.condition, **intervention}), flush=True)
+    print(json.dumps({'condition': args.condition, 'tag': tag, **intervention}), flush=True)
 
     # --- run ---------------------------------------------------------------
     controls = NeuralControls(readouts, mode='bci')
@@ -76,7 +82,8 @@ def main():
     warmup_tics = int(round(args.warmup * 35))
     names = [f"{r['type']}_{r['side']}_{r['id']}" for r in readouts]
 
-    out = Path(args.out) / args.condition
+    out = Path(args.out) / tag
+    frozen = None
     out.mkdir(parents=True, exist_ok=True)
     stim_hash = hashlib.sha256()
     window_counts = np.zeros(brain.n, dtype=np.int64)
@@ -89,6 +96,13 @@ def main():
         frame = game.pixels()
         stim_hash.update(frame.tobytes())
         light = retinal_samples(frame, brain.uv)
+        # Vision controls: the game still runs and frames are still hashed.
+        if vision == 'blank':
+            light.fill(0)
+        elif vision == 'frozen':
+            if frozen is None:
+                frozen = light.copy()
+            light = frozen
         steps = int(round(tick * 10000 / 35)) - brain.cursor  # 285/286 substeps keep clocks aligned
         counts, _ = brain.step(light, steps * .1)
         action = controls.decode(counts, steps * .1 / 1000)
@@ -101,7 +115,7 @@ def main():
             window_ms += steps * .1
         if tick % 35 == 0:
             el = time.perf_counter() - wall_start
-            print(f'{args.condition} t={tick/35:.0f}s/{args.seconds:.0f}s wall={el:.0f}s '
+            print(f'{tag} t={tick/35:.0f}s/{args.seconds:.0f}s wall={el:.0f}s '
                   f'speed={brain.sim_ms/1000/el:.3f}x', flush=True)
     wall = time.perf_counter() - wall_start
     game.close()
@@ -130,6 +144,7 @@ def main():
     commit = subprocess.run(['git', '-C', args.doomfly, 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
     summary = {
         'condition': args.condition,
+        'tag': tag,
         'question': conditions[args.condition]['question'],
         'window': (f'Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed {args.seed}, '
                    f'{args.sweep} deg/tic scripted sweep), measuring decoded commands over '
@@ -157,7 +172,7 @@ def main():
                     'host': os.uname().nodename},
     }
     (out / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
-    print(json.dumps({'done': args.condition, **summary['behavior'], 'wall_s': round(wall, 1)}), flush=True)
+    print(json.dumps({'done': tag, **summary['behavior'], 'wall_s': round(wall, 1)}), flush=True)
 
 
 if __name__ == '__main__':

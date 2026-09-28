@@ -1,34 +1,23 @@
 {
-  "condition": "both-off",
-  "tag": "both-off",
-  "question": "What remains when both decoder outputs are removed?",
+  "condition": "mevp9-off",
+  "tag": "mevp9-off",
+  "question": "Upstream: the two MeVP9 cells that supply nearly all drive to the decoder neurons.",
   "window": "Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).",
   "intervention": {
-    "silenced_types": [
-      "DNp20",
-      "DNpe017"
-    ],
+    "silenced_types": [],
     "silenced_neurons": [
       {
-        "id": "10059",
-        "type": "DNp20"
+        "id": "12356",
+        "type": "MeVP9"
       },
       {
-        "id": "10162",
-        "type": "DNp20"
-      },
-      {
-        "id": "10527",
-        "type": "DNpe017"
-      },
-      {
-        "id": "555871",
-        "type": "DNpe017"
+        "id": "12764",
+        "type": "MeVP9"
       }
     ],
     "vision": "live",
-    "incoming_synapse_rows_zeroed": 1571,
-    "outgoing_synapse_rows_zeroed": 1234,
+    "incoming_synapse_rows_zeroed": 1838,
+    "outgoing_synapse_rows_zeroed": 810,
     "method": "All incoming and outgoing edge weights of target neurons set to 0; no other change."
   },
   "stimulus_sha256": "839dfceddda5e5c6d9d138f52d13bdd6e231045bbaceb036cfea153ab075c366",
@@ -97,9 +86,9 @@
     "DNpe017_R_555871": 0.0
   },
   "network": {
-    "total_spikes": 59032557,
-    "mean_rate_hz": 2.975836278122374,
-    "active_neurons": 11669,
+    "total_spikes": 59022751,
+    "mean_rate_hz": 2.9753419568185677,
+    "active_neurons": 11662,
     "superclass": {
       "ENS": {
         "neurons": 50,
@@ -123,8 +112,8 @@
       },
       "cb_intrinsic": {
         "neurons": 32164,
-        "spikes": 15,
-        "mean_rate_hz": 3.9189908023896525e-06
+        "spikes": 0,
+        "mean_rate_hz": 0.0
       },
       "cb_motor": {
         "neurons": 107,
@@ -163,13 +152,13 @@
       },
       "ol_intrinsic": {
         "neurons": 89403,
-        "spikes": 26507285,
-        "mean_rate_hz": 2.4915304197581247
+        "spikes": 26505222,
+        "mean_rate_hz": 2.4913365097724003
       },
       "ol_sensory": {
         "neurons": 6098,
-        "spikes": 32488682,
-        "mean_rate_hz": 44.7710945316116
+        "spikes": 32488684,
+        "mean_rate_hz": 44.771097287715676
       },
       "sensory_ascending": {
         "neurons": 537,
@@ -188,13 +177,13 @@
       },
       "visual_centrifugal": {
         "neurons": 563,
-        "spikes": 26110,
-        "mean_rate_hz": 0.38971894263920265
+        "spikes": 26128,
+        "mean_rate_hz": 0.3899876113855645
       },
       "visual_projection": {
         "neurons": 9201,
-        "spikes": 10465,
-        "mean_rate_hz": 0.009557784639776516
+        "spikes": 2717,
+        "mean_rate_hz": 0.002481462099022723
       },
       "visual_projection_tbc": {
         "neurons": 2,
@@ -239,8 +228,8 @@
     }
   },
   "runtime": {
-    "wall_seconds": 111.6,
-    "speed_x_realtime": 1.075,
+    "wall_seconds": 139.8,
+    "speed_x_realtime": 0.8584,
     "host": "fly-both-off"
   }
 }

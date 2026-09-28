@@ -1,34 +1,23 @@
 {
-  "condition": "both-off",
-  "tag": "both-off",
-  "question": "What remains when both decoder outputs are removed?",
+  "condition": "sham-c",
+  "tag": "sham-c",
+  "question": "Sham: two rate-matched optic-lobe cells (Dm6, Dm6).",
   "window": "Using MaleCNS v1.0 wiring and a fixed Doom stimulus (seed 41027, 2.0 deg/tic scripted sweep), measuring decoded commands over 119.000 s of neural time starting at t=1.000 s (first 35 tics are warm-up and excluded).",
   "intervention": {
-    "silenced_types": [
-      "DNp20",
-      "DNpe017"
-    ],
+    "silenced_types": [],
     "silenced_neurons": [
       {
-        "id": "10059",
-        "type": "DNp20"
+        "id": "12132",
+        "type": "Dm6"
       },
       {
-        "id": "10162",
-        "type": "DNp20"
-      },
-      {
-        "id": "10527",
-        "type": "DNpe017"
-      },
-      {
-        "id": "555871",
-        "type": "DNpe017"
+        "id": "15801",
+        "type": "Dm6"
       }
     ],
     "vision": "live",
-    "incoming_synapse_rows_zeroed": 1571,
-    "outgoing_synapse_rows_zeroed": 1234,
+    "incoming_synapse_rows_zeroed": 645,
+    "outgoing_synapse_rows_zeroed": 1008,
     "method": "All incoming and outgoing edge weights of target neurons set to 0; no other change."
   },
   "stimulus_sha256": "839dfceddda5e5c6d9d138f52d13bdd6e231045bbaceb036cfea153ab075c366",
@@ -73,19 +62,19 @@
     }
   },
   "behavior": {
-    "turn_mean_abs_deg_per_tic": 0.0,
-    "turn_mean_signed_deg_per_tic": 0.0,
-    "turn_nonzero_frac": 0.0,
-    "forward_mean": 0.0,
-    "forward_nonzero_frac": 0.0,
-    "attack_frac": 0.0
+    "turn_mean_abs_deg_per_tic": 1.7951017202881152,
+    "turn_mean_signed_deg_per_tic": 1.7951017202881152,
+    "turn_nonzero_frac": 1.0,
+    "forward_mean": 18.756184739495797,
+    "forward_nonzero_frac": 1.0,
+    "attack_frac": 0.8989195678271309
   },
   "readout_rates_hz": {
-    "DNp20_R_10059": 0.0,
-    "DNp20_L_10162": 0.0,
+    "DNp20_R_10059": 39.941176470586186,
+    "DNp20_L_10162": 24.983193277309645,
     "MN9_L_10331": 0.0,
     "DNa02_R_10360": 0.0,
-    "DNpe017_L_10527": 0.0,
+    "DNpe017_L_10527": 24.983193277309645,
     "MDN_R_10763": 0.0,
     "DNp09_L_10783": 0.0,
     "DNp09_R_11177": 0.0,
@@ -94,12 +83,12 @@
     "MDN_L_12348": 0.0,
     "MN9_R_16949": 0.0,
     "DNa02_L_523769": 0.0,
-    "DNpe017_R_555871": 0.0
+    "DNpe017_R_555871": 23.445378151259302
   },
   "network": {
-    "total_spikes": 59032557,
-    "mean_rate_hz": 2.975836278122374,
-    "active_neurons": 11669,
+    "total_spikes": 59057020,
+    "mean_rate_hz": 2.977069460057416,
+    "active_neurons": 11668,
     "superclass": {
       "ENS": {
         "neurons": 50,
@@ -123,8 +112,8 @@
       },
       "cb_intrinsic": {
         "neurons": 32164,
-        "spikes": 15,
-        "mean_rate_hz": 3.9189908023896525e-06
+        "spikes": 23,
+        "mean_rate_hz": 6.0091192303308005e-06
       },
       "cb_motor": {
         "neurons": 107,
@@ -143,8 +132,8 @@
       },
       "descending_neuron": {
         "neurons": 1314,
-        "spikes": 0,
-        "mean_rate_hz": 0.0
+        "spikes": 13489,
+        "mean_rate_hz": 0.08626555645088645
       },
       "descending_neuron_tbc": {
         "neurons": 2,
@@ -163,13 +152,13 @@
       },
       "ol_intrinsic": {
         "neurons": 89403,
-        "spikes": 26507285,
-        "mean_rate_hz": 2.4915304197581247
+        "spikes": 26516774,
+        "mean_rate_hz": 2.4924223304971194
       },
       "ol_sensory": {
         "neurons": 6098,
-        "spikes": 32488682,
-        "mean_rate_hz": 44.7710945316116
+        "spikes": 32488711,
+        "mean_rate_hz": 44.771134495120776
       },
       "sensory_ascending": {
         "neurons": 537,
@@ -188,13 +177,13 @@
       },
       "visual_centrifugal": {
         "neurons": 563,
-        "spikes": 26110,
-        "mean_rate_hz": 0.38971894263920265
+        "spikes": 26099,
+        "mean_rate_hz": 0.38955475618309277
       },
       "visual_projection": {
         "neurons": 9201,
-        "spikes": 10465,
-        "mean_rate_hz": 0.009557784639776516
+        "spikes": 10466,
+        "mean_rate_hz": 0.009558697949345536
       },
       "visual_projection_tbc": {
         "neurons": 2,
@@ -213,8 +202,8 @@
       },
       "vnc_intrinsic": {
         "neurons": 13161,
-        "spikes": 0,
-        "mean_rate_hz": 0.0
+        "spikes": 1458,
+        "mean_rate_hz": 0.0009309399620344584
       },
       "vnc_motor": {
         "neurons": 708,
@@ -239,8 +228,8 @@
     }
   },
   "runtime": {
-    "wall_seconds": 111.6,
-    "speed_x_realtime": 1.075,
-    "host": "fly-both-off"
+    "wall_seconds": 131.7,
+    "speed_x_realtime": 0.9109,
+    "host": "fly-dnpe017-off"
   }
 }
