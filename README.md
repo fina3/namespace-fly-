@@ -77,8 +77,8 @@ Full tables: [`results/comparison.md`](results/comparison.md).
   about what is loaded, not about what participates.
 - **Behavior depends only weakly on the image.** With a black screen the brain still turns, moves
   and fires, driven by DOOMFLY's constant 12 mV lamina bias. A frozen frame gives nearly the same
-  output as live video. The brain turns right on 100% of tics in every arm, including the
-  second stimulus that sweeps the other way.
+  output as live video. The brain turns right on more than 99.9% of tics in both stimuli, including
+  the second one, which sweeps the other way.
 - **Open loop.** Commands are decoded and recorded, never applied to the game. The player stands
   still, gets killed and respawns (21 rounds in 120 s). All arms see the same frames for this reason.
 - **No noise, no replicates, no p-values.** One connectome, deterministic dynamics. Shams are the
