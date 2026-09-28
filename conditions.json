@@ -1,0 +1,6 @@
+{
+  "control":     {"silence": [],                     "question": "Baseline decoded behavior under the recorded stimulus."},
+  "dnp20-off":   {"silence": ["DNp20"],              "question": "Does turning decrease when DNp20 activity is removed?"},
+  "dnpe017-off": {"silence": ["DNpe017"],            "question": "Does forward movement / firing decrease when DNpe017 is removed?"},
+  "both-off":    {"silence": ["DNp20", "DNpe017"],   "question": "What remains when both decoder outputs are removed?"}
+}
