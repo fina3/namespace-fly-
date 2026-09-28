@@ -1,8 +1,7 @@
 """For each specific effect in comparison.json, how many synapses from the knocked-out cells?
 
 Shortest path in the connectome from any silenced neuron to any neuron of the
-affected cell type that fired in control, via connections with nonzero weight,
-then the same restricted to connections from neurons that fired in control
+affected cell type that fired in control, then the same restricted to connections from neurons that fired in control
 (the only ones that can carry an effect in this model). Writes results/propagation.json.
 """
 import json
@@ -36,9 +35,9 @@ def hops(ptr, post, sources, targets, allowed, limit=6):
 def main():
     root = Path('/workspaces/doomfly')
     g = np.load(root / 'outputs/doom/malecns_v1/graph.npz')
-    keep = g['weight'] != 0
-    ptr = np.r_[0, np.cumsum(np.add.reduceat(keep, g['ptr'][:-1]) * (np.diff(g['ptr']) > 0))].astype(np.int64)
-    post = g['post'][keep]
+    if (g['weight'] == 0).any():
+        raise RuntimeError('intact graph has zero-weight rows; filter them before counting hops')
+    ptr, post = g['ptr'], g['post']
     ids = g['ids']
     types = np.load(HERE / 'neuron_types.npz')['cell_type']
     comp = json.loads((HERE / 'results/comparison.json').read_text())

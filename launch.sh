@@ -81,5 +81,5 @@ each phase2 $(seq 0 $((${#ARMS[@]} - 1)))
 
 rm -rf results/s[0-9]*
 each pull "${ARMS[@]}"
-python3 compare.py > /dev/null && echo "wrote results/comparison.md" || { echo "ABORT: compare.py failed"; exit 1; }
+python3 verify_results.py && python3 compare.py > /dev/null && echo "wrote results/comparison.md" || { echo "ABORT: verification or comparison failed"; exit 1; }
 echo "Tear down when finished: for a in ${ARMS[*]}; do devbox expire fly-\$a --force; done"

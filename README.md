@@ -44,10 +44,20 @@ neuron counts, even though many ran on a different Devbox the second time.
 
 The model is deterministic, so there is no run-to-run noise to test against. The 24 shams take
 that role. An effect counts as **specific** only if, **on all three stimuli**, it is **larger in
-size than the largest effect of any sham**, with the same sign each time. Rules for picking the
-shams (`select_shams.py`) were fixed before any sham result was seen: active at 15–45 Hz, 300–900
-outgoing connections, no external input, and neither one of the watched cell types nor directly
-wired into them. The picks use a fixed seed.
+size than the largest effect of any sham**, with the same sign each time. Shams
+(`select_shams.py`) are active at 15–45 Hz, have 300–900 outgoing connections and no external
+input, and are neither one of the watched cell types nor directly wired into them. The picks use
+a fixed seed.
+
+Two disclosures about procedure:
+
+- **The criterion was changed once after seeing results.** The first version was "outside the
+  range of the shams". It flagged Dm17 and MeVPMe2, because all 24 shams happen to raise those
+  cell types and the target knockouts don't. The size-based rule replaced it. Nothing that
+  passes the final rule depended on the change: w-cHIN, DNp20, DNpe017 and PS278 pass both.
+- **The sham rules were written after a 3-sham pilot** that used the same rate and connection
+  criteria. The rule excluding cells wired into the watched types was added afterwards. The 24
+  final pairs were drawn by seed and none was dropped or replaced.
 
 ## Results
 
@@ -108,6 +118,10 @@ w-cHIN spikes in 120 s (control / knockout / sham range):
   qualify. Shams and targets are not interchangeable anatomically.
 - **No run-to-run noise.** One connectome and deterministic dynamics. The shams stand in for
   noise, but this is not a statistical test on replicate animals.
+- **Bit-exact only on the same platform.** Runs are byte-identical across our Linux Devboxes.
+  Against the numbers DOOMFLY's author published from a Mac build, the same graph (identical
+  sha256) gives spike totals within about 0.1%, not identical. Compiler and CPU floating-point
+  differences get amplified by the network. Conclusions here rest on effects far larger than that.
 - The blank and frozen controls are identical across stimuli (black is black, and all three
   seeds start from the same spawn view), so they are effectively one control run three times.
 - LIF dynamics, inferred transmitter signs and an approximate retina mapping. See DOOMFLY's own
@@ -128,6 +142,7 @@ python3 compare.py  # re-run the comparison on downloaded results
 | `select_shams.py` | picks the 24 sham pairs by fixed rules and seed. Exports cell-type labels |
 | `compare.py` | checks frame hashes, applies the sham test, writes `results/comparison.{md,json}` |
 | `propagation.py` | synaptic distance from each knockout to each specific effect (runs on a box) |
+| `verify_results.py` | integrity checks on every result set: provenance, frame hashes, tick counts, silenced cells at zero |
 | `audit_wiring.py` | the connectome queries behind the MeVP9 and w-cHIN wiring claims (runs on a box) |
 | `conditions.json`, `stimuli.json`, `shams.json` | the arms, the 3 stimuli and the 24 sham pairs |
 
