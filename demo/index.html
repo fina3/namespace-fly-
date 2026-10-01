@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fly Brain Knockouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090d;
+    --panel: #0d1117;
+    --panel-2: #10161f;
+    --border: #1c2531;
+    --border-hi: #2b3a4d;
+    --text: #e6edf3;
+    --muted: #6b7a8c;
+    --dim: #3a4654;
+    --on: #5cf2b0;
+    --on-glow: rgba(92, 242, 176, 0.45);
+    --off: #2a333f;
+    --accent: #7aa7ff;
+    --warn: #ff6b6b;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); overflow: hidden; }
+  body { display: flex; flex-direction: column; padding: 28px 36px 22px; gap: 20px; }
+
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+  h1 { font-size: clamp(22px, 2.6vw, 38px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .sub { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  .sub b { color: var(--text); font-weight: 500; }
+
+  main { flex: 1; display: grid; grid-template-columns: 30% 1fr; gap: 20px; min-height: 0; }
+
+  /* ---- terminal ---- */
+  .term { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  .term-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .term-bar .dots { display: flex; gap: 6px; }
+  .term-bar .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--dim); display: block; }
+  .term-bar .live { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--muted); opacity: 0; transition: opacity .4s; }
+  .term-bar .live.show { opacity: 1; color: var(--on); }
+  .term-bar .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--on); box-shadow: 0 0 10px var(--on-glow); animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .term-body { flex: 1; padding: 16px 18px; font-family: var(--mono); font-size: 13px; line-height: 1.75; color: #b7c3d0; overflow: hidden; }
+  .line { opacity: 0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; white-space: pre; }
+  .line.show { opacity: 1; transform: none; }
+  .line.cmd { color: var(--text); }
+  .line.cmd::before { content: "$ "; color: var(--accent); }
+  .line.ok { color: var(--on); }
+  .line.dim { color: var(--muted); }
+  .line.warn { color: var(--warn); }
+  .cursor { display: inline-block; width: 8px; height: 15px; background: var(--accent); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .term-foot { padding: 12px 18px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; opacity: 0; transition: opacity .5s; }
+  .term-foot.show { opacity: 1; }
+  .term-foot b { color: var(--text); font-weight: 500; }
+
+  /* ---- experiment grid ---- */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; min-height: 0; }
+  .card { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+          transition: opacity .5s ease, transform .5s ease, border-color .5s ease, box-shadow .5s ease; }
+  .card-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; }
+  .card-head .name { font-weight: 500; color: var(--text); }
+  .card-head .ko { color: var(--warn); }
+  .card-head .frame { margin-left: auto; color: var(--muted); font-size: 11px; letter-spacing: 0.04em; }
+  .card-head .frame b { color: var(--muted); font-weight: 400; }
+  .view { flex: 1; position: relative; margin: 0 12px; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid #141b24; min-height: 0; }
+  .view canvas { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+  .view .tag { position: absolute; left: 10px; top: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(230,237,243,.55); text-transform: uppercase; }
+  .view .init { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--muted); background: rgba(7,9,13,.72); transition: opacity .4s; text-transform: uppercase; }
+  .view .init.gone { opacity: 0; pointer-events: none; }
+  .raster { height: 26px; margin: 8px 12px 0; display: block; width: calc(100% - 24px); opacity: .9; }
+  .outs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px 12px 12px; }
+  .out { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 9px; background: var(--panel-2); transition: border-color .35s, box-shadow .35s, background .35s; }
+  .out .ico { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; color: var(--dim); background: var(--off); transition: all .35s; }
+  .out .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--dim); transition: color .35s; }
+  .out .val { font-family: var(--mono); font-size: 11px; color: var(--dim); margin-left: auto; transition: color .35s; }
+  .out.on { border-color: rgba(92,242,176,.35); box-shadow: 0 0 18px -6px var(--on-glow), inset 0 0 0 1px rgba(92,242,176,.08); }
+  .out.on .ico { background: var(--on); color: #05261a; box-shadow: 0 0 14px var(--on-glow); }
+  .out.on .lbl { color: var(--text); }
+  .out.on .val { color: var(--on); }
+  .out.off .ico { background: #171d26; color: #2b3542; }
+  .out.off .lbl { color: var(--dim); text-decoration: line-through; text-decoration-color: rgba(255,107,107,.5); }
+  .out.off .val { color: var(--warn); opacity: .8; }
+
+  /* ---- focus phase ---- */
+  body.focus .card:not(.hero) { opacity: .32; transform: scale(.985); }
+  body.focus .card.hero { border-color: var(--border-hi); box-shadow: 0 0 0 1px rgba(122,167,255,.25), 0 24px 60px -24px rgba(122,167,255,.35); transform: scale(1.015); z-index: 2; }
+  .circuit { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(7,9,13,.78); backdrop-filter: blur(2px); opacity: 0; transition: opacity .35s; pointer-events: none; }
+  .circuit.show { opacity: 1; }
+  .circuit svg { width: 86%; max-height: 90%; overflow: visible; }
+  .node rect { fill: #121a24; stroke: var(--on); stroke-width: 1.2; rx: 8; transition: stroke .4s, fill .4s; }
+  .node text { fill: var(--text); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-anchor: middle; dominant-baseline: middle; transition: fill .4s; }
+  .node.sink rect { stroke: var(--on); }
+  .edge { stroke: var(--on); stroke-width: 1.5; fill: none; opacity: .85; transition: stroke .4s, opacity .4s; }
+  .node.dead rect { stroke: var(--warn); fill: #1a0f12; }
+  .node.dead text { fill: var(--warn); }
+  .node.dim rect { stroke: var(--off); fill: #0f141b; }
+  .node.dim text { fill: var(--dim); }
+  .edge.dim { stroke: var(--off); opacity: .6; }
+  .edge.dead { stroke: var(--warn); opacity: .6; stroke-dasharray: 4 4; }
+  .strike { stroke: var(--warn); stroke-width: 2; opacity: 0; transition: opacity .25s; }
+  .strike.show { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>what happens if I delete neurons from a fly brain?</h1>
+  <div class="sub"><b>166,700</b>-neuron connectome · MaleCNS v1.0</div>
+</header>
+
+<main>
+  <section class="term">
+    <div class="term-bar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span>namespace-fly</span>
+      <span class="live" id="live"><i></i>4/4 LIVE</span>
+    </div>
+    <div class="term-body" id="term"></div>
+    <div class="term-foot" id="foot"><b>93</b> simulations · <b>4</b> Devboxes · <b>~13</b> min</div>
+  </section>
+
+  <section class="grid" id="grid"></section>
+</main>
+
+<script>
+/* ---------- experiment definitions (measured values, stimulus s1) ---------- */
+const CONDS = [
+  { id: 'control', name: 'CONTROL', ko: '',         turn: 1.79, move: 18.8, fire: 91, rows: [1,1,1,1] },
+  { id: 'dnp20',   name: 'DNp20',   ko: '−',        turn: 0,    move: 18.8, fire: 91, rows: [0,0,1,1] },
+  { id: 'dnpe017', name: 'DNpe017', ko: '−',        turn: 1.77, move: 0,    fire: 0,  rows: [1,1,0,0] },
+  { id: 'mevp9',   name: 'MeVP9',   ko: '−',        turn: 0,    move: 0,    fire: 0,  rows: [0,0,0,0] },
+];
+const RATES = [40, 25, 25, 23.6];        // Hz: DNp20 R, DNp20 L, DNpe017 L, DNpe017 R
+const LOOP = 10000;
+
+/* ---------- build cards ---------- */
+const grid = document.getElementById('grid');
+const cards = CONDS.map((c, i) => {
+  const el = document.createElement('article');
+  el.className = 'card' + (c.id === 'mevp9' ? ' hero' : '');
+  el.innerHTML = `
+    <div class="card-head">
+      <span class="name">${c.name}</span>${c.ko ? `<span class="ko">${c.ko}</span>` : ''}
+      <span class="frame">frame <b class="fnum">0000</b> · <b class="fhash">————</b></span>
+    </div>
+    <div class="view">
+      <canvas class="stim" width="240" height="150"></canvas>
+      <span class="tag">stimulus · seed 41027</span>
+      <div class="init">initializing</div>
+      ${c.id === 'mevp9' ? circuitSVG() : ''}
+    </div>
+    <canvas class="raster" width="600" height="26"></canvas>
+    <div class="outs">
+      ${out('turn', '↻', 'TURN', c.turn ? c.turn.toFixed(1) + '°' : '0')}
+      ${out('move', '↑', 'MOVE', c.move ? c.move.toFixed(1) : '0')}
+      ${out('fire', '●', 'FIRE', c.fire ? c.fire + '%' : '0')}
+    </div>`;
+  grid.appendChild(el);
+  return { c, el, stim: el.querySelector('.stim'), raster: el.querySelector('.raster'),
+           fnum: el.querySelector('.fnum'), fhash: el.querySelector('.fhash'), init: el.querySelector('.init'),
+           outs: { turn: el.querySelector('.out.turn'), move: el.querySelector('.out.move'), fire: el.querySelector('.out.fire') } };
+});
+function out(k, ico, lbl, val) {
+  return `<div class="out ${k}"><span class="ico">${ico}</span><span class="lbl">${lbl}</span><span class="val">${val}</span></div>`;
+}
+function circuitSVG() {
+  return `<div class="circuit" id="circuit"><svg viewBox="0 0 300 170">
+    <path class="edge e1" d="M150 36 C150 60 92 50 92 78"/>
+    <path class="edge e2" d="M150 36 C150 60 208 50 208 78"/>
+    <path class="edge e3" d="M92 102 L92 126"/>
+    <path class="edge e4" d="M208 102 C208 118 170 112 170 126"/>
+    <path class="edge e5" d="M208 102 C208 118 246 112 246 126"/>
+    <g class="node n-mevp9"><rect x="110" y="12" width="80" height="24"/><text x="150" y="25">MeVP9</text></g>
+    <g class="node n-dnp20"><rect x="52" y="78" width="80" height="24"/><text x="92" y="91">DNp20</text></g>
+    <g class="node n-dnpe017"><rect x="166" y="78" width="84" height="24"/><text x="208" y="91">DNpe017</text></g>
+    <g class="node sink n-turn"><rect x="62" y="126" width="60" height="24"/><text x="92" y="139">TURN</text></g>
+    <g class="node sink n-move"><rect x="140" y="126" width="60" height="24"/><text x="170" y="139">MOVE</text></g>
+    <g class="node sink n-fire"><rect x="216" y="126" width="60" height="24"/><text x="246" y="139">FIRE</text></g>
+    <line class="strike" x1="112" y1="34" x2="188" y2="14"/>
+  </svg></div>`;
+}
+
+/* ---------- terminal ---------- */
+const term = document.getElementById('term');
+const LINES = [
+  [   0, 'cmd',  './launch.sh --arms 4 --stimulus s1'],
+  [1000, '',     'creating control...'],
+  [1280, '',     'creating DNp20 knockout...'],
+  [1560, '',     'creating DNpe017 knockout...'],
+  [1840, '',     'creating MeVP9 knockout...'],
+  [2200, 'ok',   '✓ 4/4 live'],
+  [2420, 'ok',   '✓ same stimulus'],
+  [2640, 'ok',   '✓ frame hashes match'],
+  [3300, 'dim',  '  seed 41027 · 4200 frames · 120 s'],
+  [3700, 'dim',  '  silenced cells: 0 spikes ✓'],
+  [5000, 'warn', '  silence MeVP9 12764 + 12356'],
+  [5900, 'dim',  '  → DNp20 0 Hz · DNpe017 0 Hz'],
+  [7300, 'ok',   '✓ 93 runs · 4 devboxes · 13 min'],
+];
+const lineEls = LINES.map(([, cls, txt]) => {
+  const d = document.createElement('div'); d.className = 'line ' + cls; d.textContent = txt; term.appendChild(d); return d;
+});
+const cur = document.createElement('div'); cur.className = 'line show'; cur.innerHTML = '<span class="cursor"></span>'; term.appendChild(cur);
+
+/* ---------- deterministic Doom-style stimulus (rendered once, copied to all panels) ---------- */
+const W = 240, H = 150;
+const off = document.createElement('canvas'); off.width = W; off.height = H;
+const ox = off.getContext('2d');
+const img = ox.createImageData(W, H);
+const MAP = [
+  '################',
+  '#..............#',
+  '#..##.....##...#',
+  '#..##......#...#',
+  '#..............#',
+  '#......##......#',
+  '#.......#......#',
+  '#..............#',
+  '#...#.....#....#',
+  '#...#.....##...#',
+  '#..............#',
+  '#..###.........#',
+  '#..............#',
+  '#......#...#...#',
+  '#..............#',
+  '################',
+].map(r => r.split(''));
+const SPRITES = [ {x: 5.5, y: 3.5}, {x: 11.5, y: 10.5}, {x: 9.0, y: 5.5}, {x: 3.5, y: 11.5}, {x: 12.5, y: 4.5} ];
+const PX = 7.5, PY = 7.5, FOV = Math.PI / 3;
+const zbuf = new Float32Array(W);
+function mapAt(x, y) { return MAP[y | 0]?.[x | 0] === '#'; }
+
+function renderStim(tms) {
+  const a0 = tms / 1000 * (40 * Math.PI / 180);           // 40°/s scripted sweep
+  const bob = Math.sin(tms / 1000 * 6) * 1.2;
+  const d = img.data;
+  // ceiling / floor
+  for (let y = 0; y < H; y++) {
+    const horizon = H / 2 + bob;
+    const f = y < horizon ? (1 - y / horizon) : ((y - horizon) / (H - horizon));
+    const base = y < horizon ? [18, 20, 26] : [38, 34, 30];
+    const k = 0.35 + 0.65 * (y < horizon ? f * 0.6 : f);
+    for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; d[i] = base[0] * k; d[i+1] = base[1] * k; d[i+2] = base[2] * k; d[i+3] = 255; }
+  }
+  // walls
+  for (let x = 0; x < W; x++) {
+    const ra = a0 - FOV / 2 + (x / W) * FOV;
+    const dx = Math.cos(ra), dy = Math.sin(ra);
+    let mx = PX | 0, my = PY | 0;
+    const ddx = Math.abs(1 / dx), ddy = Math.abs(1 / dy);
+    let sx, sy, sdx, sdy;
+    if (dx < 0) { sx = -1; sdx = (PX - mx) * ddx; } else { sx = 1; sdx = (mx + 1 - PX) * ddx; }
+    if (dy < 0) { sy = -1; sdy = (PY - my) * ddy; } else { sy = 1; sdy = (my + 1 - PY) * ddy; }
+    let side = 0, n = 0;
+    while (n++ < 64) {
+      if (sdx < sdy) { sdx += ddx; mx += sx; side = 0; } else { sdy += ddy; my += sy; side = 1; }
+      if (mapAt(mx, my)) break;
+    }
+    const dist = (side === 0 ? sdx - ddx : sdy - ddy) * Math.cos(ra - a0);
+    zbuf[x] = dist;
+    const h = Math.min(H * 2, (H / dist) | 0);
+    const top = ((H - h) / 2 + bob) | 0, bot = top + h;
+    const hitX = side === 0 ? PY + (sdx - ddx) * dy : PX + (sdy - ddy) * dx;
+    const tex = ((hitX * 6) | 0) % 2;
+    const shade = Math.max(0.12, 1 / (1 + dist * 0.28)) * (side ? 0.72 : 1) * (tex ? 0.86 : 1);
+    const c = ((mx + my) % 3 === 0) ? [120, 78, 58] : [96, 100, 92];
+    for (let y = Math.max(0, top); y < Math.min(H, bot); y++) {
+      const i = (y * W + x) * 4; d[i] = c[0] * shade; d[i+1] = c[1] * shade; d[i+2] = c[2] * shade;
+    }
+  }
+  // sprites (enemies), depth tested per column
+  const order = SPRITES.map(s => ({ s, d: Math.hypot(s.x - PX, s.y - PY) })).sort((a, b) => b.d - a.d);
+  for (const { s, d: dist } of order) {
+    let rel = Math.atan2(s.y - PY, s.x - PX) - a0;
+    rel = Math.atan2(Math.sin(rel), Math.cos(rel));
+    if (Math.abs(rel) > FOV / 2 + 0.25) continue;
+    const cx = ((rel + FOV / 2) / FOV) * W;
+    const size = Math.min(H * 1.5, H / dist) * 0.9;
+    const top = (H / 2 + bob - size / 2) | 0;
+    const shade = Math.max(0.2, 1 / (1 + dist * 0.25));
+    for (let x = Math.max(0, (cx - size / 2) | 0); x < Math.min(W, (cx + size / 2) | 0); x++) {
+      if (zbuf[x] < dist) continue;
+      const u = (x - (cx - size / 2)) / size;
+      for (let y = Math.max(0, top); y < Math.min(H, top + size); y++) {
+        const v = (y - top) / size;
+        const body = (Math.abs(u - 0.5) < 0.22 && v > 0.3) || (Math.hypot(u - 0.5, (v - 0.2) * 1.6) < 0.16);
+        const limb = v > 0.35 && v < 0.75 && Math.abs(u - 0.5) < 0.42 && Math.abs(u - 0.5) > 0.24 && Math.abs((v - 0.55) - (Math.abs(u - 0.5) - 0.3) * 1.3) < 0.08;
+        if (!body && !limb) continue;
+        const i = (y * W + x) * 4; const r = body && v < 0.3 ? 150 : 128;
+        d[i] = r * shade; d[i+1] = 52 * shade; d[i+2] = 40 * shade;
+      }
+    }
+  }
+  ox.putImageData(img, 0, 0);
+  // weapon silhouette (identical in every panel: open loop, the brain never fires the gun)
+  ox.fillStyle = '#1c1f24';
+  ox.fillRect(W / 2 - 9, H - 34 + bob * 0.5, 18, 34);
+  ox.fillRect(W / 2 - 16, H - 18 + bob * 0.5, 32, 18);
+  ox.fillStyle = '#2b2f36'; ox.fillRect(W / 2 - 5, H - 40 + bob * 0.5, 10, 8);
+  // thin HUD strip
+  ox.fillStyle = 'rgba(0,0,0,.55)'; ox.fillRect(0, H - 9, W, 9);
+  ox.fillStyle = '#7fd68f'; ox.fillRect(4, H - 6, 46, 3);
+  ox.fillStyle = '#d6b45a'; ox.fillRect(W - 50, H - 6, 46, 3);
+}
+
+/* ---------- spike raster ---------- */
+function rand(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+const SPIKES = RATES.map((hz, r) => {               // deterministic spike trains for the 4 decoder cells, 10 s
+  const rnd = rand(1000 + r), out = []; let t = 0;
+  while (t < LOOP) { t += -Math.log(1 - rnd()) / hz * 1000 * 0.75 + 1000 / hz * 0.25; out.push(t); }
+  return out;
+});
+function drawRaster(cv, rows, tms, active) {
+  const g = cv.getContext('2d'), w = cv.width, h = cv.height, win = 2500;
+  g.clearRect(0, 0, w, h);
+  for (let r = 0; r < 4; r++) {
+    const y = 3 + r * 6;
+    g.fillStyle = '#131a23'; g.fillRect(0, y, w, 1);
+    if (!active || !rows[r]) { if (active) { g.fillStyle = 'rgba(255,107,107,.35)'; g.fillRect(0, y - 1, w, 3); } continue; }
+    g.fillStyle = r < 2 ? '#7aa7ff' : '#5cf2b0';
+    for (const s of SPIKES[r]) {
+      if (s > tms || s < tms - win) continue;
+      g.fillRect(((s - (tms - win)) / win) * w, y - 2, 1.5, 5);
+    }
+  }
+}
+
+/* ---------- timeline ---------- */
+const live = document.getElementById('live'), foot = document.getElementById('foot');
+const circuit = document.getElementById('circuit');
+const N = {};
+['mevp9','dnp20','dnpe017','turn','move','fire'].forEach(k => N[k] = circuit.querySelector('.n-' + k));
+const E = [1,2,3,4,5].map(i => circuit.querySelector('.e' + i));
+const strike = circuit.querySelector('.strike');
+let start = performance.now(), lastFrame = -1;
+
+function setCircuit(stage) {   // 0 intact · 1 MeVP9 dead · 2 DNs dim · 3 outputs dim
+  N.mevp9.className = 'node n-mevp9' + (stage >= 1 ? ' dead' : '');
+  strike.classList.toggle('show', stage >= 1);
+  ['dnp20','dnpe017'].forEach(k => N[k].className = `node n-${k}` + (stage >= 2 ? ' dim' : ''));
+  ['turn','move','fire'].forEach(k => N[k].className = `node sink n-${k}` + (stage >= 3 ? ' dim' : ''));
+  E[0].className.baseVal = 'edge e1' + (stage >= 1 ? ' dead' : '');
+  E[1].className.baseVal = 'edge e2' + (stage >= 1 ? ' dead' : '');
+  E.slice(2).forEach((e, i) => e.className.baseVal = `edge e${i + 3}` + (stage >= 2 ? ' dim' : ''));
+}
+
+function tick(now) {
+  const t = (now - start) % LOOP;
+  const frame = Math.floor(t / 1000 * 35);
+
+  LINES.forEach(([at], i) => lineEls[i].classList.toggle('show', t >= at));
+  live.classList.toggle('show', t >= 2200);
+  foot.classList.toggle('show', t >= 7300);
+
+  const running = t >= 1000;
+  if (running) renderStim(t);
+  const hash = frame.toString(16).padStart(4, '0') + ((frame * 2654435761 >>> 0) % 0xffff).toString(16).padStart(4, '0').slice(0, 4);
+  for (const k of cards) {
+    k.init.classList.toggle('gone', t >= 1000 + 250 * cards.indexOf(k));
+    if (running) {
+      const g = k.stim.getContext('2d'); g.drawImage(off, 0, 0);
+      if (frame !== lastFrame) { k.fnum.textContent = String(frame).padStart(4, '0'); k.fhash.textContent = hash.slice(0, 8); }
+    }
+    const active = t >= 2500;
+    drawRaster(k.raster, k.c.rows, t, active);
+    for (const [key, v] of [['turn', k.c.turn], ['move', k.c.move], ['fire', k.c.fire]]) {
+      k.outs[key].classList.toggle('on', active && v > 0);
+      k.outs[key].classList.toggle('off', active && !(v > 0));
+    }
+  }
+  lastFrame = frame;
+
+  const focus = t >= 5000 && t < 7100;
+  document.body.classList.toggle('focus', focus);
+  circuit.classList.toggle('show', t >= 5200 && t < 7000);
+  setCircuit(t < 5800 ? 0 : t < 6150 ? 1 : t < 6500 ? 2 : 3);
+
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+// Restart the sequence from 0: click anywhere, press R, or bring the tab back into view.
+const restart = () => { start = performance.now(); };
+addEventListener('click', restart);
+addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') restart(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restart(); });
+</script>
+</body>
+</html>
