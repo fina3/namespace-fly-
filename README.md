@@ -129,11 +129,19 @@ w-cHIN spikes in 120 s (control / knockout / sham range):
 
 ## Demo page
 
-`demo/index.html` is a silent, looping 10-second visualization of the four primary arms for screen
-recording. Open it directly in a browser. The footage is the real ViZDoom input from the control run
-(`demo/frames.jpg`, 350 frames at 35 Hz, dumped with `run_condition.py --dump-frames`); the per-tic
-hashes shown are the ones in `results/s1/control/ticks.csv`. Indicator values are the measured s1
-results. Click or press R to restart the loop.
+`demo/index.html` is a silent, looping 10-second visualization for screen recording. Open it
+directly in a browser; click or press R to restart.
+
+Unlike the experiment (open loop), the demo footage is **closed loop**: the brain's decoded commands
+drive the game, so each knockout plays differently. All four runs use the same seed and start from
+the identical first frame; the knockout is the only difference. Over 10 s, the control survives with
+0 deaths; DNpe017− and MeVP9− are killed at tic 183 and DNp20− at tic 311.
+
+The footage, health, deaths, per-tic commands and decoder spike rasters on the page all come from
+`results/closed-loop/<arm>/ticks.csv` (produced with `run_condition.py --closed-loop --dump-frames`
+for 10 s). Frames are stored as 256×192 JPEG sprite sheets (`demo/closed-<arm>.jpg`). These four
+runs were made on one Devbox, not four. The closed-loop runs are a demonstration only; none of the
+specificity results above depend on them.
 
 ## Reproduce
 

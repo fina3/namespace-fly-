@@ -27,6 +27,8 @@ def main():
     p.add_argument('--out', default=str(HERE / 'results'))
     p.add_argument('--tag', help='output directory name (default: the condition name)')
     p.add_argument('--dump-frames', help='also save every input frame as PNG into this directory (demo footage)')
+    p.add_argument('--closed-loop', action='store_true',
+                   help='apply the decoded commands to the game instead of the scripted sweep (demo only; frames then differ per arm)')
     args = p.parse_args()
 
     conditions = json.loads((HERE / 'conditions.json').read_text())
@@ -113,10 +115,12 @@ def main():
         steps = int(round(tick * 10000 / 35)) - brain.cursor  # 285/286 substeps keep clocks aligned
         counts, _ = brain.step(light, steps * .1)
         action = controls.decode(counts, steps * .1 / 1000)
-        game.act(scripted)  # the brain never moves the camera
+        # Open loop (the experiment): the brain never moves the camera. Closed loop: it drives the game.
+        game.act(action if args.closed_loop else scripted)
+        obs = game.observation()
         rows.append([tick, game.episode, hashlib.sha256(frame.tobytes()).hexdigest()[:16],
                      round(action['turn'], 6), round(action['forward'], 6), int(action['attack']),
-                     int(counts.sum())] + [int(counts[r['index']]) for r in readouts])
+                     int(counts.sum())] + [int(counts[r['index']]) for r in readouts] + [obs['health'], obs['kills']])
         if tick > warmup_tics:
             window_counts += counts
             window_ms += steps * .1
@@ -131,7 +135,7 @@ def main():
         raise RuntimeError('Silenced neurons spiked; intervention failed')
 
     # --- outputs -----------------------------------------------------------
-    header = ['tick', 'episode', 'frame_sha16', 'turn', 'forward', 'attack', 'total_spikes'] + names
+    header = ['tick', 'episode', 'frame_sha16', 'turn', 'forward', 'attack', 'total_spikes'] + names + ['health', 'kills']
     with open(out / 'ticks.csv', 'w', newline='') as f:
         w = csv.writer(f); w.writerow(header); w.writerows(rows)
     np.savez_compressed(out / 'neuron_counts.npz', ids=brain.ids, counts=window_counts)
@@ -160,7 +164,8 @@ def main():
         'intervention': intervention,
         'stimulus_sha256': stim_hash.hexdigest(),
         'config': {'seconds': args.seconds, 'warmup': args.warmup, 'seed': args.seed, 'sweep_deg_per_tic': args.sweep,
-                   'decoder': 'bci', 'scenario': 'combat_survival', 'loop': 'open (commands decoded, not applied)'},
+                   'decoder': 'bci', 'scenario': 'combat_survival',
+                   'loop': 'closed (decoded commands applied)' if args.closed_loop else 'open (commands decoded, not applied)'},
         'provenance': {'doomfly_commit': commit, 'kernel': BUILD, 'source_hashes': manifest['source_hashes']},
         'behavior': {
             'turn_mean_abs_deg_per_tic': float(np.abs(turn).mean()),
