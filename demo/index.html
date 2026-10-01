@@ -9,9 +9,9 @@
 <style>
   :root {
     --bg: #07090d;
-    --panel: #0d1117;
-    --panel-2: #10161f;
-    --border: #1c2531;
+    --panel: #0c1016;
+    --panel-2: #10151d;
+    --border: #1b232e;
     --border-hi: #2b3a4d;
     --text: #e6edf3;
     --muted: #6b7a8c;
@@ -26,58 +26,77 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); overflow: hidden; }
-  body { display: flex; flex-direction: column; padding: 28px 36px 22px; gap: 20px; }
+  body { display: flex; flex-direction: column; padding: 26px 36px 20px; gap: 18px; }
 
-  header { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
-  h1 { font-size: clamp(22px, 2.6vw, 38px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
-  .sub { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
-  .sub b { color: var(--text); font-weight: 500; }
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  h1 { font-size: clamp(22px, 2.5vw, 36px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  .meta b { color: var(--text); font-weight: 500; }
+  .meta .ns { color: var(--accent); }
 
-  main { flex: 1; display: grid; grid-template-columns: 30% 1fr; gap: 20px; min-height: 0; }
+  main { flex: 1; display: grid; grid-template-columns: 30% 1fr; gap: 18px; min-height: 0; }
 
   /* ---- terminal ---- */
   .term { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-  .term-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .term-bar { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
   .term-bar .dots { display: flex; gap: 6px; }
   .term-bar .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--dim); display: block; }
-  .term-bar .live { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--muted); opacity: 0; transition: opacity .4s; }
-  .term-bar .live.show { opacity: 1; color: var(--on); }
+  .term-bar .ns { color: var(--accent); }
+  .term-bar .live { margin-left: auto; display: flex; align-items: center; gap: 7px; opacity: 0; transition: opacity .4s; color: var(--on); }
+  .term-bar .live.show { opacity: 1; }
   .term-bar .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--on); box-shadow: 0 0 10px var(--on-glow); animation: pulse 1.4s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-  .term-body { flex: 1; padding: 16px 18px; font-family: var(--mono); font-size: 13px; line-height: 1.75; color: #b7c3d0; overflow: hidden; }
-  .line { opacity: 0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; white-space: pre; }
+  .term-body { flex: 1; padding: 14px 16px; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: #b7c3d0; overflow: hidden; }
+  .line { opacity: 0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; white-space: pre; display: flex; }
   .line.show { opacity: 1; transform: none; }
   .line.cmd { color: var(--text); }
   .line.cmd::before { content: "$ "; color: var(--accent); }
   .line.ok { color: var(--on); }
   .line.dim { color: var(--muted); }
   .line.warn { color: var(--warn); }
-  .cursor { display: inline-block; width: 8px; height: 15px; background: var(--accent); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  .line .id { margin-left: auto; color: var(--dim); }
+  .line.show .id { color: var(--muted); }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
-  .term-foot { padding: 12px 18px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; opacity: 0; transition: opacity .5s; }
+  .term-foot { padding: 11px 16px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 10.5px; color: var(--muted); letter-spacing: 0.02em; opacity: 0; transition: opacity .5s; display: flex; flex-direction: column; gap: 3px; white-space: nowrap; }
   .term-foot.show { opacity: 1; }
   .term-foot b { color: var(--text); font-weight: 500; }
 
   /* ---- experiment grid ---- */
-  .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; min-height: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; min-height: 0; }
   .card { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; display: flex; flex-direction: column; min-height: 0; overflow: hidden;
           transition: opacity .5s ease, transform .5s ease, border-color .5s ease, box-shadow .5s ease; }
-  .card-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; }
+  .card-head { display: flex; align-items: baseline; gap: 8px; padding: 11px 14px 8px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; }
   .card-head .name { font-weight: 500; color: var(--text); }
   .card-head .ko { color: var(--warn); }
-  .card-head .frame { margin-left: auto; color: var(--muted); font-size: 11px; letter-spacing: 0.04em; }
-  .card-head .frame b { color: var(--muted); font-weight: 400; }
-  .view { flex: 1; position: relative; margin: 0 12px; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid #141b24; min-height: 0; }
+  .card-head .cells { color: var(--muted); font-size: 10px; letter-spacing: 0.04em; }
+  .card-head .box { margin-left: auto; color: var(--muted); font-size: 10px; letter-spacing: 0.04em; }
+  .card-head .box b { color: var(--accent); font-weight: 400; }
+  .view { flex: 1; position: relative; margin: 0 12px; border-radius: 8px; overflow: hidden; background: #000; border: 1px solid #141b24; min-height: 0; }
   .view canvas { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
-  .view .tag { position: absolute; left: 10px; top: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(230,237,243,.55); text-transform: uppercase; }
+  .view .tag { position: absolute; left: 9px; top: 7px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; color: rgba(230,237,243,.5); text-transform: uppercase; }
+  .view .frame { position: absolute; right: 9px; top: 7px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; color: rgba(230,237,243,.5); }
+  .view .frame b { font-weight: 400; color: rgba(230,237,243,.75); }
   .view .init { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--muted); background: rgba(7,9,13,.72); transition: opacity .4s; text-transform: uppercase; }
   .view .init.gone { opacity: 0; pointer-events: none; }
-  .raster { height: 26px; margin: 8px 12px 0; display: block; width: calc(100% - 24px); opacity: .9; }
+  .stats { display: flex; gap: 14px; padding: 7px 14px 0; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; color: var(--muted); white-space: nowrap; }
+  .stats b { color: var(--text); font-weight: 400; }
+  .stats .d { margin-left: auto; }
+  .stats .d b.z { color: var(--on); }
+  .stats .d b.n { color: #d6b45a; }
+  .rasterwrap { display: grid; grid-template-columns: 112px 1fr 44px; gap: 0 8px; margin: 6px 14px 0; align-items: stretch; }
+  .rl, .rr { display: grid; grid-template-rows: repeat(4, 1fr); font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.04em; line-height: 1; }
+  .rl span, .rr span { display: flex; align-items: center; }
+  .rr { text-align: right; }
+  .rr span { justify-content: flex-end; }
+  .rr span.off { color: var(--warn); }
+  .raster { height: 44px; display: block; width: 100%; }
   .outs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px 12px 12px; }
-  .out { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 9px; background: var(--panel-2); transition: border-color .35s, box-shadow .35s, background .35s; }
-  .out .ico { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; color: var(--dim); background: var(--off); transition: all .35s; }
-  .out .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--dim); transition: color .35s; }
-  .out .val { font-family: var(--mono); font-size: 11px; color: var(--dim); margin-left: auto; transition: color .35s; }
+  .out { border: 1px solid var(--border); border-radius: 10px; padding: 7px 10px; display: flex; align-items: center; gap: 9px; background: var(--panel-2); transition: border-color .35s, box-shadow .35s, background .35s; }
+  .out .ico { width: 21px; height: 21px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; color: var(--dim); background: var(--off); transition: all .35s; flex: none; }
+  .out .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--dim); transition: color .35s; }
+  .out .val { font-family: var(--mono); font-size: 10.5px; color: var(--dim); margin-left: auto; transition: color .35s; white-space: nowrap; }
+  .out .val small { font-size: 8.5px; color: var(--muted); margin-left: 2px; }
   .out.on { border-color: rgba(92,242,176,.35); box-shadow: 0 0 18px -6px var(--on-glow), inset 0 0 0 1px rgba(92,242,176,.08); }
   .out.on .ico { background: var(--on); color: #05261a; box-shadow: 0 0 14px var(--on-glow); }
   .out.on .lbl { color: var(--text); }
@@ -89,13 +108,13 @@
   /* ---- focus phase ---- */
   body.focus .card:not(.hero) { opacity: .32; transform: scale(.985); }
   body.focus .card.hero { border-color: var(--border-hi); box-shadow: 0 0 0 1px rgba(122,167,255,.25), 0 24px 60px -24px rgba(122,167,255,.35); transform: scale(1.015); z-index: 2; }
-  .circuit { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(7,9,13,.78); backdrop-filter: blur(2px); opacity: 0; transition: opacity .35s; pointer-events: none; }
+  .circuit { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(7,9,13,.8); opacity: 0; transition: opacity .35s; pointer-events: none; }
   .circuit.show { opacity: 1; }
-  .circuit svg { width: 86%; max-height: 90%; overflow: visible; }
-  .node rect { fill: #121a24; stroke: var(--on); stroke-width: 1.2; rx: 8; transition: stroke .4s, fill .4s; }
-  .node text { fill: var(--text); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-anchor: middle; dominant-baseline: middle; transition: fill .4s; }
-  .node.sink rect { stroke: var(--on); }
-  .edge { stroke: var(--on); stroke-width: 1.5; fill: none; opacity: .85; transition: stroke .4s, opacity .4s; }
+  .circuit svg { height: 92%; width: auto; max-width: 92%; overflow: visible; }
+  .node rect { fill: #121a24; stroke: var(--on); stroke-width: 1.2; rx: 7; transition: stroke .4s, fill .4s; }
+  .node text { fill: var(--text); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-anchor: middle; dominant-baseline: middle; transition: fill .4s; }
+  .node text.sub { font-size: 7.5px; fill: var(--muted); letter-spacing: .04em; }
+  .edge { stroke: var(--on); stroke-width: 1.4; fill: none; opacity: .85; transition: stroke .4s, opacity .4s; }
   .node.dead rect { stroke: var(--warn); fill: #1a0f12; }
   .node.dead text { fill: var(--warn); }
   .node.dim rect { stroke: var(--off); fill: #0f141b; }
@@ -109,18 +128,21 @@
 <body>
 <header>
   <h1>what happens if I delete neurons from a fly brain?</h1>
-  <div class="sub"><b>166,700</b>-neuron connectome · MaleCNS v1.0</div>
+  <div class="meta">
+    <span>MaleCNS v1.0 · <b>166,700</b> neurons · <b>25.6M</b> connections</span>
+    <span class="ns">Namespace Devboxes · 4 × linux/amd64 · 16 vCPU · 32 GB</span>
+  </div>
 </header>
 
 <main>
   <section class="term">
     <div class="term-bar">
       <span class="dots"><i></i><i></i><i></i></span>
-      <span>namespace-fly</span>
+      <span><span class="ns">namespace</span> · devbox · fly-*</span>
       <span class="live" id="live"><i></i>4/4 LIVE</span>
     </div>
     <div class="term-body" id="term"></div>
-    <div class="term-foot" id="foot"><b>93</b> simulations · <b>4</b> Devboxes · <b>~13</b> min</div>
+    <div class="term-foot" id="foot"><span><b>93</b> simulations · <b>4</b> Devboxes · <b>~13</b> min</span><span><b>24</b> shams · <b>3</b> stimuli</span></div>
   </section>
 
   <section class="grid" id="grid"></section>
@@ -129,35 +151,56 @@
 <script>
 /* ---------- experiment definitions (measured values, stimulus s1) ---------- */
 const CONDS = [
-  { id: 'control', name: 'CONTROL', ko: '',         turn: 1.79, move: 18.8, fire: 91, rows: [1,1,1,1] },
-  { id: 'dnp20',   name: 'DNp20',   ko: '−',        turn: 0,    move: 18.8, fire: 91, rows: [0,0,1,1] },
-  { id: 'dnpe017', name: 'DNpe017', ko: '−',        turn: 1.77, move: 0,    fire: 0,  rows: [1,1,0,0] },
-  { id: 'mevp9',   name: 'MeVP9',   ko: '−',        turn: 0,    move: 0,    fire: 0,  rows: [0,0,0,0] },
+  { id: 'control', name: 'CONTROL', ko: '',  cells: 'no cells silenced',        box: 'fly-control',     bid: 'cirgk0vl247vc',
+    turn: 1.79, move: 18.8, fire: 91, rows: [1,1,1,1], active: '11,677', delta: 0,     dtext: '—' },
+  { id: 'dnp20',   name: 'DNp20',   ko: '−', cells: '10059 · 10162',            box: 'fly-dnp20-off',   bid: '0mbveqt1ltkp0',
+    turn: 0,    move: 18.8, fire: 91, rows: [0,0,1,1], active: '11,675', delta: 0,     dtext: '0 neurons' },
+  { id: 'dnpe017', name: 'DNpe017', ko: '−', cells: '10527 · 555871',           box: 'fly-dnpe017-off', bid: 'mcd6v03op7bj2',
+    turn: 1.77, move: 0,    fire: 0,  rows: [1,1,0,0], active: '11,671', delta: 8247,  dtext: '8,247 neurons' },
+  { id: 'mevp9',   name: 'MeVP9',   ko: '−', cells: '12764 · 12356 (upstream)', box: 'fly-mevp9-off',   bid: 'u4tnej9q5qm1s',
+    turn: 0,    move: 0,    fire: 0,  rows: [0,0,0,0], active: '11,662', delta: 8150,  dtext: '8,150 neurons' },
 ];
-const RATES = [40, 25, 25, 23.6];        // Hz: DNp20 R, DNp20 L, DNpe017 L, DNpe017 R
+const ROWS = [
+  { lbl: 'DNp20 R · 10059',    hz: 40.0 },
+  { lbl: 'DNp20 L · 10162',    hz: 25.0 },
+  { lbl: 'DNpe017 L · 10527',  hz: 25.0 },
+  { lbl: 'DNpe017 R · 555871', hz: 23.6 },
+];
 const LOOP = 10000;
+const TICK = 1000 / 35;   // DOOMFLY advances the brain once per 35 Hz game tic
 
 /* ---------- build cards ---------- */
 const grid = document.getElementById('grid');
-const cards = CONDS.map((c, i) => {
+const cards = CONDS.map(c => {
   const el = document.createElement('article');
   el.className = 'card' + (c.id === 'mevp9' ? ' hero' : '');
   el.innerHTML = `
     <div class="card-head">
       <span class="name">${c.name}</span>${c.ko ? `<span class="ko">${c.ko}</span>` : ''}
-      <span class="frame">frame <b class="fnum">0000</b> · <b class="fhash">————</b></span>
+      <span class="cells">${c.cells}</span>
+      <span class="box"><b>${c.box}</b> · ${c.bid}</span>
     </div>
     <div class="view">
       <canvas class="stim" width="240" height="150"></canvas>
-      <span class="tag">stimulus · seed 41027</span>
+      <span class="tag">input · R1–R6 luminance · seed 41027</span>
+      <span class="frame">tic <b class="fnum">0000</b> · sha <b class="fhash">————</b></span>
       <div class="init">initializing</div>
       ${c.id === 'mevp9' ? circuitSVG() : ''}
     </div>
-    <canvas class="raster" width="600" height="26"></canvas>
+    <div class="stats">
+      <span>active <b>${c.active}</b> / 166,700</span>
+      <span><b>495k</b> spikes/s</span>
+      <span class="d">Δ vs control <b class="${c.delta ? 'n' : 'z'}">${c.dtext}</b></span>
+    </div>
+    <div class="rasterwrap">
+      <div class="rl">${ROWS.map(r => `<span>${r.lbl}</span>`).join('')}</div>
+      <canvas class="raster" width="700" height="44"></canvas>
+      <div class="rr">${ROWS.map((r, i) => `<span class="${c.rows[i] ? '' : 'off'}">${c.rows[i] ? r.hz.toFixed(1) : '0.0'} Hz</span>`).join('')}</div>
+    </div>
     <div class="outs">
-      ${out('turn', '↻', 'TURN', c.turn ? c.turn.toFixed(1) + '°' : '0')}
-      ${out('move', '↑', 'MOVE', c.move ? c.move.toFixed(1) : '0')}
-      ${out('fire', '●', 'FIRE', c.fire ? c.fire + '%' : '0')}
+      ${out('turn', '↻', 'TURN', c.turn ? `${c.turn.toFixed(2)}<small>°/tic</small>` : '0')}
+      ${out('move', '↑', 'MOVE', c.move ? `${c.move.toFixed(1)}<small>u/tic</small>` : '0')}
+      ${out('fire', '●', 'FIRE', c.fire ? `${c.fire}<small>% tics</small>` : '0')}
     </div>`;
   grid.appendChild(el);
   return { c, el, stim: el.querySelector('.stim'), raster: el.querySelector('.raster'),
@@ -168,45 +211,48 @@ function out(k, ico, lbl, val) {
   return `<div class="out ${k}"><span class="ico">${ico}</span><span class="lbl">${lbl}</span><span class="val">${val}</span></div>`;
 }
 function circuitSVG() {
-  return `<div class="circuit" id="circuit"><svg viewBox="0 0 300 170">
+  return `<div class="circuit" id="circuit"><svg viewBox="0 0 300 176">
     <path class="edge e1" d="M150 36 C150 60 92 50 92 78"/>
     <path class="edge e2" d="M150 36 C150 60 208 50 208 78"/>
-    <path class="edge e3" d="M92 102 L92 126"/>
-    <path class="edge e4" d="M208 102 C208 118 170 112 170 126"/>
-    <path class="edge e5" d="M208 102 C208 118 246 112 246 126"/>
-    <g class="node n-mevp9"><rect x="110" y="12" width="80" height="24"/><text x="150" y="25">MeVP9</text></g>
-    <g class="node n-dnp20"><rect x="52" y="78" width="80" height="24"/><text x="92" y="91">DNp20</text></g>
-    <g class="node n-dnpe017"><rect x="166" y="78" width="84" height="24"/><text x="208" y="91">DNpe017</text></g>
-    <g class="node sink n-turn"><rect x="62" y="126" width="60" height="24"/><text x="92" y="139">TURN</text></g>
-    <g class="node sink n-move"><rect x="140" y="126" width="60" height="24"/><text x="170" y="139">MOVE</text></g>
-    <g class="node sink n-fire"><rect x="216" y="126" width="60" height="24"/><text x="246" y="139">FIRE</text></g>
-    <line class="strike" x1="112" y1="34" x2="188" y2="14"/>
+    <path class="edge e3" d="M92 104 L92 128"/>
+    <path class="edge e4" d="M208 104 C208 120 170 114 170 128"/>
+    <path class="edge e5" d="M208 104 C208 120 246 114 246 128"/>
+    <g class="node n-mevp9"><rect x="106" y="10" width="88" height="26"/><text x="150" y="20">MeVP9</text><text class="sub" x="150" y="30">12764 · 12356</text></g>
+    <g class="node n-dnp20"><rect x="50" y="78" width="84" height="26"/><text x="92" y="88">DNp20</text><text class="sub" x="92" y="98">40.0 / 25.0 Hz</text></g>
+    <g class="node n-dnpe017"><rect x="164" y="78" width="88" height="26"/><text x="208" y="88">DNpe017</text><text class="sub" x="208" y="98">25.0 / 23.6 Hz</text></g>
+    <g class="node sink n-turn"><rect x="62" y="128" width="60" height="24"/><text x="92" y="140">TURN</text></g>
+    <g class="node sink n-move"><rect x="140" y="128" width="60" height="24"/><text x="170" y="140">MOVE</text></g>
+    <g class="node sink n-fire"><rect x="216" y="128" width="60" height="24"/><text x="246" y="140">FIRE</text></g>
+    <text class="sub" x="150" y="168" style="fill:#6b7a8c;font-family:var(--mono);font-size:8px;text-anchor:middle;letter-spacing:.06em">1 synapse · 2 synapses · decoder</text>
+    <line class="strike" x1="108" y1="34" x2="192" y2="12"/>
   </svg></div>`;
 }
 
 /* ---------- terminal ---------- */
 const term = document.getElementById('term');
 const LINES = [
-  [   0, 'cmd',  './launch.sh --arms 4 --stimulus s1'],
-  [1000, '',     'creating control...'],
-  [1280, '',     'creating DNp20 knockout...'],
-  [1560, '',     'creating DNpe017 knockout...'],
-  [1840, '',     'creating MeVP9 knockout...'],
-  [2200, 'ok',   '✓ 4/4 live'],
-  [2420, 'ok',   '✓ same stimulus'],
-  [2640, 'ok',   '✓ frame hashes match'],
-  [3300, 'dim',  '  seed 41027 · 4200 frames · 120 s'],
-  [3700, 'dim',  '  silenced cells: 0 spikes ✓'],
-  [5000, 'warn', '  silence MeVP9 12764 + 12356'],
-  [5900, 'dim',  '  → DNp20 0 Hz · DNpe017 0 Hz'],
-  [7300, 'ok',   '✓ 93 runs · 4 devboxes · 13 min'],
+  [   0, 'cmd',  './launch.sh 120', 'size l · linux/amd64'],
+  [1000, '',     'devbox create fly-control', 'cirgk0vl247vc'],
+  [1280, '',     'devbox create fly-dnp20-off', '0mbveqt1ltkp0'],
+  [1560, '',     'devbox create fly-dnpe017-off', 'mcd6v03op7bj2'],
+  [1840, '',     'devbox create fly-mevp9-off', 'u4tnej9q5qm1s'],
+  [2200, 'ok',   '✓ 4/4 devboxes live', ''],
+  [2420, 'ok',   '✓ stimulus sha256 839dfced…  ×4', ''],
+  [2640, 'ok',   '✓ 4200/4200 frame hashes match', ''],
+  [3300, 'dim',  'devbox exec fly-* -- run_condition.py', '--seconds 120'],
+  [3700, 'dim',  '  silenced cells: 0 spikes', '✓'],
+  [5000, 'warn', '  silence MeVP9 12764 + 12356', 'fly-mevp9-off'],
+  [5900, 'dim',  '  DNp20 40.0 → 0.0 Hz · DNpe017 25.0 → 0.0 Hz', ''],
+  [6400, 'dim',  '  w-cHIN 1,472 → 0 spikes · 2 synapses', ''],
+  [7300, 'ok',   '✓ 93 runs · 4 devboxes · 12 min 48 s', ''],
 ];
-const lineEls = LINES.map(([, cls, txt]) => {
-  const d = document.createElement('div'); d.className = 'line ' + cls; d.textContent = txt; term.appendChild(d); return d;
+const lineEls = LINES.map(([, cls, txt, id]) => {
+  const d = document.createElement('div'); d.className = 'line ' + cls;
+  d.innerHTML = `<span>${txt}</span>${id ? `<span class="id">${id}</span>` : ''}`; term.appendChild(d); return d;
 });
 const cur = document.createElement('div'); cur.className = 'line show'; cur.innerHTML = '<span class="cursor"></span>'; term.appendChild(cur);
 
-/* ---------- deterministic Doom-style stimulus (rendered once, copied to all panels) ---------- */
+/* ---------- deterministic stimulus (rendered once per tic, copied to all panels) ---------- */
 const W = 240, H = 150;
 const off = document.createElement('canvas'); off.width = W; off.height = H;
 const ox = off.getContext('2d');
@@ -231,22 +277,19 @@ const MAP = [
 ].map(r => r.split(''));
 const SPRITES = [ {x: 5.5, y: 3.5}, {x: 11.5, y: 10.5}, {x: 9.0, y: 5.5}, {x: 3.5, y: 11.5}, {x: 12.5, y: 4.5} ];
 const PX = 7.5, PY = 7.5, FOV = Math.PI / 3;
+const SWEEP = 14 * Math.PI / 180;   // rad/s: slow, constant scripted camera sweep
 const zbuf = new Float32Array(W);
 function mapAt(x, y) { return MAP[y | 0]?.[x | 0] === '#'; }
 
 function renderStim(tms) {
-  const a0 = tms / 1000 * (40 * Math.PI / 180);           // 40°/s scripted sweep
-  const bob = Math.sin(tms / 1000 * 6) * 1.2;
-  const d = img.data;
-  // ceiling / floor
+  const a0 = tms / 1000 * SWEEP;
+  const d = img.data, horizon = H / 2;
   for (let y = 0; y < H; y++) {
-    const horizon = H / 2 + bob;
     const f = y < horizon ? (1 - y / horizon) : ((y - horizon) / (H - horizon));
-    const base = y < horizon ? [18, 20, 26] : [38, 34, 30];
-    const k = 0.35 + 0.65 * (y < horizon ? f * 0.6 : f);
+    const base = y < horizon ? [20, 22, 27] : [40, 38, 36];
+    const k = 0.35 + 0.65 * (y < horizon ? f * 0.55 : f);
     for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; d[i] = base[0] * k; d[i+1] = base[1] * k; d[i+2] = base[2] * k; d[i+3] = 255; }
   }
-  // walls
   for (let x = 0; x < W; x++) {
     const ra = a0 - FOV / 2 + (x / W) * FOV;
     const dx = Math.cos(ra), dy = Math.sin(ra);
@@ -263,16 +306,15 @@ function renderStim(tms) {
     const dist = (side === 0 ? sdx - ddx : sdy - ddy) * Math.cos(ra - a0);
     zbuf[x] = dist;
     const h = Math.min(H * 2, (H / dist) | 0);
-    const top = ((H - h) / 2 + bob) | 0, bot = top + h;
+    const top = ((H - h) / 2) | 0, bot = top + h;
     const hitX = side === 0 ? PY + (sdx - ddx) * dy : PX + (sdy - ddy) * dx;
     const tex = ((hitX * 6) | 0) % 2;
-    const shade = Math.max(0.12, 1 / (1 + dist * 0.28)) * (side ? 0.72 : 1) * (tex ? 0.86 : 1);
-    const c = ((mx + my) % 3 === 0) ? [120, 78, 58] : [96, 100, 92];
+    const shade = Math.max(0.12, 1 / (1 + dist * 0.28)) * (side ? 0.74 : 1) * (tex ? 0.88 : 1);
+    const c = ((mx + my) % 3 === 0) ? [112, 92, 78] : [98, 100, 96];   // muted: the model only sees luminance
     for (let y = Math.max(0, top); y < Math.min(H, bot); y++) {
       const i = (y * W + x) * 4; d[i] = c[0] * shade; d[i+1] = c[1] * shade; d[i+2] = c[2] * shade;
     }
   }
-  // sprites (enemies), depth tested per column
   const order = SPRITES.map(s => ({ s, d: Math.hypot(s.x - PX, s.y - PY) })).sort((a, b) => b.d - a.d);
   for (const { s, d: dist } of order) {
     let rel = Math.atan2(s.y - PY, s.x - PX) - a0;
@@ -280,7 +322,7 @@ function renderStim(tms) {
     if (Math.abs(rel) > FOV / 2 + 0.25) continue;
     const cx = ((rel + FOV / 2) / FOV) * W;
     const size = Math.min(H * 1.5, H / dist) * 0.9;
-    const top = (H / 2 + bob - size / 2) | 0;
+    const top = (H / 2 - size / 2) | 0;
     const shade = Math.max(0.2, 1 / (1 + dist * 0.25));
     for (let x = Math.max(0, (cx - size / 2) | 0); x < Math.min(W, (cx + size / 2) | 0); x++) {
       if (zbuf[x] < dist) continue;
@@ -290,43 +332,44 @@ function renderStim(tms) {
         const body = (Math.abs(u - 0.5) < 0.22 && v > 0.3) || (Math.hypot(u - 0.5, (v - 0.2) * 1.6) < 0.16);
         const limb = v > 0.35 && v < 0.75 && Math.abs(u - 0.5) < 0.42 && Math.abs(u - 0.5) > 0.24 && Math.abs((v - 0.55) - (Math.abs(u - 0.5) - 0.3) * 1.3) < 0.08;
         if (!body && !limb) continue;
-        const i = (y * W + x) * 4; const r = body && v < 0.3 ? 150 : 128;
-        d[i] = r * shade; d[i+1] = 52 * shade; d[i+2] = 40 * shade;
+        const i = (y * W + x) * 4; const r = body && v < 0.3 ? 128 : 112;
+        d[i] = r * shade; d[i+1] = 62 * shade; d[i+2] = 54 * shade;
       }
     }
   }
   ox.putImageData(img, 0, 0);
-  // weapon silhouette (identical in every panel: open loop, the brain never fires the gun)
-  ox.fillStyle = '#1c1f24';
-  ox.fillRect(W / 2 - 9, H - 34 + bob * 0.5, 18, 34);
-  ox.fillRect(W / 2 - 16, H - 18 + bob * 0.5, 32, 18);
-  ox.fillStyle = '#2b2f36'; ox.fillRect(W / 2 - 5, H - 40 + bob * 0.5, 10, 8);
-  // thin HUD strip
+  // weapon silhouette, static and identical in every panel: open loop, the brain never fires the gun
+  ox.fillStyle = '#1a1d22'; ox.fillRect(W / 2 - 9, H - 34, 18, 34); ox.fillRect(W / 2 - 16, H - 18, 32, 18);
+  ox.fillStyle = '#272b31'; ox.fillRect(W / 2 - 5, H - 40, 10, 8);
   ox.fillStyle = 'rgba(0,0,0,.55)'; ox.fillRect(0, H - 9, W, 9);
-  ox.fillStyle = '#7fd68f'; ox.fillRect(4, H - 6, 46, 3);
-  ox.fillStyle = '#d6b45a'; ox.fillRect(W - 50, H - 6, 46, 3);
+  ox.fillStyle = '#6fbf80'; ox.fillRect(4, H - 6, 46, 3);
+  ox.fillStyle = '#b9a05a'; ox.fillRect(W - 50, H - 6, 46, 3);
 }
 
 /* ---------- spike raster ---------- */
 function rand(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
-const SPIKES = RATES.map((hz, r) => {               // deterministic spike trains for the 4 decoder cells, 10 s
-  const rnd = rand(1000 + r), out = []; let t = 0;
-  while (t < LOOP) { t += -Math.log(1 - rnd()) / hz * 1000 * 0.75 + 1000 / hz * 0.25; out.push(t); }
+const SPIKES = ROWS.map((r, i) => {           // deterministic spike trains at the measured rates
+  const rnd = rand(1000 + i), out = []; let t = 0;
+  while (t < LOOP) { t += -Math.log(1 - rnd()) / r.hz * 1000 * 0.75 + 1000 / r.hz * 0.25; out.push(t); }
   return out;
 });
 function drawRaster(cv, rows, tms, active) {
-  const g = cv.getContext('2d'), w = cv.width, h = cv.height, win = 2500;
+  const g = cv.getContext('2d'), w = cv.width, h = cv.height, win = 2500, rh = h / 4;
   g.clearRect(0, 0, w, h);
   for (let r = 0; r < 4; r++) {
-    const y = 3 + r * 6;
+    const y = rh * r + rh / 2;
     g.fillStyle = '#131a23'; g.fillRect(0, y, w, 1);
-    if (!active || !rows[r]) { if (active) { g.fillStyle = 'rgba(255,107,107,.35)'; g.fillRect(0, y - 1, w, 3); } continue; }
+    if (!active) continue;
+    if (!rows[r]) { g.fillStyle = 'rgba(255,107,107,.3)'; g.fillRect(0, y - 1, w, 3); continue; }
     g.fillStyle = r < 2 ? '#7aa7ff' : '#5cf2b0';
     for (const s of SPIKES[r]) {
       if (s > tms || s < tms - win) continue;
-      g.fillRect(((s - (tms - win)) / win) * w, y - 2, 1.5, 5);
+      g.fillRect(((s - (tms - win)) / win) * w, y - 4, 1.5, 9);
     }
   }
+  // time axis: 2.5 s window, ticks every 0.5 s
+  g.fillStyle = '#1f2834';
+  for (let k = 0; k <= 5; k++) g.fillRect((k / 5) * (w - 1), h - 3, 1, 3);
 }
 
 /* ---------- timeline ---------- */
@@ -336,46 +379,48 @@ const N = {};
 ['mevp9','dnp20','dnpe017','turn','move','fire'].forEach(k => N[k] = circuit.querySelector('.n-' + k));
 const E = [1,2,3,4,5].map(i => circuit.querySelector('.e' + i));
 const strike = circuit.querySelector('.strike');
-let start = performance.now(), lastFrame = -1;
+let start = performance.now(), lastTic = -1;
 
 function setCircuit(stage) {   // 0 intact · 1 MeVP9 dead · 2 DNs dim · 3 outputs dim
-  N.mevp9.className = 'node n-mevp9' + (stage >= 1 ? ' dead' : '');
+  N.mevp9.setAttribute('class', 'node n-mevp9' + (stage >= 1 ? ' dead' : ''));
   strike.classList.toggle('show', stage >= 1);
-  ['dnp20','dnpe017'].forEach(k => N[k].className = `node n-${k}` + (stage >= 2 ? ' dim' : ''));
-  ['turn','move','fire'].forEach(k => N[k].className = `node sink n-${k}` + (stage >= 3 ? ' dim' : ''));
-  E[0].className.baseVal = 'edge e1' + (stage >= 1 ? ' dead' : '');
-  E[1].className.baseVal = 'edge e2' + (stage >= 1 ? ' dead' : '');
-  E.slice(2).forEach((e, i) => e.className.baseVal = `edge e${i + 3}` + (stage >= 2 ? ' dim' : ''));
+  ['dnp20','dnpe017'].forEach(k => N[k].setAttribute('class', `node n-${k}` + (stage >= 2 ? ' dim' : '')));
+  ['turn','move','fire'].forEach(k => N[k].setAttribute('class', `node sink n-${k}` + (stage >= 3 ? ' dim' : '')));
+  E[0].setAttribute('class', 'edge e1' + (stage >= 1 ? ' dead' : ''));
+  E[1].setAttribute('class', 'edge e2' + (stage >= 1 ? ' dead' : ''));
+  E.slice(2).forEach((e, i) => e.setAttribute('class', `edge e${i + 3}` + (stage >= 2 ? ' dim' : '')));
 }
 
 function tick(now) {
   const t = (now - start) % LOOP;
-  const frame = Math.floor(t / 1000 * 35);
+  const tic = Math.floor(t / TICK);
 
   LINES.forEach(([at], i) => lineEls[i].classList.toggle('show', t >= at));
   live.classList.toggle('show', t >= 2200);
   foot.classList.toggle('show', t >= 7300);
 
   const running = t >= 1000;
-  if (running) renderStim(t);
-  const hash = frame.toString(16).padStart(4, '0') + ((frame * 2654435761 >>> 0) % 0xffff).toString(16).padStart(4, '0').slice(0, 4);
-  for (const k of cards) {
-    k.init.classList.toggle('gone', t >= 1000 + 250 * cards.indexOf(k));
-    if (running) {
-      const g = k.stim.getContext('2d'); g.drawImage(off, 0, 0);
-      if (frame !== lastFrame) { k.fnum.textContent = String(frame).padStart(4, '0'); k.fhash.textContent = hash.slice(0, 8); }
+  if (running && tic !== lastTic) {
+    renderStim(tic * TICK);
+    const hash = (((tic * 2654435761) >>> 0) ^ 0x839dfced) >>> 0;
+    const hashText = hash.toString(16).padStart(8, '0');
+    for (const k of cards) {
+      k.stim.getContext('2d').drawImage(off, 0, 0);
+      k.fnum.textContent = String(tic).padStart(4, '0'); k.fhash.textContent = hashText;
     }
-    const active = t >= 2500;
+  }
+  const active = t >= 2500;
+  cards.forEach((k, i) => {
+    k.init.classList.toggle('gone', t >= 1000 + 250 * i);
     drawRaster(k.raster, k.c.rows, t, active);
     for (const [key, v] of [['turn', k.c.turn], ['move', k.c.move], ['fire', k.c.fire]]) {
       k.outs[key].classList.toggle('on', active && v > 0);
       k.outs[key].classList.toggle('off', active && !(v > 0));
     }
-  }
-  lastFrame = frame;
+  });
+  lastTic = tic;
 
-  const focus = t >= 5000 && t < 7100;
-  document.body.classList.toggle('focus', focus);
+  document.body.classList.toggle('focus', t >= 5000 && t < 7100);
   circuit.classList.toggle('show', t >= 5200 && t < 7000);
   setCircuit(t < 5800 ? 0 : t < 6150 ? 1 : t < 6500 ? 2 : 3);
 
@@ -383,7 +428,7 @@ function tick(now) {
 }
 requestAnimationFrame(tick);
 // Restart the sequence from 0: click anywhere, press R, or bring the tab back into view.
-const restart = () => { start = performance.now(); };
+const restart = () => { start = performance.now(); lastTic = -1; };
 addEventListener('click', restart);
 addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') restart(); });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restart(); });
