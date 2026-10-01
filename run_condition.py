@@ -26,6 +26,7 @@ def main():
     p.add_argument('--sweep', type=float, default=2.0, help='scripted camera turn, degrees per tic')
     p.add_argument('--out', default=str(HERE / 'results'))
     p.add_argument('--tag', help='output directory name (default: the condition name)')
+    p.add_argument('--dump-frames', help='also save every input frame as PNG into this directory (demo footage)')
     args = p.parse_args()
 
     conditions = json.loads((HERE / 'conditions.json').read_text())
@@ -97,6 +98,10 @@ def main():
             game.new_episode()
         frame = game.pixels()
         stim_hash.update(frame.tobytes())
+        if args.dump_frames:
+            from PIL import Image
+            Path(args.dump_frames).mkdir(parents=True, exist_ok=True)
+            Image.fromarray(frame).save(Path(args.dump_frames) / f'{tick:04d}.png')
         light = retinal_samples(frame, brain.uv)
         # Vision controls: the game still runs and frames are still hashed.
         if vision == 'blank':

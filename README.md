@@ -127,6 +127,14 @@ w-cHIN spikes in 120 s (control / knockout / sham range):
 - LIF dynamics, inferred transmitter signs and an approximate retina mapping. See DOOMFLY's own
   [model review](https://github.com/nftechie/doomfly/blob/main/docs/doom-neuroscience-review.md).
 
+## Demo page
+
+`demo/index.html` is a silent, looping 10-second visualization of the four primary arms for screen
+recording. Open it directly in a browser. The footage is the real ViZDoom input from the control run
+(`demo/frames.jpg`, 350 frames at 35 Hz, dumped with `run_condition.py --dump-frames`); the per-tic
+hashes shown are the ones in `results/s1/control/ticks.csv`. Indicator values are the measured s1
+results. Click or press R to restart the loop.
+
 ## Reproduce
 
 ```sh
