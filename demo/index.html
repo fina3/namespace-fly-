@@ -111,23 +111,6 @@
   .out.off .lbl { color: var(--dim); text-decoration: line-through; text-decoration-color: rgba(255,107,107,.5); }
   .out.off .val { color: var(--warn); opacity: .8; }
 
-  /* ---- focus phase ---- */
-  body.focus .card.hero { border-color: var(--border-hi); box-shadow: 0 0 0 1px rgba(122,167,255,.25), 0 24px 60px -24px rgba(122,167,255,.35); transform: scale(1.015); z-index: 2; }
-  .circuit { position: absolute; right: 8px; bottom: 8px; width: 56%; height: 70%; display: flex; align-items: center; justify-content: center; background: rgba(7,9,13,.86); border: 1px solid var(--border-hi); border-radius: 8px; opacity: 0; transition: opacity .35s; pointer-events: none; }
-  .circuit.show { opacity: 1; }
-  .circuit svg { height: 92%; width: auto; max-width: 92%; overflow: visible; }
-  .node rect { fill: #121a24; stroke: var(--on); stroke-width: 1.2; rx: 7; transition: stroke .4s, fill .4s; }
-  .node text { fill: var(--text); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-anchor: middle; dominant-baseline: middle; transition: fill .4s; }
-  .node text.sub { font-size: 7.5px; fill: var(--muted); letter-spacing: .04em; }
-  .edge { stroke: var(--on); stroke-width: 1.4; fill: none; opacity: .85; transition: stroke .4s, opacity .4s; }
-  .node.dead rect { stroke: var(--warn); fill: #1a0f12; }
-  .node.dead text { fill: var(--warn); }
-  .node.dim rect { stroke: var(--off); fill: #0f141b; }
-  .node.dim text { fill: var(--dim); }
-  .edge.dim { stroke: var(--off); opacity: .6; }
-  .edge.dead { stroke: var(--warn); opacity: .6; stroke-dasharray: 4 4; }
-  .strike { stroke: var(--warn); stroke-width: 2; opacity: 0; transition: opacity .25s; }
-  .strike.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -174,7 +157,7 @@ const grid = document.getElementById('grid');
 const cards = CONDS.map(c => {
   const A = D.arms[c.id];
   const el = document.createElement('article');
-  el.className = 'card' + (c.hero ? ' hero' : '');
+  el.className = 'card';
   el.innerHTML = `
     <div class="card-head">
       <span class="name">${c.name}</span>${c.ko ? `<span class="ko">${c.ko}</span>` : ''}
@@ -188,7 +171,6 @@ const cards = CONDS.map(c => {
       <span class="loop">closed loop · brain drives the player</span>
       <div class="killed">✕ KILLED</div>
       <div class="init">initializing</div>
-      ${c.hero ? circuitSVG(A) : ''}
     </div>
     <div class="stats">
       <span>health <b class="hpv">100</b><span class="hp"><i style="width:100%"></i></span></span>
@@ -214,24 +196,6 @@ const cards = CONDS.map(c => {
 });
 function out(k, ico, lbl) {
   return `<div class="out ${k}"><span class="ico">${ico}</span><span class="lbl">${lbl}</span><span class="val">0</span></div>`;
-}
-function circuitSVG(A) {
-  const c = D.arms['control'].rates;
-  return `<div class="circuit" id="circuit"><svg viewBox="0 0 300 176">
-    <path class="edge e1" d="M150 36 C150 60 92 50 92 78"/>
-    <path class="edge e2" d="M150 36 C150 60 208 50 208 78"/>
-    <path class="edge e3" d="M92 104 L92 128"/>
-    <path class="edge e4" d="M208 104 C208 120 170 114 170 128"/>
-    <path class="edge e5" d="M208 104 C208 120 246 114 246 128"/>
-    <g class="node n-mevp9"><rect x="106" y="10" width="88" height="26"/><text x="150" y="20">MeVP9</text><text class="sub" x="150" y="30">12764 · 12356</text></g>
-    <g class="node n-dnp20"><rect x="50" y="78" width="84" height="26"/><text x="92" y="88">DNp20</text><text class="sub" x="92" y="98">${c[0].toFixed(1)} / ${c[1].toFixed(1)} Hz</text></g>
-    <g class="node n-dnpe017"><rect x="164" y="78" width="88" height="26"/><text x="208" y="88">DNpe017</text><text class="sub" x="208" y="98">${c[2].toFixed(1)} / ${c[3].toFixed(1)} Hz</text></g>
-    <g class="node sink n-turn"><rect x="62" y="128" width="60" height="24"/><text x="92" y="140">TURN</text></g>
-    <g class="node sink n-move"><rect x="140" y="128" width="60" height="24"/><text x="170" y="140">MOVE</text></g>
-    <g class="node sink n-fire"><rect x="216" y="128" width="60" height="24"/><text x="246" y="140">FIRE</text></g>
-    <text class="sub" x="150" y="168" style="fill:#6b7a8c;font-family:var(--mono);font-size:8px;text-anchor:middle;letter-spacing:.06em">control rates · 1 synapse to decoder</text>
-    <line class="strike" x1="108" y1="34" x2="192" y2="12"/>
-  </svg></div>`;
 }
 
 /* ---------- terminal ---------- */
@@ -287,22 +251,7 @@ function setOut(o, on, text) {
 
 /* ---------- timeline ---------- */
 const live = document.getElementById('live'), foot = document.getElementById('foot');
-const circuit = document.getElementById('circuit');
-const N = {};
-['mevp9','dnp20','dnpe017','turn','move','fire'].forEach(k => N[k] = circuit.querySelector('.n-' + k));
-const E = [1,2,3,4,5].map(i => circuit.querySelector('.e' + i));
-const strike = circuit.querySelector('.strike');
 let start = performance.now(), lastTic = -1;
-
-function setCircuit(stage) {   // 0 intact · 1 MeVP9 dead · 2 DNs dim · 3 outputs dim
-  N.mevp9.setAttribute('class', 'node n-mevp9' + (stage >= 1 ? ' dead' : ''));
-  strike.classList.toggle('show', stage >= 1);
-  ['dnp20','dnpe017'].forEach(k => N[k].setAttribute('class', `node n-${k}` + (stage >= 2 ? ' dim' : '')));
-  ['turn','move','fire'].forEach(k => N[k].setAttribute('class', `node sink n-${k}` + (stage >= 3 ? ' dim' : '')));
-  E[0].setAttribute('class', 'edge e1' + (stage >= 1 ? ' dead' : ''));
-  E[1].setAttribute('class', 'edge e2' + (stage >= 1 ? ' dead' : ''));
-  E.slice(2).forEach((e, i) => e.setAttribute('class', `edge e${i + 3}` + (stage >= 2 ? ' dim' : '')));
-}
 
 function tick(now) {
   const t = (now - start) % LOOP;
@@ -333,9 +282,6 @@ function tick(now) {
   });
   lastTic = i;
 
-  document.body.classList.toggle('focus', t >= 5000 && t < 7100);
-  circuit.classList.toggle('show', t >= 5000 && t < 7100);
-  setCircuit(t < 5400 ? 0 : t < 5750 ? 1 : t < 6100 ? 2 : 3);
 
   requestAnimationFrame(tick);
 }
