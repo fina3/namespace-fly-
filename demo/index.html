@@ -34,7 +34,8 @@
   .meta b { color: var(--text); font-weight: 500; }
   .meta .ns { color: var(--accent); }
 
-  main { flex: 1; display: grid; grid-template-columns: 30% 1fr; gap: 18px; min-height: 0; }
+  main { flex: 1; display: grid; grid-template-columns: 1fr; gap: 18px; min-height: 0; }
+  main > .term { display: none; }   /* terminal panel hidden; its script still runs harmlessly */
 
   /* ---- terminal ---- */
   .term { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
