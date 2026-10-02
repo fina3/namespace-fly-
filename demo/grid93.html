@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>93 Fly Brains</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090d; --panel: #0c1016; --border: #1b232e; --text: #e6edf3; --muted: #6b7a8c; --dim: #2a333f;
+    --on: #5cf2b0; --warn: #ff6b6b; --accent: #7aa7ff;
+    --b0: #7aa7ff; --b1: #c792ea; --b2: #f2c45c; --b3: #5cd6f2;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); overflow: hidden; }
+  body { display: flex; flex-direction: column; padding: 20px 28px 14px; gap: 12px; }
+
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  h1 { font-size: clamp(18px, 2vw, 30px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; white-space: nowrap; }
+  h1 b { font-weight: 600; color: var(--on); }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  .meta b { color: var(--text); font-weight: 500; }
+  .meta .ns { color: var(--accent); }
+
+  .grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(8, minmax(0, 1fr)); gap: 6px; }
+  .tile { position: relative; background: #000; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; min-height: 0;
+          opacity: 0; transform: scale(.94); transition: opacity .25s ease, transform .25s ease, filter .5s ease, border-color .4s; }
+  .tile.in { opacity: 1; transform: none; }
+  .tile canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; display: block; }
+  .tile .bar { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--box); }
+  .tile .lbl { position: absolute; left: 5px; top: 6px; right: 5px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em; color: rgba(255,255,255,.82); text-shadow: 0 1px 2px #000, 0 0 4px #000; white-space: nowrap; overflow: hidden; }
+  .tile .lbl span:last-child { color: rgba(255,255,255,.5); }
+  .tile .out { position: absolute; left: 4px; right: 4px; bottom: 4px; height: 7px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .tile .out i { display: block; background: rgba(10,14,20,.8); border-radius: 2px; overflow: hidden; position: relative; }
+  .tile .out i::after { content: ""; position: absolute; inset: 0; width: var(--v, 0%); background: var(--on); border-radius: 2px; }
+  .tile .out i.lost { background: rgba(255,107,107,.55); }
+  .tile.knockout { border-color: rgba(255,107,107,.75); box-shadow: 0 0 14px -4px rgba(255,107,107,.6); }
+  .tile.knockout .lbl span:first-child { color: #ffb3b3; }
+  .tile.control { border-color: rgba(92,242,176,.75); box-shadow: 0 0 14px -4px rgba(92,242,176,.5); }
+  .tile.control .lbl span:first-child { color: var(--on); }
+  .tile.vision { border-color: rgba(122,167,255,.5); }
+  body.focus .tile.sham, body.focus .tile.vision { filter: brightness(.3) saturate(.4); }
+  body.focus .tile.knockout, body.focus .tile.control { transform: scale(1.04); z-index: 2; }
+
+  .legend { grid-column: span 3; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 0 8px; font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: .04em; white-space: nowrap; overflow: hidden; }
+  .legend div { display: flex; align-items: center; gap: 6px; }
+  .legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+  .legend b { color: var(--text); font-weight: 400; }
+
+  footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: .05em; white-space: nowrap; }
+  footer b { color: var(--text); font-weight: 500; }
+  .chips { display: flex; gap: 14px; }
+  .chip { display: flex; align-items: center; gap: 6px; }
+  .chip i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .verdict { opacity: 0; transition: opacity .5s; color: var(--text); }
+  .verdict.show { opacity: 1; }
+  .verdict .g { color: var(--on); } .verdict .r { color: var(--warn); }
+</style>
+</head>
+<body>
+<header>
+  <h1><b>93</b> simulated fly brains · <b>4</b> Devboxes · one experiment</h1>
+  <div class="meta">
+    <span>MaleCNS v1.0 · <b>166,700</b> neurons each · DOOMFLY</span>
+    <span class="ns">Namespace Devboxes · 4 × linux/amd64 · 16 vCPU · 12 runs at a time per box</span>
+  </div>
+</header>
+
+<section class="grid" id="grid"></section>
+
+<footer>
+  <div class="chips">
+    <span class="chip"><i style="background:var(--on)"></i><b id="n-control">3</b> intact</span>
+    <span class="chip"><i style="background:var(--warn)"></i><b id="n-knockout">12</b> knockouts</span>
+    <span class="chip"><i style="background:var(--muted)"></i><b id="n-sham">72</b> shams</span>
+    <span class="chip"><i style="background:var(--accent)"></i><b id="n-vision">6</b> vision controls</span>
+  </div>
+  <div class="verdict" id="verdict"><span class="g">72 shams: output intact</span> · <span class="r">12 targeted: output lost</span></div>
+  <div>replay · first 10 s of each run · bars = <b>TURN MOVE FIRE</b></div>
+</footer>
+
+<script src="grid93-data.js"></script>
+<script>
+/* One tile per simulation of the 93-run experiment. Bars are each run's own decoded commands, tic by tic.
+   This was the fixed-camera experiment: every run on a stimulus saw identical frames, so tiles on the same
+   stimulus share footage and differ only in what the brain did with it. */
+const LOOP = 10000, TICK = 1000 / 35;
+const BOXC = ['var(--b0)', 'var(--b1)', 'var(--b2)', 'var(--b3)'];
+const KORDER = { control: 0, knockout: 1, vision: 2, sham: 3 };
+const boxIx = b => GRID.boxes.indexOf(b);
+const runs = GRID.runs.slice().sort((a, b) => boxIx(a.box) - boxIx(b.box) || KORDER[a.kind] - KORDER[b.kind]
+                                              || a.stim.localeCompare(b.stim) || a.arm.localeCompare(b.arm));
+
+const sheets = {};                       // one sprite sheet per stimulus: 350 frames, 25 columns
+for (const s of Object.keys(GRID.stimuli)) { const im = new Image(); im.src = `stim-${s}.jpg`; sheets[s] = im; }
+const FW = 128, FH = 96, COLS = 25;
+
+const grid = document.getElementById('grid');
+const tiles = runs.map(r => {
+  const el = document.createElement('div');
+  el.className = 'tile ' + r.kind;
+  el.style.setProperty('--box', BOXC[boxIx(r.box)]);
+  el.innerHTML = `<canvas width="${FW}" height="${FH}"></canvas><div class="bar"></div>
+    <div class="lbl"><span>${r.label}</span><span>${r.stim}</span></div>
+    <div class="out"><i class="${r.turn120 ? '' : 'lost'}"></i><i class="${r.move120 ? '' : 'lost'}"></i><i class="${r.fire120 ? '' : 'lost'}"></i></div>`;
+  grid.appendChild(el);
+  return { r, el, ctx: el.querySelector('canvas').getContext('2d'), bars: el.querySelectorAll('.out i') };
+});
+const legend = document.createElement('div');
+legend.className = 'legend';
+legend.innerHTML = GRID.boxes.map((b, i) =>
+  `<div><i style="background:${BOXC[i]}"></i><b>${b}</b> ${runs.filter(r => r.box === b).length} runs</div>`).join('');
+grid.appendChild(legend);
+for (const k of ['control', 'knockout', 'sham', 'vision']) document.getElementById('n-' + k).textContent = GRID.counts[k];
+
+const verdict = document.getElementById('verdict');
+let start = performance.now(), last = -1;
+function frame(now) {
+  const t = (now - start) % LOOP;
+  const i = Math.min(GRID.tics - 1, Math.floor(t / TICK));
+  tiles.forEach((k, n) => k.el.classList.toggle('in', t >= 150 + n * 14));
+  document.body.classList.toggle('focus', t >= 6200 && t < 9300);
+  verdict.classList.toggle('show', t >= 6200);
+  if (i !== last) {
+    for (const k of tiles) {
+      const im = sheets[k.r.stim];
+      if (im.complete && im.naturalWidth) {
+        if (k.r.arm === 'blank-vision') { k.ctx.fillStyle = '#000'; k.ctx.fillRect(0, 0, FW, FH); }   // this brain was shown black
+        else {
+          const f = k.r.arm === 'frozen-vision' ? 0 : i;                                              // this one saw frame 1 forever
+          k.ctx.drawImage(im, (f % COLS) * FW, Math.floor(f / COLS) * FH, FW, FH, 0, 0, FW, FH);
+        }
+      }
+      k.bars[0].style.setProperty('--v', (k.r.turn.charCodeAt(i) - 48) / 9 * 100 + '%');
+      k.bars[1].style.setProperty('--v', (k.r.move.charCodeAt(i) - 48) / 9 * 100 + '%');
+      k.bars[2].style.setProperty('--v', k.r.fire[i] === '1' ? '100%' : '0%');
+    }
+    last = i;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+const restart = () => { start = performance.now(); last = -1; };
+addEventListener('click', restart);
+addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') restart(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restart(); });
+</script>
+</body>
+</html>
