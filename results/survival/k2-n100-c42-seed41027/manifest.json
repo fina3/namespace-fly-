@@ -1,0 +1,720 @@
+{
+ "candidate_seed": 42,
+ "knockout_size": 2,
+ "num_candidates": 100,
+ "game_seeds": [
+  41027
+ ],
+ "max_tics": 10500,
+ "pool": {
+  "size": 1341,
+  "rule": "fires in results/s1/control and is not a directly driven input cell (R1-R6, L1, L2, L3, L5)"
+ },
+ "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b",
+ "candidates": [
+  {
+   "candidate_id": 0,
+   "neurons": []
+  },
+  {
+   "candidate_id": 1,
+   "neurons": [
+    14539,
+    78122
+   ]
+  },
+  {
+   "candidate_id": 2,
+   "neurons": [
+    40669,
+    41141
+   ]
+  },
+  {
+   "candidate_id": 3,
+   "neurons": [
+    14449,
+    63225
+   ]
+  },
+  {
+   "candidate_id": 4,
+   "neurons": [
+    14676,
+    46901
+   ]
+  },
+  {
+   "candidate_id": 5,
+   "neurons": [
+    69912,
+    75470
+   ]
+  },
+  {
+   "candidate_id": 6,
+   "neurons": [
+    46168,
+    82185
+   ]
+  },
+  {
+   "candidate_id": 7,
+   "neurons": [
+    42151,
+    113834
+   ]
+  },
+  {
+   "candidate_id": 8,
+   "neurons": [
+    20114,
+    33866
+   ]
+  },
+  {
+   "candidate_id": 9,
+   "neurons": [
+    55812,
+    81043
+   ]
+  },
+  {
+   "candidate_id": 10,
+   "neurons": [
+    47937,
+    103492
+   ]
+  },
+  {
+   "candidate_id": 11,
+   "neurons": [
+    22044,
+    42151
+   ]
+  },
+  {
+   "candidate_id": 12,
+   "neurons": [
+    48513,
+    215999
+   ]
+  },
+  {
+   "candidate_id": 13,
+   "neurons": [
+    107204,
+    130404
+   ]
+  },
+  {
+   "candidate_id": 14,
+   "neurons": [
+    19123,
+    54432
+   ]
+  },
+  {
+   "candidate_id": 15,
+   "neurons": [
+    32533,
+    63496
+   ]
+  },
+  {
+   "candidate_id": 16,
+   "neurons": [
+    41813,
+    539307
+   ]
+  },
+  {
+   "candidate_id": 17,
+   "neurons": [
+    59615,
+    80443
+   ]
+  },
+  {
+   "candidate_id": 18,
+   "neurons": [
+    20701,
+    33426
+   ]
+  },
+  {
+   "candidate_id": 19,
+   "neurons": [
+    12684,
+    45094
+   ]
+  },
+  {
+   "candidate_id": 20,
+   "neurons": [
+    18467,
+    72022
+   ]
+  },
+  {
+   "candidate_id": 21,
+   "neurons": [
+    72407,
+    518259
+   ]
+  },
+  {
+   "candidate_id": 22,
+   "neurons": [
+    38560,
+    535355
+   ]
+  },
+  {
+   "candidate_id": 23,
+   "neurons": [
+    33866,
+    513754
+   ]
+  },
+  {
+   "candidate_id": 24,
+   "neurons": [
+    43660,
+    84782
+   ]
+  },
+  {
+   "candidate_id": 25,
+   "neurons": [
+    16792,
+    43091
+   ]
+  },
+  {
+   "candidate_id": 26,
+   "neurons": [
+    30412,
+    44008
+   ]
+  },
+  {
+   "candidate_id": 27,
+   "neurons": [
+    49046,
+    58478
+   ]
+  },
+  {
+   "candidate_id": 28,
+   "neurons": [
+    18858,
+    40998
+   ]
+  },
+  {
+   "candidate_id": 29,
+   "neurons": [
+    54136,
+    63845
+   ]
+  },
+  {
+   "candidate_id": 30,
+   "neurons": [
+    28962,
+    76628
+   ]
+  },
+  {
+   "candidate_id": 31,
+   "neurons": [
+    40929,
+    89660
+   ]
+  },
+  {
+   "candidate_id": 32,
+   "neurons": [
+    35637,
+    338369
+   ]
+  },
+  {
+   "candidate_id": 33,
+   "neurons": [
+    22522,
+    61110
+   ]
+  },
+  {
+   "candidate_id": 34,
+   "neurons": [
+    17345,
+    108465
+   ]
+  },
+  {
+   "candidate_id": 35,
+   "neurons": [
+    10349,
+    89280
+   ]
+  },
+  {
+   "candidate_id": 36,
+   "neurons": [
+    80999,
+    82408
+   ]
+  },
+  {
+   "candidate_id": 37,
+   "neurons": [
+    43727,
+    64517
+   ]
+  },
+  {
+   "candidate_id": 38,
+   "neurons": [
+    48602,
+    80999
+   ]
+  },
+  {
+   "candidate_id": 39,
+   "neurons": [
+    45765,
+    49523
+   ]
+  },
+  {
+   "candidate_id": 40,
+   "neurons": [
+    17345,
+    22786
+   ]
+  },
+  {
+   "candidate_id": 41,
+   "neurons": [
+    41322,
+    58348
+   ]
+  },
+  {
+   "candidate_id": 42,
+   "neurons": [
+    43727,
+    125863
+   ]
+  },
+  {
+   "candidate_id": 43,
+   "neurons": [
+    14228,
+    75890
+   ]
+  },
+  {
+   "candidate_id": 44,
+   "neurons": [
+    49178,
+    54592
+   ]
+  },
+  {
+   "candidate_id": 45,
+   "neurons": [
+    14595,
+    48773
+   ]
+  },
+  {
+   "candidate_id": 46,
+   "neurons": [
+    28250,
+    51975
+   ]
+  },
+  {
+   "candidate_id": 47,
+   "neurons": [
+    31730,
+    40998
+   ]
+  },
+  {
+   "candidate_id": 48,
+   "neurons": [
+    21585,
+    25586
+   ]
+  },
+  {
+   "candidate_id": 49,
+   "neurons": [
+    125203,
+    568163
+   ]
+  },
+  {
+   "candidate_id": 50,
+   "neurons": [
+    22334,
+    103289
+   ]
+  },
+  {
+   "candidate_id": 51,
+   "neurons": [
+    25965,
+    125863
+   ]
+  },
+  {
+   "candidate_id": 52,
+   "neurons": [
+    27509,
+    40923
+   ]
+  },
+  {
+   "candidate_id": 53,
+   "neurons": [
+    16600,
+    48689
+   ]
+  },
+  {
+   "candidate_id": 54,
+   "neurons": [
+    81987,
+    803469
+   ]
+  },
+  {
+   "candidate_id": 55,
+   "neurons": [
+    38108,
+    38279
+   ]
+  },
+  {
+   "candidate_id": 56,
+   "neurons": [
+    29712,
+    96691
+   ]
+  },
+  {
+   "candidate_id": 57,
+   "neurons": [
+    11550,
+    30750
+   ]
+  },
+  {
+   "candidate_id": 58,
+   "neurons": [
+    14544,
+    77657
+   ]
+  },
+  {
+   "candidate_id": 59,
+   "neurons": [
+    43011,
+    63085
+   ]
+  },
+  {
+   "candidate_id": 60,
+   "neurons": [
+    18915,
+    512340
+   ]
+  },
+  {
+   "candidate_id": 61,
+   "neurons": [
+    18412,
+    522777
+   ]
+  },
+  {
+   "candidate_id": 62,
+   "neurons": [
+    45006,
+    63085
+   ]
+  },
+  {
+   "candidate_id": 63,
+   "neurons": [
+    19131,
+    34721
+   ]
+  },
+  {
+   "candidate_id": 64,
+   "neurons": [
+    27936,
+    61160
+   ]
+  },
+  {
+   "candidate_id": 65,
+   "neurons": [
+    33284,
+    52123
+   ]
+  },
+  {
+   "candidate_id": 66,
+   "neurons": [
+    14504,
+    31577
+   ]
+  },
+  {
+   "candidate_id": 67,
+   "neurons": [
+    31153,
+    534534
+   ]
+  },
+  {
+   "candidate_id": 68,
+   "neurons": [
+    44965,
+    514056
+   ]
+  },
+  {
+   "candidate_id": 69,
+   "neurons": [
+    24440,
+    42751
+   ]
+  },
+  {
+   "candidate_id": 70,
+   "neurons": [
+    24281,
+    536662
+   ]
+  },
+  {
+   "candidate_id": 71,
+   "neurons": [
+    23845,
+    66687
+   ]
+  },
+  {
+   "candidate_id": 72,
+   "neurons": [
+    41934,
+    70951
+   ]
+  },
+  {
+   "candidate_id": 73,
+   "neurons": [
+    14228,
+    14812
+   ]
+  },
+  {
+   "candidate_id": 74,
+   "neurons": [
+    16726,
+    512803
+   ]
+  },
+  {
+   "candidate_id": 75,
+   "neurons": [
+    21012,
+    64105
+   ]
+  },
+  {
+   "candidate_id": 76,
+   "neurons": [
+    28452,
+    93643
+   ]
+  },
+  {
+   "candidate_id": 77,
+   "neurons": [
+    19797,
+    47999
+   ]
+  },
+  {
+   "candidate_id": 78,
+   "neurons": [
+    11434,
+    127124
+   ]
+  },
+  {
+   "candidate_id": 79,
+   "neurons": [
+    44839,
+    67140
+   ]
+  },
+  {
+   "candidate_id": 80,
+   "neurons": [
+    28688,
+    40659
+   ]
+  },
+  {
+   "candidate_id": 81,
+   "neurons": [
+    17345,
+    50838
+   ]
+  },
+  {
+   "candidate_id": 82,
+   "neurons": [
+    54136,
+    56387
+   ]
+  },
+  {
+   "candidate_id": 83,
+   "neurons": [
+    39040,
+    74904
+   ]
+  },
+  {
+   "candidate_id": 84,
+   "neurons": [
+    12632,
+    20035
+   ]
+  },
+  {
+   "candidate_id": 85,
+   "neurons": [
+    20439,
+    30412
+   ]
+  },
+  {
+   "candidate_id": 86,
+   "neurons": [
+    17799,
+    59615
+   ]
+  },
+  {
+   "candidate_id": 87,
+   "neurons": [
+    19734,
+    51012
+   ]
+  },
+  {
+   "candidate_id": 88,
+   "neurons": [
+    19435,
+    27898
+   ]
+  },
+  {
+   "candidate_id": 89,
+   "neurons": [
+    50500,
+    555871
+   ]
+  },
+  {
+   "candidate_id": 90,
+   "neurons": [
+    31682,
+    52881
+   ]
+  },
+  {
+   "candidate_id": 91,
+   "neurons": [
+    11550,
+    27538
+   ]
+  },
+  {
+   "candidate_id": 92,
+   "neurons": [
+    39712,
+    533265
+   ]
+  },
+  {
+   "candidate_id": 93,
+   "neurons": [
+    43426,
+    81903
+   ]
+  },
+  {
+   "candidate_id": 94,
+   "neurons": [
+    14366,
+    25382
+   ]
+  },
+  {
+   "candidate_id": 95,
+   "neurons": [
+    44769,
+    58510
+   ]
+  },
+  {
+   "candidate_id": 96,
+   "neurons": [
+    18858,
+    522777
+   ]
+  },
+  {
+   "candidate_id": 97,
+   "neurons": [
+    43884,
+    47795
+   ]
+  },
+  {
+   "candidate_id": 98,
+   "neurons": [
+    24463,
+    531382
+   ]
+  },
+  {
+   "candidate_id": 99,
+   "neurons": [
+    46479,
+    47876
+   ]
+  },
+  {
+   "candidate_id": 100,
+   "neurons": [
+    26121,
+    41141
+   ]
+  }
+ ]
+}

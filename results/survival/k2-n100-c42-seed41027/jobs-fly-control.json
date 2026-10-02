@@ -1,0 +1,285 @@
+[
+ {
+  "candidate_id": 0,
+  "neurons": [],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 4,
+  "neurons": [
+   14676,
+   46901
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 8,
+  "neurons": [
+   20114,
+   33866
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 12,
+  "neurons": [
+   48513,
+   215999
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 16,
+  "neurons": [
+   41813,
+   539307
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 20,
+  "neurons": [
+   18467,
+   72022
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 24,
+  "neurons": [
+   43660,
+   84782
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 28,
+  "neurons": [
+   18858,
+   40998
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 32,
+  "neurons": [
+   35637,
+   338369
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 36,
+  "neurons": [
+   80999,
+   82408
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 40,
+  "neurons": [
+   17345,
+   22786
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 44,
+  "neurons": [
+   49178,
+   54592
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 48,
+  "neurons": [
+   21585,
+   25586
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 52,
+  "neurons": [
+   27509,
+   40923
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 56,
+  "neurons": [
+   29712,
+   96691
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 60,
+  "neurons": [
+   18915,
+   512340
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 64,
+  "neurons": [
+   27936,
+   61160
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 68,
+  "neurons": [
+   44965,
+   514056
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 72,
+  "neurons": [
+   41934,
+   70951
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 76,
+  "neurons": [
+   28452,
+   93643
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 80,
+  "neurons": [
+   28688,
+   40659
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 84,
+  "neurons": [
+   12632,
+   20035
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 88,
+  "neurons": [
+   19435,
+   27898
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 92,
+  "neurons": [
+   39712,
+   533265
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 96,
+  "neurons": [
+   18858,
+   522777
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ {
+  "candidate_id": 100,
+  "neurons": [
+   26121,
+   41141
+  ],
+  "game_seed": 41027,
+  "max_tics": 10500,
+  "candidate_seed": 42,
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ }
+]

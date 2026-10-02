@@ -1,0 +1,3957 @@
+{
+ "manifest": {
+  "candidate_seed": 42,
+  "knockout_size": 2,
+  "num_candidates": 100,
+  "game_seeds": [
+   41027
+  ],
+  "max_tics": 10500,
+  "pool": {
+   "size": 1341,
+   "rule": "fires in results/s1/control and is not a directly driven input cell (R1-R6, L1, L2, L3, L5)"
+  },
+  "code_commit": "896cccb208309c59e938be8f5fdcb13a204df26b"
+ },
+ "intact": {
+  "41027": 2025
+ },
+ "missing_runs": [],
+ "ranking": [
+  {
+   "candidate_id": 53,
+   "knockout_neurons": [
+    16600,
+    48689
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 104.66,
+   "survival_ratio": 1.809,
+   "min_survival_ratio": 1.809,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 27
+  },
+  {
+   "candidate_id": 40,
+   "knockout_neurons": [
+    17345,
+    22786
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 104.26,
+   "survival_ratio": 1.802,
+   "min_survival_ratio": 1.802,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 29
+  },
+  {
+   "candidate_id": 12,
+   "knockout_neurons": [
+    48513,
+    215999
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 103.74,
+   "survival_ratio": 1.793,
+   "min_survival_ratio": 1.793,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 28
+  },
+  {
+   "candidate_id": 6,
+   "knockout_neurons": [
+    46168,
+    82185
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 103.31,
+   "survival_ratio": 1.786,
+   "min_survival_ratio": 1.786,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.936,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 26
+  },
+  {
+   "candidate_id": 32,
+   "knockout_neurons": [
+    35637,
+    338369
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 102.37,
+   "survival_ratio": 1.769,
+   "min_survival_ratio": 1.769,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 24
+  },
+  {
+   "candidate_id": 10,
+   "knockout_neurons": [
+    47937,
+    103492
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 99.23,
+   "survival_ratio": 1.715,
+   "min_survival_ratio": 1.715,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.94,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 26
+  },
+  {
+   "candidate_id": 42,
+   "knockout_neurons": [
+    43727,
+    125863
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 97.29,
+   "survival_ratio": 1.681,
+   "min_survival_ratio": 1.681,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 26
+  },
+  {
+   "candidate_id": 56,
+   "knockout_neurons": [
+    29712,
+    96691
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 93.23,
+   "survival_ratio": 1.611,
+   "min_survival_ratio": 1.611,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 25
+  },
+  {
+   "candidate_id": 21,
+   "knockout_neurons": [
+    72407,
+    518259
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 89.09,
+   "survival_ratio": 1.54,
+   "min_survival_ratio": 1.54,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.944,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 22
+  },
+  {
+   "candidate_id": 62,
+   "knockout_neurons": [
+    45006,
+    63085
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 88.4,
+   "survival_ratio": 1.528,
+   "min_survival_ratio": 1.528,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 20
+  },
+  {
+   "candidate_id": 94,
+   "knockout_neurons": [
+    14366,
+    25382
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 88.4,
+   "survival_ratio": 1.528,
+   "min_survival_ratio": 1.528,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.948,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 23
+  },
+  {
+   "candidate_id": 59,
+   "knockout_neurons": [
+    43011,
+    63085
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 86.8,
+   "survival_ratio": 1.5,
+   "min_survival_ratio": 1.5,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 80,
+   "knockout_neurons": [
+    28688,
+    40659
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 85.23,
+   "survival_ratio": 1.473,
+   "min_survival_ratio": 1.473,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 21
+  },
+  {
+   "candidate_id": 18,
+   "knockout_neurons": [
+    20701,
+    33426
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 82.54,
+   "survival_ratio": 1.427,
+   "min_survival_ratio": 1.427,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 33,
+   "knockout_neurons": [
+    22522,
+    61110
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 82.26,
+   "survival_ratio": 1.422,
+   "min_survival_ratio": 1.422,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 19
+  },
+  {
+   "candidate_id": 76,
+   "knockout_neurons": [
+    28452,
+    93643
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 81.46,
+   "survival_ratio": 1.408,
+   "min_survival_ratio": 1.408,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.936,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 21
+  },
+  {
+   "candidate_id": 85,
+   "knockout_neurons": [
+    20439,
+    30412
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 79.54,
+   "survival_ratio": 1.375,
+   "min_survival_ratio": 1.375,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 81,
+   "knockout_neurons": [
+    17345,
+    50838
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 79.29,
+   "survival_ratio": 1.37,
+   "min_survival_ratio": 1.37,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.942,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 21
+  },
+  {
+   "candidate_id": 64,
+   "knockout_neurons": [
+    27936,
+    61160
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 76.86,
+   "survival_ratio": 1.328,
+   "min_survival_ratio": 1.328,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.943,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 21
+  },
+  {
+   "candidate_id": 93,
+   "knockout_neurons": [
+    43426,
+    81903
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 75.77,
+   "survival_ratio": 1.31,
+   "min_survival_ratio": 1.31,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 23,
+   "knockout_neurons": [
+    33866,
+    513754
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 74.97,
+   "survival_ratio": 1.296,
+   "min_survival_ratio": 1.296,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 39,
+   "knockout_neurons": [
+    45765,
+    49523
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 73.63,
+   "survival_ratio": 1.273,
+   "min_survival_ratio": 1.273,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.934,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 20
+  },
+  {
+   "candidate_id": 63,
+   "knockout_neurons": [
+    19131,
+    34721
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 71.83,
+   "survival_ratio": 1.241,
+   "min_survival_ratio": 1.241,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.945,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 20
+  },
+  {
+   "candidate_id": 17,
+   "knockout_neurons": [
+    59615,
+    80443
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 71.2,
+   "survival_ratio": 1.231,
+   "min_survival_ratio": 1.231,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 17
+  },
+  {
+   "candidate_id": 43,
+   "knockout_neurons": [
+    14228,
+    75890
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 70.51,
+   "survival_ratio": 1.219,
+   "min_survival_ratio": 1.219,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.931,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 17
+  },
+  {
+   "candidate_id": 87,
+   "knockout_neurons": [
+    19734,
+    51012
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 70.51,
+   "survival_ratio": 1.219,
+   "min_survival_ratio": 1.219,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.936,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 17
+  },
+  {
+   "candidate_id": 86,
+   "knockout_neurons": [
+    17799,
+    59615
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 69.34,
+   "survival_ratio": 1.199,
+   "min_survival_ratio": 1.199,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.948,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 58,
+   "knockout_neurons": [
+    14544,
+    77657
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 69.11,
+   "survival_ratio": 1.195,
+   "min_survival_ratio": 1.195,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 19
+  },
+  {
+   "candidate_id": 25,
+   "knockout_neurons": [
+    16792,
+    43091
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 67.57,
+   "survival_ratio": 1.168,
+   "min_survival_ratio": 1.168,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 45,
+   "knockout_neurons": [
+    14595,
+    48773
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 67.03,
+   "survival_ratio": 1.159,
+   "min_survival_ratio": 1.159,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 83,
+   "knockout_neurons": [
+    39040,
+    74904
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 67.06,
+   "survival_ratio": 1.159,
+   "min_survival_ratio": 1.159,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.931,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 28,
+   "knockout_neurons": [
+    18858,
+    40998
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 66.86,
+   "survival_ratio": 1.156,
+   "min_survival_ratio": 1.156,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 71,
+   "knockout_neurons": [
+    23845,
+    66687
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 66.51,
+   "survival_ratio": 1.15,
+   "min_survival_ratio": 1.15,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.925,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 17
+  },
+  {
+   "candidate_id": 49,
+   "knockout_neurons": [
+    125203,
+    568163
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 66.46,
+   "survival_ratio": 1.149,
+   "min_survival_ratio": 1.149,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 95,
+   "knockout_neurons": [
+    44769,
+    58510
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 65.97,
+   "survival_ratio": 1.14,
+   "min_survival_ratio": 1.14,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 51,
+   "knockout_neurons": [
+    25965,
+    125863
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 65.37,
+   "survival_ratio": 1.13,
+   "min_survival_ratio": 1.13,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 35,
+   "knockout_neurons": [
+    10349,
+    89280
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 64.54,
+   "survival_ratio": 1.116,
+   "min_survival_ratio": 1.116,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 96,
+   "knockout_neurons": [
+    18858,
+    522777
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 64.43,
+   "survival_ratio": 1.114,
+   "min_survival_ratio": 1.114,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 88,
+   "knockout_neurons": [
+    19435,
+    27898
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 64.37,
+   "survival_ratio": 1.113,
+   "min_survival_ratio": 1.113,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.933,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 54,
+   "knockout_neurons": [
+    81987,
+    803469
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 62.77,
+   "survival_ratio": 1.085,
+   "min_survival_ratio": 1.085,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.933,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 31,
+   "knockout_neurons": [
+    40929,
+    89660
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 62.74,
+   "survival_ratio": 1.084,
+   "min_survival_ratio": 1.084,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 18
+  },
+  {
+   "candidate_id": 37,
+   "knockout_neurons": [
+    43727,
+    64517
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 62.54,
+   "survival_ratio": 1.081,
+   "min_survival_ratio": 1.081,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.949,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 7,
+   "knockout_neurons": [
+    42151,
+    113834
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 62.03,
+   "survival_ratio": 1.072,
+   "min_survival_ratio": 1.072,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.934,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 69,
+   "knockout_neurons": [
+    24440,
+    42751
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 61.23,
+   "survival_ratio": 1.058,
+   "min_survival_ratio": 1.058,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.931,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 16
+  },
+  {
+   "candidate_id": 9,
+   "knockout_neurons": [
+    55812,
+    81043
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 61.17,
+   "survival_ratio": 1.057,
+   "min_survival_ratio": 1.057,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.942,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 3,
+   "knockout_neurons": [
+    14449,
+    63225
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 60.94,
+   "survival_ratio": 1.053,
+   "min_survival_ratio": 1.053,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.942,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 70,
+   "knockout_neurons": [
+    24281,
+    536662
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 60.74,
+   "survival_ratio": 1.05,
+   "min_survival_ratio": 1.05,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 15,
+   "knockout_neurons": [
+    32533,
+    63496
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 60.06,
+   "survival_ratio": 1.038,
+   "min_survival_ratio": 1.038,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.94,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 34,
+   "knockout_neurons": [
+    17345,
+    108465
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 59.51,
+   "survival_ratio": 1.029,
+   "min_survival_ratio": 1.029,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 4,
+   "knockout_neurons": [
+    14676,
+    46901
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 59.14,
+   "survival_ratio": 1.022,
+   "min_survival_ratio": 1.022,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 30,
+   "knockout_neurons": [
+    28962,
+    76628
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 58.86,
+   "survival_ratio": 1.017,
+   "min_survival_ratio": 1.017,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.934,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 15
+  },
+  {
+   "candidate_id": 72,
+   "knockout_neurons": [
+    41934,
+    70951
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 58.49,
+   "survival_ratio": 1.011,
+   "min_survival_ratio": 1.011,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 99,
+   "knockout_neurons": [
+    46479,
+    47876
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 58.4,
+   "survival_ratio": 1.009,
+   "min_survival_ratio": 1.009,
+   "seeds_beating_intact": 1,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 0,
+   "knockout_neurons": [],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.86,
+   "survival_ratio": 1.0,
+   "min_survival_ratio": 1.0,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 24,
+   "knockout_neurons": [
+    43660,
+    84782
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.86,
+   "survival_ratio": 1.0,
+   "min_survival_ratio": 1.0,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 65,
+   "knockout_neurons": [
+    33284,
+    52123
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.86,
+   "survival_ratio": 1.0,
+   "min_survival_ratio": 1.0,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.941,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 67,
+   "knockout_neurons": [
+    31153,
+    534534
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.86,
+   "survival_ratio": 1.0,
+   "min_survival_ratio": 1.0,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 57,
+   "knockout_neurons": [
+    11550,
+    30750
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.69,
+   "survival_ratio": 0.997,
+   "min_survival_ratio": 0.997,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.934,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 46,
+   "knockout_neurons": [
+    28250,
+    51975
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 57.6,
+   "survival_ratio": 0.996,
+   "min_survival_ratio": 0.996,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.94,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 16,
+   "knockout_neurons": [
+    41813,
+    539307
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 56.03,
+   "survival_ratio": 0.968,
+   "min_survival_ratio": 0.968,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.961,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 77,
+   "knockout_neurons": [
+    19797,
+    47999
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 55.29,
+   "survival_ratio": 0.956,
+   "min_survival_ratio": 0.956,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.953,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 73,
+   "knockout_neurons": [
+    14228,
+    14812
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 55.26,
+   "survival_ratio": 0.955,
+   "min_survival_ratio": 0.955,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.947,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 68,
+   "knockout_neurons": [
+    44965,
+    514056
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 55.06,
+   "survival_ratio": 0.952,
+   "min_survival_ratio": 0.952,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 14
+  },
+  {
+   "candidate_id": 74,
+   "knockout_neurons": [
+    16726,
+    512803
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 53.91,
+   "survival_ratio": 0.932,
+   "min_survival_ratio": 0.932,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.94,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 78,
+   "knockout_neurons": [
+    11434,
+    127124
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 53.51,
+   "survival_ratio": 0.925,
+   "min_survival_ratio": 0.925,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.942,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 8
+  },
+  {
+   "candidate_id": 27,
+   "knockout_neurons": [
+    49046,
+    58478
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 52.94,
+   "survival_ratio": 0.915,
+   "min_survival_ratio": 0.915,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 9
+  },
+  {
+   "candidate_id": 22,
+   "knockout_neurons": [
+    38560,
+    535355
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 52.34,
+   "survival_ratio": 0.905,
+   "min_survival_ratio": 0.905,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.936,
+   "mean_turning_fraction": 1.0,
+   "total_kills": 9
+  },
+  {
+   "candidate_id": 26,
+   "knockout_neurons": [
+    30412,
+    44008
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 51.77,
+   "survival_ratio": 0.895,
+   "min_survival_ratio": 0.895,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 41,
+   "knockout_neurons": [
+    41322,
+    58348
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 51.34,
+   "survival_ratio": 0.887,
+   "min_survival_ratio": 0.887,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.93,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 1,
+   "knockout_neurons": [
+    14539,
+    78122
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 50.89,
+   "survival_ratio": 0.88,
+   "min_survival_ratio": 0.88,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.936,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 9
+  },
+  {
+   "candidate_id": 47,
+   "knockout_neurons": [
+    31730,
+    40998
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 50.94,
+   "survival_ratio": 0.88,
+   "min_survival_ratio": 0.88,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.931,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 10
+  },
+  {
+   "candidate_id": 44,
+   "knockout_neurons": [
+    49178,
+    54592
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 50.66,
+   "survival_ratio": 0.876,
+   "min_survival_ratio": 0.876,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.944,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 100,
+   "knockout_neurons": [
+    26121,
+    41141
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 50.63,
+   "survival_ratio": 0.875,
+   "min_survival_ratio": 0.875,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 9
+  },
+  {
+   "candidate_id": 38,
+   "knockout_neurons": [
+    48602,
+    80999
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 48.97,
+   "survival_ratio": 0.846,
+   "min_survival_ratio": 0.846,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.934,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 12
+  },
+  {
+   "candidate_id": 92,
+   "knockout_neurons": [
+    39712,
+    533265
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 48.57,
+   "survival_ratio": 0.84,
+   "min_survival_ratio": 0.84,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 60,
+   "knockout_neurons": [
+    18915,
+    512340
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 48.34,
+   "survival_ratio": 0.836,
+   "min_survival_ratio": 0.836,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.93,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 8,
+   "knockout_neurons": [
+    20114,
+    33866
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 45.83,
+   "survival_ratio": 0.792,
+   "min_survival_ratio": 0.792,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 9
+  },
+  {
+   "candidate_id": 20,
+   "knockout_neurons": [
+    18467,
+    72022
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 45.51,
+   "survival_ratio": 0.787,
+   "min_survival_ratio": 0.787,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.933,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 10
+  },
+  {
+   "candidate_id": 55,
+   "knockout_neurons": [
+    38108,
+    38279
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 45.4,
+   "survival_ratio": 0.785,
+   "min_survival_ratio": 0.785,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 5,
+   "knockout_neurons": [
+    69912,
+    75470
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 45.23,
+   "survival_ratio": 0.782,
+   "min_survival_ratio": 0.782,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.949,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 98,
+   "knockout_neurons": [
+    24463,
+    531382
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 44.71,
+   "survival_ratio": 0.773,
+   "min_survival_ratio": 0.773,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.932,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 11
+  },
+  {
+   "candidate_id": 52,
+   "knockout_neurons": [
+    27509,
+    40923
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 44.6,
+   "survival_ratio": 0.771,
+   "min_survival_ratio": 0.771,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.933,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 10
+  },
+  {
+   "candidate_id": 90,
+   "knockout_neurons": [
+    31682,
+    52881
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 44.43,
+   "survival_ratio": 0.768,
+   "min_survival_ratio": 0.768,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.943,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 10
+  },
+  {
+   "candidate_id": 13,
+   "knockout_neurons": [
+    107204,
+    130404
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 42.74,
+   "survival_ratio": 0.739,
+   "min_survival_ratio": 0.739,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.931,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 13
+  },
+  {
+   "candidate_id": 48,
+   "knockout_neurons": [
+    21585,
+    25586
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 42.46,
+   "survival_ratio": 0.734,
+   "min_survival_ratio": 0.734,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 14,
+   "knockout_neurons": [
+    19123,
+    54432
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 41.49,
+   "survival_ratio": 0.717,
+   "min_survival_ratio": 0.717,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.937,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 8
+  },
+  {
+   "candidate_id": 89,
+   "knockout_neurons": [
+    50500,
+    555871
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 40.57,
+   "survival_ratio": 0.701,
+   "min_survival_ratio": 0.701,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 0.999,
+   "mean_firing_fraction": 0.854,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 8
+  },
+  {
+   "candidate_id": 50,
+   "knockout_neurons": [
+    22334,
+    103289
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 40.03,
+   "survival_ratio": 0.692,
+   "min_survival_ratio": 0.692,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.946,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 6
+  },
+  {
+   "candidate_id": 84,
+   "knockout_neurons": [
+    12632,
+    20035
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 39.94,
+   "survival_ratio": 0.69,
+   "min_survival_ratio": 0.69,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.945,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 5
+  },
+  {
+   "candidate_id": 36,
+   "knockout_neurons": [
+    80999,
+    82408
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 39.77,
+   "survival_ratio": 0.687,
+   "min_survival_ratio": 0.687,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.943,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 8
+  },
+  {
+   "candidate_id": 91,
+   "knockout_neurons": [
+    11550,
+    27538
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 38.63,
+   "survival_ratio": 0.668,
+   "min_survival_ratio": 0.668,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.945,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 75,
+   "knockout_neurons": [
+    21012,
+    64105
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 38.49,
+   "survival_ratio": 0.665,
+   "min_survival_ratio": 0.665,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.938,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 6
+  },
+  {
+   "candidate_id": 29,
+   "knockout_neurons": [
+    54136,
+    63845
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 38.26,
+   "survival_ratio": 0.661,
+   "min_survival_ratio": 0.661,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.955,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 79,
+   "knockout_neurons": [
+    44839,
+    67140
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 38.26,
+   "survival_ratio": 0.661,
+   "min_survival_ratio": 0.661,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.94,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 11,
+   "knockout_neurons": [
+    22044,
+    42151
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 38.17,
+   "survival_ratio": 0.66,
+   "min_survival_ratio": 0.66,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.935,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 6
+  },
+  {
+   "candidate_id": 2,
+   "knockout_neurons": [
+    40669,
+    41141
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 37.54,
+   "survival_ratio": 0.649,
+   "min_survival_ratio": 0.649,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.945,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 82,
+   "knockout_neurons": [
+    54136,
+    56387
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 37.4,
+   "survival_ratio": 0.646,
+   "min_survival_ratio": 0.646,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.949,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 8
+  },
+  {
+   "candidate_id": 19,
+   "knockout_neurons": [
+    12684,
+    45094
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 36.94,
+   "survival_ratio": 0.639,
+   "min_survival_ratio": 0.639,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.933,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 66,
+   "knockout_neurons": [
+    14504,
+    31577
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 36.83,
+   "survival_ratio": 0.637,
+   "min_survival_ratio": 0.637,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.939,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 7
+  },
+  {
+   "candidate_id": 97,
+   "knockout_neurons": [
+    43884,
+    47795
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 33.91,
+   "survival_ratio": 0.586,
+   "min_survival_ratio": 0.586,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.949,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 5
+  },
+  {
+   "candidate_id": 61,
+   "knockout_neurons": [
+    18412,
+    522777
+   ],
+   "seeds_run": 1,
+   "mean_survival_seconds": 32.43,
+   "survival_ratio": 0.56,
+   "min_survival_ratio": 0.56,
+   "seeds_beating_intact": 0,
+   "seeds_hit_time_limit": 0,
+   "mean_movement_fraction": 1.0,
+   "mean_firing_fraction": 0.93,
+   "mean_turning_fraction": 0.999,
+   "total_kills": 6
+  }
+ ],
+ "runs": [
+  {
+   "candidate_id": 0,
+   "knockout_neurons": [],
+   "game_seed": 41027,
+   "survival_tics": 2025,
+   "survival_seconds": 57.857,
+   "died": true,
+   "turn_output": 1692.642,
+   "move_output": 38916.975,
+   "fire_output": 1906,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9412,
+   "distance_moved": 10743.4,
+   "kills": 12,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.0
+  },
+  {
+   "candidate_id": 1,
+   "knockout_neurons": [
+    14539,
+    78122
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1781,
+   "survival_seconds": 50.886,
+   "died": true,
+   "turn_output": 1483.644,
+   "move_output": 34225.125,
+   "fire_output": 1667,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.936,
+   "distance_moved": 9325.8,
+   "kills": 9,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.88
+  },
+  {
+   "candidate_id": 2,
+   "knockout_neurons": [
+    40669,
+    41141
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1314,
+   "survival_seconds": 37.543,
+   "died": true,
+   "turn_output": 1100.579,
+   "move_output": 25259.308,
+   "fire_output": 1242,
+   "turning_fraction": 0.9992,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9452,
+   "distance_moved": 6822.9,
+   "kills": 7,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.649
+  },
+  {
+   "candidate_id": 3,
+   "knockout_neurons": [
+    14449,
+    63225
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2133,
+   "survival_seconds": 60.943,
+   "died": true,
+   "turn_output": 1789.225,
+   "move_output": 40933.162,
+   "fire_output": 2009,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9419,
+   "distance_moved": 11293.5,
+   "kills": 12,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.053
+  },
+  {
+   "candidate_id": 4,
+   "knockout_neurons": [
+    14676,
+    46901
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2070,
+   "survival_seconds": 59.143,
+   "died": true,
+   "turn_output": 1762.307,
+   "move_output": 39763.833,
+   "fire_output": 1943,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9386,
+   "distance_moved": 11002.8,
+   "kills": 13,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.022
+  },
+  {
+   "candidate_id": 5,
+   "knockout_neurons": [
+    69912,
+    75470
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1583,
+   "survival_seconds": 45.229,
+   "died": true,
+   "turn_output": 1324.706,
+   "move_output": 30457.251,
+   "fire_output": 1502,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9488,
+   "distance_moved": 8279.7,
+   "kills": 7,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.782
+  },
+  {
+   "candidate_id": 6,
+   "knockout_neurons": [
+    46168,
+    82185
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3616,
+   "survival_seconds": 103.314,
+   "died": true,
+   "turn_output": 2973.659,
+   "move_output": 69481.895,
+   "fire_output": 3385,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9361,
+   "distance_moved": 18989.3,
+   "kills": 26,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.786
+  },
+  {
+   "candidate_id": 7,
+   "knockout_neurons": [
+    42151,
+    113834
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2171,
+   "survival_seconds": 62.029,
+   "died": true,
+   "turn_output": 1798.386,
+   "move_output": 41578.103,
+   "fire_output": 2028,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9341,
+   "distance_moved": 11221.6,
+   "kills": 15,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.072
+  },
+  {
+   "candidate_id": 8,
+   "knockout_neurons": [
+    20114,
+    33866
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1604,
+   "survival_seconds": 45.829,
+   "died": true,
+   "turn_output": 1359.8,
+   "move_output": 30895.77,
+   "fire_output": 1506,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9389,
+   "distance_moved": 8317.5,
+   "kills": 9,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.792
+  },
+  {
+   "candidate_id": 9,
+   "knockout_neurons": [
+    55812,
+    81043
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2141,
+   "survival_seconds": 61.171,
+   "died": true,
+   "turn_output": 1776.775,
+   "move_output": 41122.61,
+   "fire_output": 2016,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9416,
+   "distance_moved": 11200.6,
+   "kills": 14,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.057
+  },
+  {
+   "candidate_id": 10,
+   "knockout_neurons": [
+    47937,
+    103492
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3473,
+   "survival_seconds": 99.229,
+   "died": true,
+   "turn_output": 2866.105,
+   "move_output": 66783.792,
+   "fire_output": 3265,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9401,
+   "distance_moved": 18242.9,
+   "kills": 26,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.715
+  },
+  {
+   "candidate_id": 11,
+   "knockout_neurons": [
+    22044,
+    42151
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1336,
+   "survival_seconds": 38.171,
+   "died": true,
+   "turn_output": 1117.634,
+   "move_output": 25692.986,
+   "fire_output": 1249,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9349,
+   "distance_moved": 6893.6,
+   "kills": 6,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.66
+  },
+  {
+   "candidate_id": 12,
+   "knockout_neurons": [
+    48513,
+    215999
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3631,
+   "survival_seconds": 103.743,
+   "died": true,
+   "turn_output": 2970.173,
+   "move_output": 69703.073,
+   "fire_output": 3408,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9386,
+   "distance_moved": 19034.3,
+   "kills": 28,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.793
+  },
+  {
+   "candidate_id": 13,
+   "knockout_neurons": [
+    107204,
+    130404
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1496,
+   "survival_seconds": 42.743,
+   "died": true,
+   "turn_output": 1259.599,
+   "move_output": 28491.182,
+   "fire_output": 1393,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9311,
+   "distance_moved": 7405.1,
+   "kills": 13,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.739
+  },
+  {
+   "candidate_id": 14,
+   "knockout_neurons": [
+    19123,
+    54432
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1452,
+   "survival_seconds": 41.486,
+   "died": true,
+   "turn_output": 1204.753,
+   "move_output": 27796.201,
+   "fire_output": 1361,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9373,
+   "distance_moved": 7335.2,
+   "kills": 8,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.717
+  },
+  {
+   "candidate_id": 15,
+   "knockout_neurons": [
+    32533,
+    63496
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2102,
+   "survival_seconds": 60.057,
+   "died": true,
+   "turn_output": 1750.324,
+   "move_output": 40376.032,
+   "fire_output": 1976,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9401,
+   "distance_moved": 11042.3,
+   "kills": 14,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.038
+  },
+  {
+   "candidate_id": 16,
+   "knockout_neurons": [
+    41813,
+    539307
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1961,
+   "survival_seconds": 56.029,
+   "died": true,
+   "turn_output": 1575.266,
+   "move_output": 38673.771,
+   "fire_output": 1884,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9607,
+   "distance_moved": 10222.5,
+   "kills": 14,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.968
+  },
+  {
+   "candidate_id": 17,
+   "knockout_neurons": [
+    59615,
+    80443
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2492,
+   "survival_seconds": 71.2,
+   "died": true,
+   "turn_output": 2061.379,
+   "move_output": 47844.491,
+   "fire_output": 2329,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9346,
+   "distance_moved": 12960.2,
+   "kills": 17,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.231
+  },
+  {
+   "candidate_id": 18,
+   "knockout_neurons": [
+    20701,
+    33426
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2889,
+   "survival_seconds": 82.543,
+   "died": true,
+   "turn_output": 2351.897,
+   "move_output": 55481.259,
+   "fire_output": 2710,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.938,
+   "distance_moved": 15016.2,
+   "kills": 18,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.427
+  },
+  {
+   "candidate_id": 19,
+   "knockout_neurons": [
+    12684,
+    45094
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1293,
+   "survival_seconds": 36.943,
+   "died": true,
+   "turn_output": 1102.667,
+   "move_output": 24859.031,
+   "fire_output": 1206,
+   "turning_fraction": 0.9992,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9327,
+   "distance_moved": 6848.4,
+   "kills": 7,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.639
+  },
+  {
+   "candidate_id": 20,
+   "knockout_neurons": [
+    18467,
+    72022
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1593,
+   "survival_seconds": 45.514,
+   "died": true,
+   "turn_output": 1313.881,
+   "move_output": 30596.529,
+   "fire_output": 1486,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9328,
+   "distance_moved": 8088.7,
+   "kills": 10,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.787
+  },
+  {
+   "candidate_id": 21,
+   "knockout_neurons": [
+    72407,
+    518259
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3118,
+   "survival_seconds": 89.086,
+   "died": true,
+   "turn_output": 2562.602,
+   "move_output": 59815.543,
+   "fire_output": 2942,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9436,
+   "distance_moved": 16313.4,
+   "kills": 22,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.54
+  },
+  {
+   "candidate_id": 22,
+   "knockout_neurons": [
+    38560,
+    535355
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1832,
+   "survival_seconds": 52.343,
+   "died": true,
+   "turn_output": 1529.814,
+   "move_output": 35157.341,
+   "fire_output": 1715,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9361,
+   "distance_moved": 9602.5,
+   "kills": 9,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.905
+  },
+  {
+   "candidate_id": 23,
+   "knockout_neurons": [
+    33866,
+    513754
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2624,
+   "survival_seconds": 74.971,
+   "died": true,
+   "turn_output": 2180.135,
+   "move_output": 50463.51,
+   "fire_output": 2463,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9386,
+   "distance_moved": 13815.4,
+   "kills": 18,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.296
+  },
+  {
+   "candidate_id": 24,
+   "knockout_neurons": [
+    43660,
+    84782
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2025,
+   "survival_seconds": 57.857,
+   "died": true,
+   "turn_output": 1692.642,
+   "move_output": 38916.975,
+   "fire_output": 1906,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9412,
+   "distance_moved": 10743.4,
+   "kills": 12,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.0
+  },
+  {
+   "candidate_id": 25,
+   "knockout_neurons": [
+    16792,
+    43091
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2365,
+   "survival_seconds": 67.571,
+   "died": true,
+   "turn_output": 1953.057,
+   "move_output": 45412.35,
+   "fire_output": 2215,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9366,
+   "distance_moved": 12328.7,
+   "kills": 15,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.168
+  },
+  {
+   "candidate_id": 26,
+   "knockout_neurons": [
+    30412,
+    44008
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1812,
+   "survival_seconds": 51.771,
+   "died": true,
+   "turn_output": 1529.554,
+   "move_output": 34722.667,
+   "fire_output": 1689,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9321,
+   "distance_moved": 9444.2,
+   "kills": 7,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.895
+  },
+  {
+   "candidate_id": 27,
+   "knockout_neurons": [
+    49046,
+    58478
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1853,
+   "survival_seconds": 52.943,
+   "died": true,
+   "turn_output": 1549.193,
+   "move_output": 35629.701,
+   "fire_output": 1736,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9369,
+   "distance_moved": 9770.9,
+   "kills": 9,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.915
+  },
+  {
+   "candidate_id": 28,
+   "knockout_neurons": [
+    18858,
+    40998
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2340,
+   "survival_seconds": 66.857,
+   "died": true,
+   "turn_output": 1934.016,
+   "move_output": 44746.327,
+   "fire_output": 2181,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9321,
+   "distance_moved": 12053.7,
+   "kills": 14,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.156
+  },
+  {
+   "candidate_id": 29,
+   "knockout_neurons": [
+    54136,
+    63845
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1339,
+   "survival_seconds": 38.257,
+   "died": true,
+   "turn_output": 1077.416,
+   "move_output": 26115.394,
+   "fire_output": 1279,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9552,
+   "distance_moved": 6750.9,
+   "kills": 7,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.661
+  },
+  {
+   "candidate_id": 30,
+   "knockout_neurons": [
+    28962,
+    76628
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2060,
+   "survival_seconds": 58.857,
+   "died": true,
+   "turn_output": 1724.959,
+   "move_output": 39592.558,
+   "fire_output": 1925,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9345,
+   "distance_moved": 10907.3,
+   "kills": 15,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.017
+  },
+  {
+   "candidate_id": 31,
+   "knockout_neurons": [
+    40929,
+    89660
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2196,
+   "survival_seconds": 62.743,
+   "died": true,
+   "turn_output": 1834.144,
+   "move_output": 42137.459,
+   "fire_output": 2057,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9367,
+   "distance_moved": 11262.6,
+   "kills": 18,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.084
+  },
+  {
+   "candidate_id": 32,
+   "knockout_neurons": [
+    35637,
+    338369
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3583,
+   "survival_seconds": 102.371,
+   "died": true,
+   "turn_output": 2912.75,
+   "move_output": 69134.39,
+   "fire_output": 3362,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9383,
+   "distance_moved": 18798.4,
+   "kills": 24,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.769
+  },
+  {
+   "candidate_id": 33,
+   "knockout_neurons": [
+    22522,
+    61110
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2879,
+   "survival_seconds": 82.257,
+   "died": true,
+   "turn_output": 2353.955,
+   "move_output": 55228.157,
+   "fire_output": 2692,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.935,
+   "distance_moved": 14890.9,
+   "kills": 19,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.422
+  },
+  {
+   "candidate_id": 34,
+   "knockout_neurons": [
+    17345,
+    108465
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2083,
+   "survival_seconds": 59.514,
+   "died": true,
+   "turn_output": 1772.095,
+   "move_output": 40028.219,
+   "fire_output": 1959,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9405,
+   "distance_moved": 11018.6,
+   "kills": 12,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.029
+  },
+  {
+   "candidate_id": 35,
+   "knockout_neurons": [
+    10349,
+    89280
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2259,
+   "survival_seconds": 64.543,
+   "died": true,
+   "turn_output": 1866.225,
+   "move_output": 43404.942,
+   "fire_output": 2120,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9385,
+   "distance_moved": 11732.5,
+   "kills": 15,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.116
+  },
+  {
+   "candidate_id": 36,
+   "knockout_neurons": [
+    80999,
+    82408
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1392,
+   "survival_seconds": 39.771,
+   "died": true,
+   "turn_output": 1175.074,
+   "move_output": 26804.995,
+   "fire_output": 1313,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9432,
+   "distance_moved": 7328.4,
+   "kills": 8,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.687
+  },
+  {
+   "candidate_id": 37,
+   "knockout_neurons": [
+    43727,
+    64517
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2189,
+   "survival_seconds": 62.543,
+   "died": true,
+   "turn_output": 1833.458,
+   "move_output": 42311.529,
+   "fire_output": 2077,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9488,
+   "distance_moved": 11526.2,
+   "kills": 16,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.081
+  },
+  {
+   "candidate_id": 38,
+   "knockout_neurons": [
+    48602,
+    80999
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1714,
+   "survival_seconds": 48.971,
+   "died": true,
+   "turn_output": 1446.784,
+   "move_output": 32915.227,
+   "fire_output": 1601,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9341,
+   "distance_moved": 8980.9,
+   "kills": 12,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.846
+  },
+  {
+   "candidate_id": 39,
+   "knockout_neurons": [
+    45765,
+    49523
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2577,
+   "survival_seconds": 73.629,
+   "died": true,
+   "turn_output": 2124.053,
+   "move_output": 49482.468,
+   "fire_output": 2407,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.934,
+   "distance_moved": 13546.1,
+   "kills": 20,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.273
+  },
+  {
+   "candidate_id": 40,
+   "knockout_neurons": [
+    17345,
+    22786
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3649,
+   "survival_seconds": 104.257,
+   "died": true,
+   "turn_output": 2985.054,
+   "move_output": 70085.685,
+   "fire_output": 3433,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9408,
+   "distance_moved": 19226.8,
+   "kills": 29,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.802
+  },
+  {
+   "candidate_id": 41,
+   "knockout_neurons": [
+    41322,
+    58348
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1797,
+   "survival_seconds": 51.343,
+   "died": true,
+   "turn_output": 1492.492,
+   "move_output": 34403.964,
+   "fire_output": 1672,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9304,
+   "distance_moved": 9440.0,
+   "kills": 11,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.887
+  },
+  {
+   "candidate_id": 42,
+   "knockout_neurons": [
+    43727,
+    125863
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3405,
+   "survival_seconds": 97.286,
+   "died": true,
+   "turn_output": 2802.317,
+   "move_output": 65387.425,
+   "fire_output": 3198,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9392,
+   "distance_moved": 17900.7,
+   "kills": 26,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.681
+  },
+  {
+   "candidate_id": 43,
+   "knockout_neurons": [
+    14228,
+    75890
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2468,
+   "survival_seconds": 70.514,
+   "died": true,
+   "turn_output": 2048.79,
+   "move_output": 47462.283,
+   "fire_output": 2297,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9307,
+   "distance_moved": 12936.8,
+   "kills": 17,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.219
+  },
+  {
+   "candidate_id": 44,
+   "knockout_neurons": [
+    49178,
+    54592
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1773,
+   "survival_seconds": 50.657,
+   "died": true,
+   "turn_output": 1483.891,
+   "move_output": 33958.623,
+   "fire_output": 1674,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9442,
+   "distance_moved": 9078.4,
+   "kills": 12,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.876
+  },
+  {
+   "candidate_id": 45,
+   "knockout_neurons": [
+    14595,
+    48773
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2346,
+   "survival_seconds": 67.029,
+   "died": true,
+   "turn_output": 1953.152,
+   "move_output": 45096.704,
+   "fire_output": 2208,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9412,
+   "distance_moved": 12370.1,
+   "kills": 16,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.159
+  },
+  {
+   "candidate_id": 46,
+   "knockout_neurons": [
+    28250,
+    51975
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2016,
+   "survival_seconds": 57.6,
+   "died": true,
+   "turn_output": 1719.235,
+   "move_output": 38708.586,
+   "fire_output": 1894,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9395,
+   "distance_moved": 10610.5,
+   "kills": 11,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.996
+  },
+  {
+   "candidate_id": 47,
+   "knockout_neurons": [
+    31730,
+    40998
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1783,
+   "survival_seconds": 50.943,
+   "died": true,
+   "turn_output": 1499.327,
+   "move_output": 34121.742,
+   "fire_output": 1660,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.931,
+   "distance_moved": 9344.9,
+   "kills": 10,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.88
+  },
+  {
+   "candidate_id": 48,
+   "knockout_neurons": [
+    21585,
+    25586
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1486,
+   "survival_seconds": 42.457,
+   "died": true,
+   "turn_output": 1241.215,
+   "move_output": 28503.486,
+   "fire_output": 1393,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9374,
+   "distance_moved": 7772.5,
+   "kills": 7,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.734
+  },
+  {
+   "candidate_id": 49,
+   "knockout_neurons": [
+    125203,
+    568163
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2326,
+   "survival_seconds": 66.457,
+   "died": true,
+   "turn_output": 1877.545,
+   "move_output": 44581.7,
+   "fire_output": 2175,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9351,
+   "distance_moved": 11763.3,
+   "kills": 13,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.149
+  },
+  {
+   "candidate_id": 50,
+   "knockout_neurons": [
+    22334,
+    103289
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1401,
+   "survival_seconds": 40.029,
+   "died": true,
+   "turn_output": 1178.69,
+   "move_output": 26910.804,
+   "fire_output": 1325,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9458,
+   "distance_moved": 7324.0,
+   "kills": 6,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.692
+  },
+  {
+   "candidate_id": 51,
+   "knockout_neurons": [
+    25965,
+    125863
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2288,
+   "survival_seconds": 65.371,
+   "died": true,
+   "turn_output": 1895.587,
+   "move_output": 43911.264,
+   "fire_output": 2149,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9392,
+   "distance_moved": 11998.0,
+   "kills": 14,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.13
+  },
+  {
+   "candidate_id": 52,
+   "knockout_neurons": [
+    27509,
+    40923
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1561,
+   "survival_seconds": 44.6,
+   "died": true,
+   "turn_output": 1312.708,
+   "move_output": 29981.291,
+   "fire_output": 1456,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9327,
+   "distance_moved": 8244.1,
+   "kills": 10,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.771
+  },
+  {
+   "candidate_id": 53,
+   "knockout_neurons": [
+    16600,
+    48689
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3663,
+   "survival_seconds": 104.657,
+   "died": true,
+   "turn_output": 3003.426,
+   "move_output": 70427.75,
+   "fire_output": 3446,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9408,
+   "distance_moved": 19136.7,
+   "kills": 27,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.809
+  },
+  {
+   "candidate_id": 54,
+   "knockout_neurons": [
+    81987,
+    803469
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2197,
+   "survival_seconds": 62.771,
+   "died": true,
+   "turn_output": 1801.138,
+   "move_output": 42190.224,
+   "fire_output": 2050,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9331,
+   "distance_moved": 11214.7,
+   "kills": 16,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.085
+  },
+  {
+   "candidate_id": 55,
+   "knockout_neurons": [
+    38108,
+    38279
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1589,
+   "survival_seconds": 45.4,
+   "died": true,
+   "turn_output": 1324.352,
+   "move_output": 30464.016,
+   "fire_output": 1489,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9371,
+   "distance_moved": 8160.6,
+   "kills": 11,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.785
+  },
+  {
+   "candidate_id": 56,
+   "knockout_neurons": [
+    29712,
+    96691
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3263,
+   "survival_seconds": 93.229,
+   "died": true,
+   "turn_output": 2658.291,
+   "move_output": 62531.833,
+   "fire_output": 3071,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9412,
+   "distance_moved": 16833.3,
+   "kills": 25,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.611
+  },
+  {
+   "candidate_id": 57,
+   "knockout_neurons": [
+    11550,
+    30750
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2019,
+   "survival_seconds": 57.686,
+   "died": true,
+   "turn_output": 1706.9,
+   "move_output": 38637.765,
+   "fire_output": 1886,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9341,
+   "distance_moved": 10529.0,
+   "kills": 14,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.997
+  },
+  {
+   "candidate_id": 58,
+   "knockout_neurons": [
+    14544,
+    77657
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2419,
+   "survival_seconds": 69.114,
+   "died": true,
+   "turn_output": 2001.811,
+   "move_output": 46575.432,
+   "fire_output": 2271,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9388,
+   "distance_moved": 12696.3,
+   "kills": 19,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.195
+  },
+  {
+   "candidate_id": 59,
+   "knockout_neurons": [
+    43011,
+    63085
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3038,
+   "survival_seconds": 86.8,
+   "died": true,
+   "turn_output": 2534.583,
+   "move_output": 58281.791,
+   "fire_output": 2850,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9381,
+   "distance_moved": 15795.1,
+   "kills": 18,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.5
+  },
+  {
+   "candidate_id": 60,
+   "knockout_neurons": [
+    18915,
+    512340
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1692,
+   "survival_seconds": 48.343,
+   "died": true,
+   "turn_output": 1410.075,
+   "move_output": 32524.814,
+   "fire_output": 1573,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9297,
+   "distance_moved": 8824.8,
+   "kills": 11,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.836
+  },
+  {
+   "candidate_id": 61,
+   "knockout_neurons": [
+    18412,
+    522777
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1135,
+   "survival_seconds": 32.429,
+   "died": true,
+   "turn_output": 974.497,
+   "move_output": 21811.811,
+   "fire_output": 1056,
+   "turning_fraction": 0.9991,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9304,
+   "distance_moved": 5960.5,
+   "kills": 6,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.56
+  },
+  {
+   "candidate_id": 62,
+   "knockout_neurons": [
+    45006,
+    63085
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3094,
+   "survival_seconds": 88.4,
+   "died": true,
+   "turn_output": 2540.717,
+   "move_output": 59410.126,
+   "fire_output": 2906,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9392,
+   "distance_moved": 16183.9,
+   "kills": 20,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.528
+  },
+  {
+   "candidate_id": 63,
+   "knockout_neurons": [
+    19131,
+    34721
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2514,
+   "survival_seconds": 71.829,
+   "died": true,
+   "turn_output": 2073.944,
+   "move_output": 48265.152,
+   "fire_output": 2375,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9447,
+   "distance_moved": 12947.9,
+   "kills": 20,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.241
+  },
+  {
+   "candidate_id": 64,
+   "knockout_neurons": [
+    27936,
+    61160
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2690,
+   "survival_seconds": 76.857,
+   "died": true,
+   "turn_output": 2228.91,
+   "move_output": 51603.646,
+   "fire_output": 2537,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9431,
+   "distance_moved": 14109.4,
+   "kills": 21,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.328
+  },
+  {
+   "candidate_id": 65,
+   "knockout_neurons": [
+    33284,
+    52123
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2025,
+   "survival_seconds": 57.857,
+   "died": true,
+   "turn_output": 1692.642,
+   "move_output": 38916.975,
+   "fire_output": 1906,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9412,
+   "distance_moved": 10743.4,
+   "kills": 12,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.0
+  },
+  {
+   "candidate_id": 66,
+   "knockout_neurons": [
+    14504,
+    31577
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1289,
+   "survival_seconds": 36.829,
+   "died": true,
+   "turn_output": 1089.696,
+   "move_output": 24740.514,
+   "fire_output": 1210,
+   "turning_fraction": 0.9992,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9387,
+   "distance_moved": 6750.5,
+   "kills": 7,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.637
+  },
+  {
+   "candidate_id": 67,
+   "knockout_neurons": [
+    31153,
+    534534
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2025,
+   "survival_seconds": 57.857,
+   "died": true,
+   "turn_output": 1675.749,
+   "move_output": 38678.974,
+   "fire_output": 1888,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9323,
+   "distance_moved": 10510.9,
+   "kills": 11,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.0
+  },
+  {
+   "candidate_id": 68,
+   "knockout_neurons": [
+    44965,
+    514056
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1927,
+   "survival_seconds": 55.057,
+   "died": true,
+   "turn_output": 1608.17,
+   "move_output": 36954.412,
+   "fire_output": 1808,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9382,
+   "distance_moved": 10148.3,
+   "kills": 14,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.952
+  },
+  {
+   "candidate_id": 69,
+   "knockout_neurons": [
+    24440,
+    42751
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2143,
+   "survival_seconds": 61.229,
+   "died": true,
+   "turn_output": 1772.937,
+   "move_output": 41101.509,
+   "fire_output": 1996,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9314,
+   "distance_moved": 11100.6,
+   "kills": 16,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.058
+  },
+  {
+   "candidate_id": 70,
+   "knockout_neurons": [
+    24281,
+    536662
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2126,
+   "survival_seconds": 60.743,
+   "died": true,
+   "turn_output": 1769.556,
+   "move_output": 40870.178,
+   "fire_output": 1988,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9351,
+   "distance_moved": 11182.4,
+   "kills": 12,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.05
+  },
+  {
+   "candidate_id": 71,
+   "knockout_neurons": [
+    23845,
+    66687
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2328,
+   "survival_seconds": 66.514,
+   "died": true,
+   "turn_output": 1953.799,
+   "move_output": 44607.541,
+   "fire_output": 2154,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9253,
+   "distance_moved": 12221.7,
+   "kills": 17,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.15
+  },
+  {
+   "candidate_id": 72,
+   "knockout_neurons": [
+    41934,
+    70951
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2047,
+   "survival_seconds": 58.486,
+   "died": true,
+   "turn_output": 1700.415,
+   "move_output": 39176.771,
+   "fire_output": 1907,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9316,
+   "distance_moved": 10677.5,
+   "kills": 13,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.011
+  },
+  {
+   "candidate_id": 73,
+   "knockout_neurons": [
+    14228,
+    14812
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1934,
+   "survival_seconds": 55.257,
+   "died": true,
+   "turn_output": 1616.632,
+   "move_output": 37226.186,
+   "fire_output": 1832,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9473,
+   "distance_moved": 10020.3,
+   "kills": 14,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.955
+  },
+  {
+   "candidate_id": 74,
+   "knockout_neurons": [
+    16726,
+    512803
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1887,
+   "survival_seconds": 53.914,
+   "died": true,
+   "turn_output": 1570.031,
+   "move_output": 36381.549,
+   "fire_output": 1773,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9396,
+   "distance_moved": 9925.0,
+   "kills": 13,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.932
+  },
+  {
+   "candidate_id": 75,
+   "knockout_neurons": [
+    21012,
+    64105
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1347,
+   "survival_seconds": 38.486,
+   "died": true,
+   "turn_output": 1151.809,
+   "move_output": 25899.804,
+   "fire_output": 1263,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9376,
+   "distance_moved": 7087.3,
+   "kills": 6,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.665
+  },
+  {
+   "candidate_id": 76,
+   "knockout_neurons": [
+    28452,
+    93643
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2851,
+   "survival_seconds": 81.457,
+   "died": true,
+   "turn_output": 2361.741,
+   "move_output": 54702.358,
+   "fire_output": 2668,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9358,
+   "distance_moved": 14995.4,
+   "kills": 21,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.408
+  },
+  {
+   "candidate_id": 77,
+   "knockout_neurons": [
+    19797,
+    47999
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1935,
+   "survival_seconds": 55.286,
+   "died": true,
+   "turn_output": 1619.457,
+   "move_output": 37304.574,
+   "fire_output": 1843,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9525,
+   "distance_moved": 10116.0,
+   "kills": 13,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.956
+  },
+  {
+   "candidate_id": 78,
+   "knockout_neurons": [
+    11434,
+    127124
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1873,
+   "survival_seconds": 53.514,
+   "died": true,
+   "turn_output": 1564.614,
+   "move_output": 36079.836,
+   "fire_output": 1764,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9418,
+   "distance_moved": 9898.2,
+   "kills": 8,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.925
+  },
+  {
+   "candidate_id": 79,
+   "knockout_neurons": [
+    44839,
+    67140
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1339,
+   "survival_seconds": 38.257,
+   "died": true,
+   "turn_output": 1138.351,
+   "move_output": 25749.472,
+   "fire_output": 1259,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9403,
+   "distance_moved": 7046.4,
+   "kills": 7,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.661
+  },
+  {
+   "candidate_id": 80,
+   "knockout_neurons": [
+    28688,
+    40659
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2983,
+   "survival_seconds": 85.229,
+   "died": true,
+   "turn_output": 2456.2,
+   "move_output": 57329.815,
+   "fire_output": 2795,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.937,
+   "distance_moved": 15680.5,
+   "kills": 21,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.473
+  },
+  {
+   "candidate_id": 81,
+   "knockout_neurons": [
+    17345,
+    50838
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2775,
+   "survival_seconds": 79.286,
+   "died": true,
+   "turn_output": 2306.378,
+   "move_output": 53418.221,
+   "fire_output": 2613,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9416,
+   "distance_moved": 14651.3,
+   "kills": 21,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.37
+  },
+  {
+   "candidate_id": 82,
+   "knockout_neurons": [
+    54136,
+    56387
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1309,
+   "survival_seconds": 37.4,
+   "died": true,
+   "turn_output": 1113.127,
+   "move_output": 25527.258,
+   "fire_output": 1242,
+   "turning_fraction": 0.9992,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9488,
+   "distance_moved": 6894.3,
+   "kills": 8,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.646
+  },
+  {
+   "candidate_id": 83,
+   "knockout_neurons": [
+    39040,
+    74904
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2347,
+   "survival_seconds": 67.057,
+   "died": true,
+   "turn_output": 1945.957,
+   "move_output": 44949.177,
+   "fire_output": 2186,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9314,
+   "distance_moved": 12292.9,
+   "kills": 15,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.159
+  },
+  {
+   "candidate_id": 84,
+   "knockout_neurons": [
+    12632,
+    20035
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1398,
+   "survival_seconds": 39.943,
+   "died": true,
+   "turn_output": 1191.513,
+   "move_output": 26934.48,
+   "fire_output": 1321,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9449,
+   "distance_moved": 7366.7,
+   "kills": 5,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.69
+  },
+  {
+   "candidate_id": 85,
+   "knockout_neurons": [
+    20439,
+    30412
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2784,
+   "survival_seconds": 79.543,
+   "died": true,
+   "turn_output": 2316.803,
+   "move_output": 53440.062,
+   "fire_output": 2595,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9321,
+   "distance_moved": 14566.7,
+   "kills": 18,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.375
+  },
+  {
+   "candidate_id": 86,
+   "knockout_neurons": [
+    17799,
+    59615
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2427,
+   "survival_seconds": 69.343,
+   "died": true,
+   "turn_output": 2060.437,
+   "move_output": 46750.841,
+   "fire_output": 2300,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9477,
+   "distance_moved": 12983.8,
+   "kills": 18,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.199
+  },
+  {
+   "candidate_id": 87,
+   "knockout_neurons": [
+    19734,
+    51012
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2468,
+   "survival_seconds": 70.514,
+   "died": true,
+   "turn_output": 2038.464,
+   "move_output": 47379.767,
+   "fire_output": 2309,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9356,
+   "distance_moved": 12985.5,
+   "kills": 17,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.219
+  },
+  {
+   "candidate_id": 88,
+   "knockout_neurons": [
+    19435,
+    27898
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2253,
+   "survival_seconds": 64.371,
+   "died": true,
+   "turn_output": 1874.876,
+   "move_output": 43361.676,
+   "fire_output": 2102,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.933,
+   "distance_moved": 11926.2,
+   "kills": 16,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.113
+  },
+  {
+   "candidate_id": 89,
+   "knockout_neurons": [
+    50500,
+    555871
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1420,
+   "survival_seconds": 40.571,
+   "died": true,
+   "turn_output": 966.277,
+   "move_output": 16946.783,
+   "fire_output": 1212,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 0.9993,
+   "firing_fraction": 0.8535,
+   "distance_moved": 4953.9,
+   "kills": 8,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.701
+  },
+  {
+   "candidate_id": 90,
+   "knockout_neurons": [
+    31682,
+    52881
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1555,
+   "survival_seconds": 44.429,
+   "died": true,
+   "turn_output": 1291.69,
+   "move_output": 29715.923,
+   "fire_output": 1466,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9428,
+   "distance_moved": 7871.5,
+   "kills": 10,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.768
+  },
+  {
+   "candidate_id": 91,
+   "knockout_neurons": [
+    11550,
+    27538
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1352,
+   "survival_seconds": 38.629,
+   "died": true,
+   "turn_output": 1143.847,
+   "move_output": 26017.025,
+   "fire_output": 1277,
+   "turning_fraction": 0.9993,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9445,
+   "distance_moved": 7048.4,
+   "kills": 7,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.668
+  },
+  {
+   "candidate_id": 92,
+   "knockout_neurons": [
+    39712,
+    533265
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1700,
+   "survival_seconds": 48.571,
+   "died": true,
+   "turn_output": 1440.148,
+   "move_output": 32546.792,
+   "fire_output": 1590,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9353,
+   "distance_moved": 8852.2,
+   "kills": 13,
+   "min_health": -11,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.84
+  },
+  {
+   "candidate_id": 93,
+   "knockout_neurons": [
+    43426,
+    81903
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2652,
+   "survival_seconds": 75.771,
+   "died": true,
+   "turn_output": 2221.383,
+   "move_output": 50989.856,
+   "fire_output": 2484,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9367,
+   "distance_moved": 13669.5,
+   "kills": 18,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.31
+  },
+  {
+   "candidate_id": 94,
+   "knockout_neurons": [
+    14366,
+    25382
+   ],
+   "game_seed": 41027,
+   "survival_tics": 3094,
+   "survival_seconds": 88.4,
+   "died": true,
+   "turn_output": 2590.833,
+   "move_output": 59966.874,
+   "fire_output": 2934,
+   "turning_fraction": 0.9997,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9483,
+   "distance_moved": 16500.0,
+   "kills": 23,
+   "min_health": -14,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.528
+  },
+  {
+   "candidate_id": 95,
+   "knockout_neurons": [
+    44769,
+    58510
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2309,
+   "survival_seconds": 65.971,
+   "died": true,
+   "turn_output": 1924.719,
+   "move_output": 44343.546,
+   "fire_output": 2165,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9376,
+   "distance_moved": 11966.6,
+   "kills": 15,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.14
+  },
+  {
+   "candidate_id": 96,
+   "knockout_neurons": [
+    18858,
+    522777
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2255,
+   "survival_seconds": 64.429,
+   "died": true,
+   "turn_output": 1924.719,
+   "move_output": 43203.112,
+   "fire_output": 2114,
+   "turning_fraction": 0.9996,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9375,
+   "distance_moved": 11912.6,
+   "kills": 16,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.114
+  },
+  {
+   "candidate_id": 97,
+   "knockout_neurons": [
+    43884,
+    47795
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1187,
+   "survival_seconds": 33.914,
+   "died": true,
+   "turn_output": 1029.418,
+   "move_output": 22860.332,
+   "fire_output": 1126,
+   "turning_fraction": 0.9992,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9486,
+   "distance_moved": 6294.1,
+   "kills": 5,
+   "min_health": -8,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.586
+  },
+  {
+   "candidate_id": 98,
+   "knockout_neurons": [
+    24463,
+    531382
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1565,
+   "survival_seconds": 44.714,
+   "died": true,
+   "turn_output": 1316.836,
+   "move_output": 30100.289,
+   "fire_output": 1459,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9323,
+   "distance_moved": 8176.6,
+   "kills": 11,
+   "min_health": -2,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.773
+  },
+  {
+   "candidate_id": 99,
+   "knockout_neurons": [
+    46479,
+    47876
+   ],
+   "game_seed": 41027,
+   "survival_tics": 2044,
+   "survival_seconds": 58.4,
+   "died": true,
+   "turn_output": 1705.636,
+   "move_output": 39274.564,
+   "fire_output": 1915,
+   "turning_fraction": 0.9995,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9369,
+   "distance_moved": 10661.2,
+   "kills": 12,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 1.009
+  },
+  {
+   "candidate_id": 100,
+   "knockout_neurons": [
+    26121,
+    41141
+   ],
+   "game_seed": 41027,
+   "survival_tics": 1772,
+   "survival_seconds": 50.629,
+   "died": true,
+   "turn_output": 1506.328,
+   "move_output": 33958.011,
+   "fire_output": 1664,
+   "turning_fraction": 0.9994,
+   "movement_fraction": 1.0,
+   "firing_fraction": 0.9391,
+   "distance_moved": 9279.2,
+   "kills": 9,
+   "min_health": -5,
+   "intact_survival_tics": 2025,
+   "survival_ratio": 0.875
+  }
+ ]
+}
