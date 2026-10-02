@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fly Candidate</title>
+<style>
+  :root { --bg: #07090d; --text: #e6edf3; --muted: #6b7a8c; --dim: #2a333f; --on: #5cf2b0; --dead: #ff6b6b;
+          --mono: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; }
+  body { display: flex; flex-direction: column; padding: 3vmin; gap: 2vmin; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; gap: 2vmin; }
+  .cand { font-size: 5vmin; letter-spacing: .06em; font-weight: 600; }
+  .ko { font-size: 3vmin; color: var(--muted); white-space: nowrap; }
+  .ko b { color: var(--text); font-weight: 400; }
+  .view { flex: 1; min-height: 0; position: relative; background: #000; border-radius: 1.5vmin; overflow: hidden; border: 1px solid #1b232e; }
+  .view img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; display: block; }
+  body.dead .view img { filter: grayscale(1) brightness(.55); }
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: 2vmin; }
+  .timer { font-size: 7vmin; font-variant-numeric: tabular-nums; }
+  .timer small { font-size: 2.4vmin; color: var(--muted); letter-spacing: .14em; display: block; }
+  .outs { display: flex; gap: 2.4vmin; font-size: 3vmin; letter-spacing: .1em; color: var(--muted); }
+  .outs span::before { content: ""; display: inline-block; width: 2.4vmin; height: 2.4vmin; border-radius: 50%; background: var(--dim); margin-right: 1vmin; vertical-align: -0.3vmin; }
+  .outs span.on { color: var(--text); }
+  .outs span.on::before { background: var(--on); box-shadow: 0 0 2vmin rgba(92,242,176,.6); }
+  .status { font-size: 5vmin; letter-spacing: .14em; color: var(--on); }
+  body.dead .status { color: var(--dead); }
+  body.done .status { color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="cand" id="cand">CANDIDATE —</div>
+    <div class="ko" id="ko"></div>
+  </div>
+  <div class="view"><img id="frame" alt=""></div>
+  <div class="foot">
+    <div class="timer"><small>SURVIVAL</small><span id="timer">00:00.0</span></div>
+    <div class="outs"><span id="turn">TURN</span><span id="move">MOVE</span><span id="fire">FIRE</span></div>
+    <div class="status" id="status">…</div>
+  </div>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + (s % 60).toFixed(1).padStart(4, '0');
+let lastTick = -1;
+async function poll() {
+  try {
+    const s = await (await fetch('state', { cache: 'no-store' })).json();
+    if (s.candidate_id !== undefined) {
+      $('cand').textContent = s.candidate_id === 0 ? 'INTACT BRAIN' : 'CANDIDATE ' + String(s.candidate_id).padStart(3, '0');
+      $('ko').innerHTML = s.neurons.length ? 'KO: <b>' + s.neurons.join(' + ') + '</b>' : 'no neurons silenced';
+      $('timer').textContent = fmt(s.seconds || 0);
+      const dead = s.status === 'DEAD', done = s.status === 'ALIVE' && s.tick >= s.max_tics;
+      document.body.classList.toggle('dead', dead);
+      document.body.classList.toggle('done', done);
+      $('status').textContent = dead ? 'DEAD' : done ? 'SURVIVED' : s.status;
+      for (const k of ['turn', 'move', 'fire']) $(k).classList.toggle('on', !dead && !!s[k]);
+      if (s.tick !== lastTick && !dead) { $('frame').src = 'frame.jpg?t=' + s.tick; lastTick = s.tick; }   // last frame stays up after death
+    }
+  } catch (e) { $('status').textContent = 'OFFLINE'; }
+  setTimeout(poll, 100);
+}
+poll();
+</script>
+</body>
+</html>

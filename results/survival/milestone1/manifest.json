@@ -1,0 +1,55 @@
+{
+ "candidate_seed": 42,
+ "knockout_size": 2,
+ "num_candidates": 5,
+ "game_seeds": [
+  1
+ ],
+ "max_tics": 4200,
+ "pool": {
+  "size": 1341,
+  "rule": "fires in results/s1/control and is not a directly driven input cell (R1-R6, L1, L2, L3, L5)"
+ },
+ "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty",
+ "candidates": [
+  {
+   "candidate_id": 0,
+   "neurons": []
+  },
+  {
+   "candidate_id": 1,
+   "neurons": [
+    14539,
+    78122
+   ]
+  },
+  {
+   "candidate_id": 2,
+   "neurons": [
+    40669,
+    41141
+   ]
+  },
+  {
+   "candidate_id": 3,
+   "neurons": [
+    14449,
+    63225
+   ]
+  },
+  {
+   "candidate_id": 4,
+   "neurons": [
+    14676,
+    46901
+   ]
+  },
+  {
+   "candidate_id": 5,
+   "neurons": [
+    69912,
+    75470
+   ]
+  }
+ ]
+}

@@ -41,40 +41,30 @@ def main():
     vision = conditions[args.condition].get('vision', 'live')
     tag = args.tag or args.condition
 
-    sys.path.insert(0, args.doomfly)
-    from doom.native import NativeBrain, BUILD
+    import fly_sim
+    brain, manifest, BUILD = fly_sim.load(args.doomfly)
     from doom.engine import NeuralControls
     from doom.game import Game, retinal_samples
     import pyarrow.feather as feather
 
     root = Path(args.doomfly)
-    manifest = json.loads((root / 'outputs/doom/malecns_v1/manifest.json').read_text())
     readouts = manifest['readouts']
-    brain = NativeBrain(root / 'outputs/doom/malecns_v1/graph.npz')
     nodes = feather.read_table(root / 'connectome_data/malecns_v1/normalized/neurons.feather',
                                columns=['cell_type', 'superclass']).to_pandas()
     assert len(nodes) == brain.n
 
     # --- intervention -------------------------------------------------------
-    by_id = [int(np.flatnonzero(brain.ids == i)[0]) for i in silence_ids]  # IndexError if an id is absent
-    targets = np.asarray(sorted({r['index'] for r in readouts if r['type'] in silence} | set(by_id)), dtype=np.int32)
     missing = set(silence) - {r['type'] for r in readouts}
     if missing:
         raise RuntimeError(f'No readout neurons of type {missing} in manifest')
-    externally_driven = np.r_[brain.retina, brain.lamina, brain.sugar]
-    if np.isin(targets, externally_driven).any():
-        raise RuntimeError('A target receives external current; zeroing synapses would not silence it')
-    incoming = np.isin(brain.post, targets)
-    outgoing = np.zeros(len(brain.post), dtype=bool)
-    for i in targets:
-        outgoing[brain.ptr[i]:brain.ptr[i + 1]] = True
-    brain.weight[incoming | outgoing] = 0
+    by_type = [r['index'] for r in readouts if r['type'] in silence]
+    targets, rows_in, rows_out = fly_sim.silence(brain, by_type + fly_sim.indices_of(brain, silence_ids))
     intervention = {
         'silenced_types': silence,
         'silenced_neurons': [{'id': str(brain.ids[i]), 'type': str(nodes.cell_type.iloc[i])} for i in targets],
         'vision': vision,
-        'incoming_synapse_rows_zeroed': int(incoming.sum()),
-        'outgoing_synapse_rows_zeroed': int(outgoing.sum()),
+        'incoming_synapse_rows_zeroed': rows_in,
+        'outgoing_synapse_rows_zeroed': rows_out,
         'method': 'All incoming and outgoing edge weights of target neurons set to 0; no other change.',
     }
     print(json.dumps({'condition': args.condition, 'tag': tag, **intervention}), flush=True)

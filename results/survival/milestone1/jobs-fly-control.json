@@ -1,0 +1,65 @@
+[
+ {
+  "candidate_id": 0,
+  "neurons": [],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ },
+ {
+  "candidate_id": 1,
+  "neurons": [
+   14539,
+   78122
+  ],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ },
+ {
+  "candidate_id": 2,
+  "neurons": [
+   40669,
+   41141
+  ],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ },
+ {
+  "candidate_id": 3,
+  "neurons": [
+   14449,
+   63225
+  ],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ },
+ {
+  "candidate_id": 4,
+  "neurons": [
+   14676,
+   46901
+  ],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ },
+ {
+  "candidate_id": 5,
+  "neurons": [
+   69912,
+   75470
+  ],
+  "game_seed": 1,
+  "max_tics": 4200,
+  "candidate_seed": 42,
+  "code_commit": "f63fe5c2d791d9577519977c10a12dd45153c0e7-dirty"
+ }
+]

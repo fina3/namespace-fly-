@@ -127,6 +127,43 @@ w-cHIN spikes in 120 s (control / knockout / sham range):
 - LIF dynamics, inferred transmitter signs and an approximate retina mapping. See DOOMFLY's own
   [model review](https://github.com/nftechie/doomfly/blob/main/docs/doom-neuroscience-review.md).
 
+## Survival search (closed loop)
+
+Can a small knockout make the simulated fly survive *longer* in Doom than the intact brain?
+Here the brain plays the game: each tic's frame drives the brain, and the decoded TURN / MOVE / FIRE
+commands move the player. Each candidate runs until it dies or reaches the time limit.
+
+```sh
+python3 run_survival_search.py --num-candidates 100 --knockout-size 2 --candidate-seed 42 \
+    --game-seeds 1,2,3,4,5,6,7,41027 --max-tics 4200 --devboxes fly-control
+python run_candidate.py --candidate-id 37 --neurons 48122,99102 --game-seed 1 --live-port 8900 --realtime
+```
+
+| File | What it does |
+|---|---|
+| `fly_sim.py` | shared core: load the brain, silence neurons (also used by `run_condition.py`) |
+| `run_candidate.py` | one candidate on one game seed, fully independent. Writes one result JSON. `--live-port` serves `live.html` with the gameplay, timer, TURN/MOVE/FIRE and ALIVE/DEAD |
+| `run_survival_search.py` | coordinator: generate candidates (fixed seed), assign to machines, run on Devboxes, collect, rank. Writes `manifest.json`, `results.csv`, `results.json` |
+
+Candidates are drawn from the **1,341 neurons that fire in the control run and can be fully silenced**.
+The other 10,336 active neurons are photoreceptors and lamina cells that receive direct input; cutting
+their synapses would not stop them firing, so they are excluded. Candidate 0 is always the intact brain.
+
+**First milestone** (`results/survival/milestone1*`, intact + 5 random pairs, run on one Devbox):
+
+- Silenced neurons fired 0 spikes in every run; every run started from the same first frame.
+- Death is detected at the tic the game reports the player dead. The MeVP9 pair dies after tic 182,
+  matching the earlier demo run.
+- Rerunning a candidate reproduced its result, per-tic trace and frame hash exactly.
+- The intact brain dies on all 8 seeds, after 36 to 97 s (mean 66 s), so there is room to beat it.
+
+**Read rankings on one seed as luck.** On seed 1 alone, all 5 random pairs "beat" intact, by 1.45x to
+2.12x. Seed 1 is simply intact's worst seed. On 8 seeds the same pairs score 0.95x to 1.15x, none beats
+intact on every seed, and each wins on about half. Closed-loop games diverge from any small change, so
+a knockout mostly re-rolls the dice. A real winner has to hold up across many seeds and then again on
+fresh seeds it was not selected on. Two of the five pairs also reached the 120 s limit on one seed, so
+a longer `--max-tics` is needed to avoid capping good runs.
+
 ## Demo page
 
 `demo/index.html` is a silent, looping 10-second visualization for screen recording. Open it
