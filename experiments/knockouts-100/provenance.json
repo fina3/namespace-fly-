@@ -1,0 +1,54 @@
+{
+  "experiment": {
+    "name": "knockouts-100",
+    "description": "100 simulated fly brains: 4 stimuli x (intact + 4 targeted knockouts + 2 vision controls + 18 sham pairs)",
+    "blueprint": "fly-doomfly",
+    "image": "fly/doomfly",
+    "size": "l",
+    "devboxes": 4,
+    "runs_per_box": 12,
+    "seconds": 120,
+    "stimuli": {
+      "s1": {
+        "seed": 41027,
+        "sweep": 2
+      },
+      "s2": {
+        "seed": 7,
+        "sweep": -3
+      },
+      "s3": {
+        "seed": 123,
+        "sweep": 1
+      },
+      "s4": {
+        "seed": 2026,
+        "sweep": -1.5
+      }
+    },
+    "shams": {
+      "pairs": 18,
+      "seed": 20260927
+    }
+  },
+  "code_commit": "23e18156f07a4b3547e30ae90ecd44e70d0e733f",
+  "devboxes": [
+    {
+      "name": "knockouts-100-01",
+      "id": "1puh2bkhghfbo"
+    },
+    {
+      "name": "knockouts-100-02",
+      "id": "u1pf01ev0j11i"
+    },
+    {
+      "name": "knockouts-100-03",
+      "id": "jhbjo3umrth62"
+    },
+    {
+      "name": "knockouts-100-04",
+      "id": "nktpkls2s04im"
+    }
+  ],
+  "finished_at": "2026-10-03T05:09:10.613Z"
+}

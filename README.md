@@ -159,6 +159,12 @@ Devbox created from the image (8 min for the 21 main runs, 26 min for the 72 sha
 value and every one of the 166,700 neuron counts in all 93 runs matched the original hand-run
 results exactly, and the same 24 sham pairs were selected.
 
+**100 simulated brains** (`experiments/knockouts-100`): 4 stimuli × (intact + 4 targeted knockouts + 2 vision
+controls + 18 sham pairs) = 100 runs on 4 provisioned Devboxes, **12 min 48 s** from creating the boxes to deleting
+them (boxes ready in 13 s, main runs 4 min, shams 8 min). Same conclusions as the 93-run experiment on a fourth
+stimulus: DNp20 off removes turning; DNpe017 off removes movement and firing and silences w-cHIN; MeVP9 off removes
+everything and silences DNp20, DNpe017, w-cHIN and PS278; no sham comes close.
+
 **Account limit:** Namespace allows **10 Devboxes per user** on this account (`per-user devbox limit
 reached (10)`), so a one-brain-per-box run of 100 needs the limit raised, or fewer, bigger boxes.
 

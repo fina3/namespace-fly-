@@ -1,0 +1,146 @@
+{
+  "sham-01": {
+    "silence": [],
+    "silence_ids": [
+      13053,
+      27093
+    ],
+    "question": "Sham: Dm13 + Dm20 (ol_intrinsic, ol_intrinsic); 43.0 / 44.6 Hz in control."
+  },
+  "sham-02": {
+    "silence": [],
+    "silence_ids": [
+      527132,
+      28323
+    ],
+    "question": "Sham: Dm1 + Dm20 (ol_intrinsic, ol_intrinsic); 34.2 / 40.0 Hz in control."
+  },
+  "sham-03": {
+    "silence": [],
+    "silence_ids": [
+      338369,
+      11612
+    ],
+    "question": "Sham: Dm1 + Dm6 (ol_intrinsic, ol_intrinsic); 40.2 / 33.4 Hz in control."
+  },
+  "sham-04": {
+    "silence": [],
+    "silence_ids": [
+      21955,
+      23578
+    ],
+    "question": "Sham: Dm20 + Dm1 (ol_intrinsic, ol_intrinsic); 40.2 / 38.7 Hz in control."
+  },
+  "sham-05": {
+    "silence": [],
+    "silence_ids": [
+      51738,
+      97130
+    ],
+    "question": "Sham: Dm1 + Dm1 (ol_intrinsic, ol_intrinsic); 27.7 / 25.9 Hz in control."
+  },
+  "sham-06": {
+    "silence": [],
+    "silence_ids": [
+      36980,
+      558367
+    ],
+    "question": "Sham: Dm1 + Dm1 (ol_intrinsic, ol_intrinsic); 18.5 / 30.3 Hz in control."
+  },
+  "sham-07": {
+    "silence": [],
+    "silence_ids": [
+      567127,
+      11434
+    ],
+    "question": "Sham: Dm1 + Dm6 (ol_intrinsic, ol_intrinsic); 28.0 / 24.5 Hz in control."
+  },
+  "sham-08": {
+    "silence": [],
+    "silence_ids": [
+      49841,
+      58138
+    ],
+    "question": "Sham: Dm1 + Dm1 (ol_intrinsic, ol_intrinsic); 24.4 / 26.5 Hz in control."
+  },
+  "sham-09": {
+    "silence": [],
+    "silence_ids": [
+      18915,
+      11885
+    ],
+    "question": "Sham: Dm1 + Dm1 (ol_intrinsic, ol_intrinsic); 21.9 / 29.8 Hz in control."
+  },
+  "sham-10": {
+    "silence": [],
+    "silence_ids": [
+      36372,
+      14390
+    ],
+    "question": "Sham: Dm1 + Dm6 (ol_intrinsic, ol_intrinsic); 23.5 / 40.1 Hz in control."
+  },
+  "sham-11": {
+    "silence": [],
+    "silence_ids": [
+      18216,
+      35406
+    ],
+    "question": "Sham: Dm13 + Dm1 (ol_intrinsic, ol_intrinsic); 34.1 / 27.4 Hz in control."
+  },
+  "sham-12": {
+    "silence": [],
+    "silence_ids": [
+      513267,
+      12078
+    ],
+    "question": "Sham: Dm6 + Dm6 (ol_intrinsic, ol_intrinsic); 35.1 / 17.2 Hz in control."
+  },
+  "sham-13": {
+    "silence": [],
+    "silence_ids": [
+      522323,
+      12739
+    ],
+    "question": "Sham: Dm6 + Dm6 (ol_intrinsic, ol_intrinsic); 34.1 / 28.9 Hz in control."
+  },
+  "sham-14": {
+    "silence": [],
+    "silence_ids": [
+      91151,
+      14443
+    ],
+    "question": "Sham: Dm1 + Dm6 (ol_intrinsic, ol_intrinsic); 20.8 / 44.9 Hz in control."
+  },
+  "sham-15": {
+    "silence": [],
+    "silence_ids": [
+      42272,
+      514056
+    ],
+    "question": "Sham: Dm1 + Dm6 (ol_intrinsic, ol_intrinsic); 25.7 / 43.5 Hz in control."
+  },
+  "sham-16": {
+    "silence": [],
+    "silence_ids": [
+      13869,
+      516927
+    ],
+    "question": "Sham: Dm6 + Dm1 (ol_intrinsic, ol_intrinsic); 31.0 / 39.0 Hz in control."
+  },
+  "sham-17": {
+    "silence": [],
+    "silence_ids": [
+      33403,
+      15801
+    ],
+    "question": "Sham: Dm20 + Dm6 (ol_intrinsic, ol_intrinsic); 43.3 / 35.8 Hz in control."
+  },
+  "sham-18": {
+    "silence": [],
+    "silence_ids": [
+      524358,
+      31577
+    ],
+    "question": "Sham: Dm6 + Dm1 (ol_intrinsic, ol_intrinsic); 38.1 / 40.4 Hz in control."
+  }
+}
