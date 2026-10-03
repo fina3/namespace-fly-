@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Prints what this image contains and proves the native kernel loads.
+set -u
+cd /opt/fly/doomfly || exit 1
+echo "DOOMFLY $(git rev-parse --short HEAD) at /opt/fly/doomfly"
+echo "python  $(/opt/fly/venv/bin/python --version 2>&1)"
+echo "graph   $(ls -la outputs/doom/malecns_v1/graph.npz 2>/dev/null | awk '{print $5}') bytes"
+/opt/fly/venv/bin/python - <<'PY'
+import sys; sys.path.insert(0, '.')
+from doom.native import NativeBrain
+b = NativeBrain('outputs/doom/malecns_v1/graph.npz')
+print(f'kernel  ok: {b.n} neurons, {len(b.post)} connections')
+PY

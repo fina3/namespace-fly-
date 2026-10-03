@@ -1,2 +1,6 @@
 __pycache__/
 .DS_Store
+# per-run files of provisioned experiments are large and exactly reproducible; summaries are kept
+experiments/*/results/s*/*/ticks.csv
+experiments/*/results/s*/*/neuron_counts.npz
+experiments/*/results/s*/*/celltype_spikes.json

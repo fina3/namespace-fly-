@@ -3,7 +3,7 @@ import csv, glob, json, os, sys
 from pathlib import Path
 import numpy as np
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(os.environ.get('FLY_ROOT', Path(__file__).resolve().parent))  # an experiment folder, or this repo
 
 
 def main():

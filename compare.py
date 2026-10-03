@@ -15,11 +15,11 @@ time (all 24 raise Dm17, for example). An arm that merely fails to do that would
 sit outside the range without having any effect of its own.
 Cell-type screens test hundreds of types, so read single-type hits with that in mind.
 """
-import csv, json, sys
+import csv, json, os, sys
 from pathlib import Path
 import numpy as np
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(os.environ.get('FLY_ROOT', Path(__file__).resolve().parent))  # an experiment folder, or this repo
 RESULTS = HERE / 'results'
 TARGETS = ['dnp20-off', 'dnpe017-off', 'both-off', 'mevp9-off']  # mevp9-off is the upstream follow-up
 VISION = ['blank-vision', 'frozen-vision']

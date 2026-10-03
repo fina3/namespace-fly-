@@ -127,6 +127,41 @@ w-cHIN spikes in 120 s (control / knockout / sham range):
 - LIF dynamics, inferred transmitter signs and an approximate retina mapping. See DOOMFLY's own
   [model review](https://github.com/nftechie/doomfly/blob/main/docs/doom-neuroscience-review.md).
 
+## Provisioning the whole experiment with the Namespace SDK
+
+`provision/provision.mjs` runs an entire experiment from one file, with no manual Devbox setup:
+
+```sh
+cd provision && npm install
+node provision.mjs ../experiments/knockouts-100.json      # or repro-93.json; add --keep to leave the boxes up
+```
+
+It creates the Blueprint `fly-doomfly` if missing, creates the Devboxes in parallel from the
+pre-baked image, spreads every (stimulus, condition) run across them, selects the sham pairs on the
+box that ran the first control, runs the shams, pulls everything into `experiments/<name>/results/`,
+runs `verify_results.py` and `compare.py` on it, and deletes the Devboxes, also after a failure.
+
+| File | What it is |
+|---|---|
+| `experiments/*.json` | the whole design: stimuli, sham count and seed, run length, image, box size and count, runs per box |
+| `provision/image/Dockerfile` | the Custom Image `fly/doomfly`: pinned DOOMFLY, the MaleCNS data (checksum-verified), the prepared graph and the native kernel, all under `/opt/fly`. Build with `devbox image build provision/image --name=fly/doomfly --user=devbox` (about 10 minutes) |
+| `provision/smoke.mjs` | one-box check of the SDK path: blueprint, create, `fly-check`, a 3 s run, delete |
+
+A Devbox from the image is ready to simulate about 13 seconds after creation; nothing is downloaded
+or compiled per box. `run_batch.sh` reads the image's `FLY_DOOMFLY` / `FLY_VENV` paths, so the same
+scripts run on hand-made boxes (`setup.sh`, under `/workspaces`) and on image-based ones.
+
+One SDK detail: version 1.4.0 treats any image name containing `/` as a registry reference, so the
+Blueprint is created with a placeholder image and its `imageName` is then set directly.
+
+**Checked:** `experiments/repro-93` re-ran the whole 93-run experiment through the provisioner on one
+Devbox created from the image (8 min for the 21 main runs, 26 min for the 72 shams). Every per-tic
+value and every one of the 166,700 neuron counts in all 93 runs matched the original hand-run
+results exactly, and the same 24 sham pairs were selected.
+
+**Account limit:** Namespace allows **10 Devboxes per user** on this account (`per-user devbox limit
+reached (10)`), so a one-brain-per-box run of 100 needs the limit raised, or fewer, bigger boxes.
+
 ## Survival search (closed loop)
 
 Can a small knockout make the simulated fly survive *longer* in Doom than the intact brain?

@@ -1,0 +1,12 @@
+{
+  "name": "knockouts-100",
+  "description": "100 simulated fly brains: 4 stimuli x (intact + 4 targeted knockouts + 2 vision controls + 18 sham pairs)",
+  "blueprint": "fly-doomfly",
+  "image": "fly/doomfly",
+  "size": "l",
+  "devboxes": 4,
+  "runs_per_box": 12,
+  "seconds": 120,
+  "stimuli": { "s1": { "seed": 41027, "sweep": 2.0 }, "s2": { "seed": 7, "sweep": -3.0 }, "s3": { "seed": 123, "sweep": 1.0 }, "s4": { "seed": 2026, "sweep": -1.5 } },
+  "shams": { "pairs": 18, "seed": 20260927 }
+}

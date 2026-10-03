@@ -1,0 +1,12 @@
+{
+  "name": "repro-93",
+  "description": "Re-run of the original 93-run experiment through the SDK provisioner; results must match results/ byte for byte",
+  "blueprint": "fly-doomfly",
+  "image": "fly/doomfly",
+  "size": "l",
+  "devboxes": 4,
+  "runs_per_box": 12,
+  "seconds": 120,
+  "stimuli": { "s1": { "seed": 41027, "sweep": 2.0 }, "s2": { "seed": 7, "sweep": -3.0 }, "s3": { "seed": 123, "sweep": 1.0 } },
+  "shams": { "pairs": 24, "seed": 20260927 }
+}

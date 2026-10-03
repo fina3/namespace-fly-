@@ -1,0 +1,8 @@
+{
+  "name": "namespace-fly-provision",
+  "private": true,
+  "type": "module",
+  "description": "Provision the whole fly-brain experiment on Namespace Devboxes with the SDK",
+  "scripts": { "provision": "node provision.mjs" },
+  "dependencies": { "@namespacelabs/sdk": "^1.4.0" }
+}
