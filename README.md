@@ -198,6 +198,21 @@ their synapses would not stop them firing, so they are excluded. Candidate 0 is 
 - Rerunning a candidate reproduced its result, per-tic trace and frame hash exactly.
 - The intact brain dies on all 8 seeds, after 36 to 97 s (mean 66 s), so there is room to beat it.
 
+**Full search** (`results/survival/k2-n100-c42-screen8` and `k2-top10-holdout8`, 6 provisioned Devboxes):
+all 100 random pairs on 8 game seeds (808 runs), then the top 10 re-tested on 8 fresh seeds (88 runs).
+
+| | Best pair | Pairs beating intact on every seed | Median ratio |
+|---|---|---|---|
+| One seed (41027) | 1.81x | 53 of 100 "won" | 1.02x |
+| 8 seeds | 1.36x | 1 of 100 | 1.06x |
+| Top 10 on 8 fresh seeds | 1.13x | 0 of 10 | 1.03x |
+
+The screen's winners did not hold up: its best pair (1.36x) fell to 0.89x on fresh seeds, and the one
+pair that beat intact on all 8 screening seeds scored 1.03x and won 3 of 8. **No 2-neuron knockout
+reliably outlives the intact brain.** Random knockouts re-roll the game; selection then picks the
+lucky ones. Every candidate kept moving (100% of tics) and firing (94%), so no degenerate "hide and
+survive" strategy appeared either. The longest-lasting fly, within noise, is the intact one.
+
 **Read rankings on one seed as luck.** On seed 1 alone, all 5 random pairs "beat" intact, by 1.45x to
 2.12x. Seed 1 is simply intact's worst seed. On 8 seeds the same pairs score 0.95x to 1.15x, none beats
 intact on every seed, and each wins on about half. Closed-loop games diverge from any small change, so

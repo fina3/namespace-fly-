@@ -1,0 +1,68 @@
+{
+ "candidate_id": 47,
+ "knockout_neurons": [
+  31730,
+  40998
+ ],
+ "game_seed": 3,
+ "survival_tics": 2853,
+ "survival_seconds": 81.514,
+ "died": true,
+ "hit_time_limit": false,
+ "max_tics": 10500,
+ "turn_output": 2360.374,
+ "turn_output_signed": 2278.534,
+ "move_output": 54662.613,
+ "fire_output": 2694,
+ "turning_fraction": 0.9996,
+ "movement_fraction": 1.0,
+ "firing_fraction": 0.9443,
+ "distance_moved": 14958.6,
+ "kills": 20,
+ "min_health": -14,
+ "silenced_spikes": 0,
+ "synapse_rows_zeroed": {
+  "incoming": 221,
+  "outgoing": 354
+ },
+ "provenance": {
+  "candidate_seed": 42,
+  "code_commit": "d2852f2e392004bc18bfaa008a3b72c9414839ac-dirty",
+  "doomfly_commit": "71ecf53d78eaffaf1a57ed7b0ccf5d458abc9f33",
+  "kernel": {
+   "kernel_source_sha256": "2dc0939d5efb5b3b53551a7836b24385e30976b6dfb8ece9edbb0a6983bed337",
+   "binary_sha256": "ff1cf285acaa689c00b1c3b576458aa0c4a909326c23ce52fd3fb28451d127e2",
+   "model_revision": "lif-r2-refractory-write-protection",
+   "compile_flags": [
+    "-O3",
+    "-std=c++17",
+    "-shared",
+    "-fPIC"
+   ]
+  },
+  "source_hashes": {
+   "annotations.feather": {
+    "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+    "bytes": 14483314,
+    "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+   },
+   "neurotransmitters.feather": {
+    "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+    "bytes": 43282834,
+    "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621"
+   },
+   "edges.feather": {
+    "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+    "bytes": 1051241946,
+    "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+   }
+  },
+  "first_frame_sha256": "1fd48474a6be9a50a0490ada62b632a59f768a0648f2ea5b4fa1f1483e785834",
+  "frames_sha256": "c110a8bd2ca00699962794c1b8339f90758d981bdb787b23cd72041f3c2bf800",
+  "scenario": "combat_survival",
+  "decoder": "bci",
+  "loop": "closed",
+  "host": "survival-01",
+  "wall_seconds": 173.0
+ }
+}

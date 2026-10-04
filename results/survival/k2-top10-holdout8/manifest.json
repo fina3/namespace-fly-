@@ -1,0 +1,121 @@
+{
+ "candidate_seed": 42,
+ "knockout_size": 2,
+ "num_candidates": 10,
+ "game_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18
+ ],
+ "max_tics": 10500,
+ "retest_of": {
+  "results": "results/survival/k2-n100-c42-screen8/results.json",
+  "screen_seeds": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   41027
+  ],
+  "top": 10
+ },
+ "pool": {
+  "size": 1341,
+  "rule": "fires in results/s1/control and is not a directly driven input cell (R1-R6, L1, L2, L3, L5)"
+ },
+ "code_commit": "3fbba7967640885fe2adb9f197c7bf584812b6ee",
+ "candidates": [
+  {
+   "candidate_id": 0,
+   "neurons": []
+  },
+  {
+   "candidate_id": 53,
+   "neurons": [
+    16600,
+    48689
+   ],
+   "screen_survival_ratio": 1.356
+  },
+  {
+   "candidate_id": 18,
+   "neurons": [
+    20701,
+    33426
+   ],
+   "screen_survival_ratio": 1.29
+  },
+  {
+   "candidate_id": 11,
+   "neurons": [
+    22044,
+    42151
+   ],
+   "screen_survival_ratio": 1.267
+  },
+  {
+   "candidate_id": 51,
+   "neurons": [
+    25965,
+    125863
+   ],
+   "screen_survival_ratio": 1.241
+  },
+  {
+   "candidate_id": 6,
+   "neurons": [
+    46168,
+    82185
+   ],
+   "screen_survival_ratio": 1.226
+  },
+  {
+   "candidate_id": 78,
+   "neurons": [
+    11434,
+    127124
+   ],
+   "screen_survival_ratio": 1.224
+  },
+  {
+   "candidate_id": 90,
+   "neurons": [
+    31682,
+    52881
+   ],
+   "screen_survival_ratio": 1.218
+  },
+  {
+   "candidate_id": 33,
+   "neurons": [
+    22522,
+    61110
+   ],
+   "screen_survival_ratio": 1.203
+  },
+  {
+   "candidate_id": 26,
+   "neurons": [
+    30412,
+    44008
+   ],
+   "screen_survival_ratio": 1.202
+  },
+  {
+   "candidate_id": 95,
+   "neurons": [
+    44769,
+    58510
+   ],
+   "screen_survival_ratio": 1.192
+  }
+ ]
+}
