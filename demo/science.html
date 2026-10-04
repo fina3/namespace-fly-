@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Knockout Rule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090d; --panel: #0c1016; --border: #1b232e; --text: #e6edf3; --muted: #6b7a8c; --dim: #2a333f;
+    --on: #5cf2b0; --warn: #ff6b6b; --accent: #7aa7ff; --sham: #55627a;
+    --c-dnp20: #ff6b6b; --c-dnpe017: #ffb454; --c-both: #c792ea; --c-mevp9: #5cd6f2;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); overflow: hidden; }
+  body { display: flex; flex-direction: column; padding: 22px 30px 16px; gap: 14px; }
+
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  h1 { font-size: clamp(18px, 2vw, 30px); font-weight: 500; letter-spacing: -0.02em; white-space: nowrap; }
+  h1 b { font-weight: 600; color: var(--on); }
+  .meta { font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; text-align: right; line-height: 1.6; }
+  .meta b { color: var(--text); font-weight: 500; }
+
+  .rule { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px 18px; }
+  .rule .eq { font-family: var(--mono); font-size: clamp(12px, 1.15vw, 17px); color: var(--text); white-space: nowrap; }
+  .rule .eq i { font-style: normal; color: var(--on); }
+  .rule .eq u { text-decoration: none; color: var(--accent); }
+  .rule .eq s { text-decoration: none; color: var(--sham); }
+  .rule .words { font-size: clamp(11px, 1vw, 14px); color: var(--muted); line-height: 1.45; }
+  .rule .words b { color: var(--text); font-weight: 500; }
+  .legend { display: flex; flex-direction: column; gap: 4px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .legend span { display: flex; align-items: center; gap: 7px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  .rows { flex: 1; min-height: 0; display: grid; grid-template-rows: auto repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+  .hdr, .row { display: grid; grid-template-columns: 120px repeat(var(--s), minmax(0, 1fr)) 132px; gap: 10px; align-items: center; }
+  .hdr { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; padding: 0 2px; }
+  .hdr span:nth-child(n+2):nth-last-child(n+2) { text-align: center; }
+  .row { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; min-height: 0; }
+  .row .name { font-size: 13px; font-weight: 500; }
+  .row .name small { display: block; font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: .04em; margin-top: 2px; }
+  .strip { position: relative; height: 100%; min-height: 34px; }
+  .strip .axis { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #1f2834; }
+  .strip .zero { position: absolute; top: 20%; bottom: 20%; width: 1px; background: #2b3747; left: 50%; }
+  .strip .band { position: absolute; top: 28%; bottom: 28%; background: rgba(85,98,122,.22); border-left: 1px solid rgba(85,98,122,.6); border-right: 1px solid rgba(85,98,122,.6); border-radius: 2px; opacity: 0; transition: opacity .4s; }
+  .strip .band.show { opacity: 1; }
+  .dot { position: absolute; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--sham); opacity: 0; transform: translateY(-14px) scale(.6); transition: opacity .3s, transform .3s; }
+  .dot.in { opacity: .9; transform: none; }
+  .dot.t { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; background: var(--c); box-shadow: 0 0 10px var(--c); z-index: 2; }
+  .dot.t.inside { box-shadow: none; opacity: .55; }
+  .strip .tick { position: absolute; top: 74%; font-family: var(--mono); font-size: 8px; color: var(--dim); }
+  .verdict { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .chip { font-family: var(--mono); font-size: 12px; font-weight: 500; text-align: center; padding: 3px 0; border-radius: 6px; border: 1px solid var(--border); color: var(--dim); opacity: 0; transition: opacity .3s, border-color .3s, color .3s; white-space: nowrap; }
+  .chip.show { opacity: 1; }
+  .chip.yes { color: var(--c); border-color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); }
+  .chip.no { color: var(--muted); }
+  .chip.na { color: var(--dim); border-style: dashed; }
+
+  footer { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: .04em; white-space: nowrap; gap: 16px; }
+  footer b { color: var(--text); font-weight: 500; }
+  .count { opacity: 0; transition: opacity .5s; } .count.show { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Which knockouts <b>actually</b> matter? One rule, no p-values</h1>
+  <div class="meta" id="meta"></div>
+</header>
+
+<section class="rule">
+  <div class="eq">specific(<i>k</i>) ⇔ ∀ stimulus <u>s</u>: &nbsp;|Δ<sub>s</sub>(<i>k</i>)| &gt; max<sub>j</sub> |Δ<sub>s</sub>(<s>sham<sub>j</sub></s>)| &nbsp;∧&nbsp; sign constant</div>
+  <div class="words">The model has no noise, so <b>random knockouts are the yardstick</b>. A targeted knockout's effect counts only if it is <b>bigger than every sham's</b>, in the same direction, on <b>every</b> stimulus. Δ = change vs the intact brain.</div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section class="rows" id="rows"></section>
+
+<footer>
+  <div><b id="n-runs"></b> simulations · <b id="n-sham"></b> sham pairs · <b id="n-stim"></b> stimuli · identical frames within a stimulus</div>
+  <div class="count" id="count"></div>
+  <div>grey = shams · band = sham envelope · symmetric log axis</div>
+</footer>
+
+<script src="science-data.js"></script>
+<script>
+const LOOP = 10000;
+const COLOR = { 'dnp20-off': 'var(--c-dnp20)', 'dnpe017-off': 'var(--c-dnpe017)', 'both-off': 'var(--c-both)', 'mevp9-off': 'var(--c-mevp9)' };
+const stimuli = Object.keys(SCI.stimuli), targets = Object.keys(SCI.targets), shams = SCI.shams;
+const measures = SCI.measures.filter(m => m.key !== 'MeVP9');   // MeVP9 is the knocked-out cell in one arm; its own row adds nothing
+
+document.getElementById('meta').innerHTML = `${SCI.experiment} · <b>${stimuli.length * (7 + shams.length)}</b> runs · <b>166,700</b>-neuron MaleCNS v1.0 brain<br>stimuli: ${stimuli.map(s => `${s} seed ${SCI.stimuli[s].seed}`).join(' · ')}`;
+document.getElementById('legend').innerHTML = targets.map(t => `<span><i style="background:${COLOR[t]}"></i>${SCI.targets[t]} <small style="color:var(--dim)">${SCI.cells[t].map(c => c.id).join(' + ')}</small></span>`).join('')
+  + `<span><i style="background:var(--sham)"></i>${shams.length} sham pairs (random, matched)</span>`;
+document.getElementById('n-runs').textContent = stimuli.length * (7 + shams.length);
+document.getElementById('n-sham').textContent = shams.length;
+document.getElementById('n-stim').textContent = stimuli.length;
+
+// symmetric log: position = sign(v) * log10(1 + |v|/scale) / log10(1 + max/scale), scale set per measure
+const rows = document.getElementById('rows');
+rows.style.setProperty('--n', measures.length); rows.style.setProperty('--s', stimuli.length);
+rows.innerHTML = `<div class="hdr"><span>measure</span>${stimuli.map(s => `<span>${s}</span>`).join('')}<span>rule: ${targets.map(t => `<i style="color:${COLOR[t]};font-style:normal">●</i>`).join(' ')}</span></div>`;
+const dots = [], bands = [], chips = [];
+for (const m of measures) {
+  const all = stimuli.flatMap(s => [...shams, ...targets].map(a => SCI.delta[m.key][s][a])).filter(v => v !== null).map(Math.abs);
+  const max = Math.max(...all, 1e-6), scale = Math.max(1e-3, max / 300);
+  const pos = v => 50 + 50 * Math.sign(v) * Math.log10(1 + Math.abs(v) / scale) / Math.log10(1 + max / scale) * 0.92;
+  const row = document.createElement('div'); row.className = 'row';
+  row.innerHTML = `<div class="name">${m.label}<small>Δ in ${m.unit}</small></div>`;
+  for (const s of stimuli) {
+    const strip = document.createElement('div'); strip.className = 'strip';
+    strip.innerHTML = `<div class="axis"></div><div class="zero"></div>`;
+    const env = Math.max(...shams.map(a => Math.abs(SCI.delta[m.key][s][a] ?? 0)));
+    const band = document.createElement('div'); band.className = 'band';
+    band.style.left = pos(-env) + '%'; band.style.width = (pos(env) - pos(-env)) + '%';
+    band.title = `sham envelope ±${env.toPrecision(2)}`;
+    strip.appendChild(band); bands.push(band);
+    shams.forEach((a, i) => {
+      const v = SCI.delta[m.key][s][a]; if (v === null) return;
+      const d = document.createElement('div'); d.className = 'dot'; d.style.left = pos(v) + '%'; d.title = `${a}: ${v}`;
+      strip.appendChild(d); dots.push({ el: d, order: 0, i });
+    });
+    targets.forEach((a, i) => {
+      const v = SCI.delta[m.key][s][a]; if (v === null) return;
+      const d = document.createElement('div'); d.className = 'dot t' + (Math.abs(v) <= env ? ' inside' : '');
+      d.style.setProperty('--c', COLOR[a]); d.style.left = pos(v) + '%'; d.style.top = (50 + (i - 1.5) * 16) + '%'; d.title = `${SCI.targets[a]}: ${v}`;
+      strip.appendChild(d); dots.push({ el: d, order: 1, i });
+    });
+    for (const [t, x, tr] of [[-max, '1%', '0'], [0, '50%', '-50%'], [max, '99%', '-100%']]) { const k = document.createElement('div'); k.className = 'tick'; k.style.left = x; k.style.transform = `translateX(${tr})`; k.textContent = t === 0 ? '0' : (t > 0 ? '+' : '−') + max.toPrecision(2); strip.appendChild(k); }
+    row.appendChild(strip);
+  }
+  const v = document.createElement('div'); v.className = 'verdict';
+  for (const a of targets) {
+    const na = stimuli.some(s => SCI.delta[m.key][s][a] === null);
+    const ok = SCI.verdict[a][m.key];
+    const c = document.createElement('div'); c.className = 'chip ' + (na ? 'na' : ok ? 'yes' : 'no'); c.style.setProperty('--c', COLOR[a]);
+    c.textContent = na ? '–' : ok ? '✓' : '✗'; c.title = SCI.targets[a] + (na ? ' (its own cells are silenced here)' : ok ? ': specific' : ': within the sham envelope');
+    v.appendChild(c); chips.push(c);
+  }
+  row.appendChild(v); rows.appendChild(row);
+}
+const count = document.getElementById('count');
+const nSpecific = targets.reduce((n, a) => n + measures.filter(m => SCI.verdict[a][m.key]).length, 0);
+count.textContent = `${nSpecific} specific effects across ${targets.length} knockouts · 0 for any sham`;
+
+let start = performance.now();
+function frame(now) {
+  const t = (now - start) % LOOP;
+  for (const d of dots) {
+    const at = d.order === 0 ? 800 + d.i * 110 : 3600 + d.i * 250;
+    d.el.classList.toggle('in', t >= at);
+  }
+  for (const b of bands) b.classList.toggle('show', t >= 5200);
+  chips.forEach((c, i) => c.classList.toggle('show', t >= 6200 + (i % 4) * 120 + Math.floor(i / 4) * 60));
+  count.classList.toggle('show', t >= 7800);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+const restart = () => { start = performance.now(); };
+addEventListener('click', restart);
+addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') restart(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restart(); });
+</script>
+</body>
+</html>

@@ -61,6 +61,26 @@ def generate(args, out):
     return manifest
 
 
+def retest(args, out):
+    """Manifest for re-running the best candidates of an earlier search on new game seeds."""
+    prev = json.loads(Path(args.retest).read_text())
+    ranked = [c for c in prev['ranking'] if c['candidate_id']][:args.top]
+    overlap = set(args.game_seeds) & set(prev['manifest']['game_seeds'])
+    if overlap:
+        sys.exit(f'retest seeds must be fresh; {sorted(overlap)} were used in the screen')
+    manifest = {
+        'candidate_seed': prev['manifest']['candidate_seed'], 'knockout_size': prev['manifest']['knockout_size'],
+        'num_candidates': len(ranked), 'game_seeds': args.game_seeds, 'max_tics': args.max_tics,
+        'retest_of': {'results': args.retest, 'screen_seeds': prev['manifest']['game_seeds'], 'top': args.top},
+        'pool': prev['manifest']['pool'], 'code_commit': git_commit(),
+        'candidates': [{'candidate_id': 0, 'neurons': []}] + [{'candidate_id': c['candidate_id'], 'neurons': c['knockout_neurons'],
+                                                              'screen_survival_ratio': c['survival_ratio']} for c in ranked],
+    }
+    (out / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
+    print(f're-testing the top {len(ranked)} candidates of {args.retest} on fresh seeds {args.game_seeds}')
+    return manifest
+
+
 def git_commit():
     r = subprocess.run(['git', '-C', str(HERE), 'rev-parse', 'HEAD'], capture_output=True, text=True)
     dirty = subprocess.run(['git', '-C', str(HERE), 'status', '--porcelain', '--untracked-files=no'],
@@ -94,7 +114,8 @@ def worker(argv):
     p.add_argument('--jobs', required=True)
     p.add_argument('--runs', required=True)
     p.add_argument('--par', type=int, default=12, help='simulations at once (each uses one core and ~0.5 GB)')
-    p.add_argument('--python', default='/workspaces/venv/bin/python')
+    p.add_argument('--python', default=os.environ.get('FLY_VENV', '/workspaces/venv') + '/bin/python')
+    p.add_argument('--doomfly', default=os.environ.get('FLY_DOOMFLY', '/workspaces/doomfly'))
     p.add_argument('--trace', action='store_true')
     a = p.parse_args(argv)
     jobs = json.loads(Path(a.jobs).read_text())
@@ -107,7 +128,7 @@ def worker(argv):
             return name, 'skip'
         work = runs.parent / 'work' / name   # ViZDoom writes ./_vizdoom in its cwd; parallel runs must not share one
         work.mkdir(parents=True, exist_ok=True)
-        cmd = [a.python, str(HERE / 'run_candidate.py')] + command(job, runs, ['--trace'] if a.trace else [])[1:]
+        cmd = [a.python, str(HERE / 'run_candidate.py')] + command(job, runs, (['--trace'] if a.trace else []) + ['--doomfly', a.doomfly])[1:]
         with open(logs / f'{name}.log', 'w') as log:
             code = subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT).returncode
         return name, 'ok' if code == 0 and (runs / f'{name}.json').exists() else 'FAIL'
@@ -134,7 +155,8 @@ def run_on_devbox(box, out, par, trace):
         devbox('upload', box, str(HERE / f), f'{REMOTE}/{f}', '--mkdir')
     devbox('upload', box, str(out / f'jobs-{box}.json'), f'{remote_out}/jobs.json', '--mkdir')
     r = subprocess.run(['devbox', 'exec', box, '--', 'bash', '-lc',
-                        f'python3 {REMOTE}/run_survival_search.py worker --jobs {remote_out}/jobs.json '
+                        'P=$([ -n "$FLY_VENV" ] && echo "$FLY_VENV/bin/python" || echo python3); '
+                        f'$P {REMOTE}/run_survival_search.py worker --jobs {remote_out}/jobs.json '
                         f'--runs {remote_out}/runs --par {par}' + (' --trace' if trace else '')],
                        capture_output=True, text=True)
     summary = [l for l in r.stdout.splitlines() if ' ok, ' in l]
@@ -246,13 +268,17 @@ def main():
     p.add_argument('--par', type=int, default=12)
     p.add_argument('--trace', action='store_true')
     p.add_argument('--steps', default='generate,assign,run,collect', type=lambda s: s.split(','))
+    p.add_argument('--retest', help='results.json of an earlier search: re-run its top candidates instead of drawing new ones')
+    p.add_argument('--top', type=int, default=10, help='with --retest: how many of the best candidates to re-run')
     args = p.parse_args()
 
     name = args.name or f'k{args.knockout_size}-n{args.num_candidates}-c{args.candidate_seed}'
     out = HERE / 'results/survival' / name
     out.mkdir(parents=True, exist_ok=True)
 
-    if 'generate' in args.steps:
+    if 'generate' in args.steps and args.retest:
+        manifest = retest(args, out)
+    elif 'generate' in args.steps:
         manifest = generate(args, out)
     else:
         manifest = json.loads((out / 'manifest.json').read_text())
