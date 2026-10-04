@@ -168,6 +168,34 @@ everything and silences DNp20, DNpe017, w-cHIN and PS278; no sham comes close.
 **Account limit:** Namespace allows **10 Devboxes per user** on this account (`per-user devbox limit
 reached (10)`), so a one-brain-per-box run of 100 needs the limit raised, or fewer, bigger boxes.
 
+## Claude Managed Agents on Devboxes (new Namespace feature)
+
+Namespace can act as a **self-hosted sandbox environment** for Anthropic's Managed Agents: Anthropic runs
+the agent loop, and when a session starts, Anthropic calls Namespace's webhook and Namespace brings up a
+Devbox where the agent's `bash` / file tools execute (CLI: `devbox claude managed-agents ...`, CLI ≥ 0.0.195).
+
+One-time setup (interactive; it asks for an Anthropic Console API key, a service key and a webhook secret):
+
+```sh
+devbox claude managed-agents setup-environment
+devbox claude managed-agents environment      # shows the integration id and webhook URL
+```
+
+After that, sessions are plain Anthropic API calls, so an experiment can be handed to an agent from code:
+
+```sh
+cd provision && export ANTHROPIC_API_KEY=...
+node agent_session.mjs --environments                               # find the Namespace environment (type self_hosted)
+node agent_session.mjs --env env_... "Run fly-check and report what the box contains"
+node agent_session.mjs --env env_... --budget-usd 5 "Clone fina3/namespace-fly- and run run_condition.py --condition mevp9-off --seconds 20 --doomfly /opt/fly/doomfly; report the decoded behavior"
+```
+
+`agent_session.mjs` creates (once) an agent that knows the fly/doomfly image layout, starts a session on the
+Namespace environment with the task as its first message, optionally caps spend, and streams the agent's
+messages, tool calls and results until the session goes idle. Which Devbox blueprint a session gets is set on
+the Namespace side of the integration; point it at `fly-doomfly` so the agent lands on a box with the
+simulation pre-installed.
+
 ## Survival search (closed loop)
 
 Can a small knockout make the simulated fly survive *longer* in Doom than the intact brain?
