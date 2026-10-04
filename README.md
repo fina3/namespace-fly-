@@ -168,6 +168,28 @@ everything and silences DNp20, DNpe017, w-cHIN and PS278; no sham comes close.
 **Account limit:** Namespace allows **10 Devboxes per user** on this account (`per-user devbox limit
 reached (10)`), so a one-brain-per-box run of 100 needs the limit raised, or fewer, bigger boxes.
 
+## Live view wall (new Namespace feature)
+
+Namespace's dashboard has a flag-enabled **Instances → Live** page that tiles the screens of running
+Devboxes in a grid. Only macOS Devboxes have a screen (the SDK's `devbox.display` API: `screenshot()`,
+`click()`), so the wall is built from macOS boxes, each running a fly brain with ViZDoom's real game
+window visible. What the grid shows is the actual game rendered by each brain, nothing in between.
+
+```sh
+cd provision
+node mac_wall.mjs up 6          # create 6 macOS boxes (size m), install DOOMFLY (~1 min each), start the game loops
+node mac_wall.mjs shots         # one screenshot per box via the SDK, into results/live-view/
+node mac_wall.mjs down          # delete them
+```
+
+Each box loops intact → DNp20 off → DNpe017 off → MeVP9 off (`mac_loop.sh`, 60 s games, closed loop,
+real-time pace, own game seed per box). `mac_setup.sh` installs DOOMFLY on macOS: the ViZDoom 1.3.0
+wheel for Apple Silicon exists, Xcode supplies clang, and the data download plus graph build takes about
+a minute. `run_candidate.py --show-window --resolution 1600x1200` renders the window large for the grid;
+the bigger raster changes the retina samples slightly, so these demo games are not bit-identical to the
+experiment's runs. Checked on one box (`results/live-view/mac-doom-window.jpg`): a macOS Devbox was ready
+in 17 s and the SDK returned 2560×1600 screenshots of the game. The 10-Devbox limit applies.
+
 ## Claude Managed Agents on Devboxes (new Namespace feature)
 
 Namespace can act as a **self-hosted sandbox environment** for Anthropic's Managed Agents: Anthropic runs

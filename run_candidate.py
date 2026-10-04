@@ -83,6 +83,9 @@ def main():
     p.add_argument('--live-port', type=int, help='serve the live view on this port')
     p.add_argument('--realtime', action='store_true', help='never run faster than the game clock (for watching live)')
     p.add_argument('--linger', type=float, default=0, help='keep the live view up this many seconds after the run ends')
+    p.add_argument('--show-window', action='store_true', help='show the real ViZDoom game window (needs a display; for Live view)')
+    p.add_argument('--resolution', help='render at this ViZDoom resolution instead of 640x480, e.g. 1600x1200 (demo only: '
+                   'the retina samples a different raster, so results differ from the experiment)')
     args = p.parse_args()
 
     ids = [int(x) for x in args.neurons.split(',') if x.strip()]
@@ -96,6 +99,13 @@ def main():
     from doom.game import Game, retinal_samples
     import vizdoom as vzd
 
+    if args.show_window:   # DOOMFLY hides the window; undo that so the game renders on the box's screen
+        hide = vzd.DoomGame.set_window_visible
+        vzd.DoomGame.set_window_visible = lambda self, visible: hide(self, True)
+    if args.resolution:
+        res = getattr(vzd.ScreenResolution, 'RES_' + args.resolution.upper())
+        set_res = vzd.DoomGame.set_screen_resolution
+        vzd.DoomGame.set_screen_resolution = lambda self, r: set_res(self, res)
     targets, rows_in, rows_out = fly_sim.silence(brain, fly_sim.indices_of(brain, ids))
     controls = NeuralControls(manifest['readouts'], mode='bci')
     game = Game(seed=args.game_seed, scenario='combat_survival', spectator=False)
