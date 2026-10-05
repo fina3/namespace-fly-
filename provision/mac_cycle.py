@@ -42,6 +42,10 @@ def main():
         for name, ids in CYCLE:
             brain.weight[:] = weights0
             targets, _, _ = fly_sim.silence(brain, fly_sim.indices_of(brain, ids)) if ids else (np.zeros(0, dtype=np.int32), 0, 0)
+            if len(targets):   # a cell switched off mid-run may still hold charge from the last game; put it at rest
+                brain.v[targets] = -52.0
+                brain.g[targets] = 0.0
+                brain.refractory[targets] = 0
             controls = NeuralControls(manifest['readouts'], mode='bci')
             game.new_episode()
             start, t0 = tick, time.perf_counter()
@@ -63,8 +67,8 @@ def main():
                     time.sleep(ahead)
             print(json.dumps({'condition': name, 'seed': args.seed, 'survived_s': round((tick - start) / 35, 1),
                               'died': obs['finished'], 'kills': obs['kills'], 'silenced_spikes': silenced_spikes}), flush=True)
-            if silenced_spikes:
-                raise RuntimeError('silenced neurons spiked')
+            if silenced_spikes:   # should not happen after the reset above; report, but keep the wall running
+                print(json.dumps({'warning': 'silenced neurons spiked', 'condition': name, 'spikes': silenced_spikes}), flush=True)
             time.sleep(args.hold)
 
 

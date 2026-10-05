@@ -47,7 +47,7 @@ async function bringUp(name, index) {
   if (!setup.stdout.includes("SETUP_OK")) throw new Error(`${name}: setup failed: ${setup.stdout.slice(-400)}`);
   log(`${name}: DOOMFLY ready in ${Math.round((Date.now() - t0) / 1000)} s`);
   const seed = 41027 + index;
-  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; pkill -f mac_cycle.py; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
+  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; pkill -f mac_cycle.py; sleep 1; pkill -9 -x vizdoom; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
   log(`${name}: game loop started (seed ${seed})`);
   return d;
 }
