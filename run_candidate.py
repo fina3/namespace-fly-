@@ -84,6 +84,7 @@ def main():
     p.add_argument('--realtime', action='store_true', help='never run faster than the game clock (for watching live)')
     p.add_argument('--linger', type=float, default=0, help='keep the live view up this many seconds after the run ends')
     p.add_argument('--show-window', action='store_true', help='show the real ViZDoom game window (needs a display; for Live view)')
+    p.add_argument('--hold', type=float, default=0, help='keep the game window up this many seconds after the run ends (for Live view)')
     p.add_argument('--resolution', help='render at this ViZDoom resolution instead of 640x480, e.g. 1600x1200 (demo only: '
                    'the retina samples a different raster, so results differ from the experiment)')
     args = p.parse_args()
@@ -168,6 +169,8 @@ def main():
             if ahead > 0:
                 time.sleep(ahead)
     wall = time.perf_counter() - wall_start
+    if args.hold:
+        time.sleep(args.hold)   # the last frame stays on screen
     game.close()
 
     if silenced_spikes:

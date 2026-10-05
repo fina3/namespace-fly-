@@ -15,8 +15,7 @@ while true; do
     esac
     i=$((i + 1)); [ "$name" = intact ] || id=$i
     "$FLY/venv/bin/python" "$REPO/run_candidate.py" --candidate-id "$id" --neurons "$neurons" --game-seed "$SEED" \
-      --max-tics 2100 --doomfly "$FLY/doomfly" --show-window --realtime --resolution "$RES" --out "$HOME/fly-out/runs" \
+      --max-tics 2100 --doomfly "$FLY/doomfly" --show-window --realtime --resolution "$RES" --hold 4 --out "$HOME/fly-out/runs" \
       > "$HOME/fly-out/loop-$name.log" 2>&1
-    sleep 2
   done
 done
