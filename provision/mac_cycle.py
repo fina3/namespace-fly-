@@ -66,7 +66,8 @@ def main():
                 if ahead > 0:
                     time.sleep(ahead)
             print(json.dumps({'condition': name, 'seed': args.seed, 'survived_s': round((tick - start) / 35, 1),
-                              'died': obs['finished'], 'kills': obs['kills'], 'silenced_spikes': silenced_spikes}), flush=True)
+                              'wall_s': round(time.perf_counter() - t0, 1), 'died': obs['finished'], 'kills': obs['kills'],
+                              'silenced_spikes': silenced_spikes}), flush=True)
             if silenced_spikes:   # should not happen after the reset above; report, but keep the wall running
                 print(json.dumps({'warning': 'silenced neurons spiked', 'condition': name, 'spikes': silenced_spikes}), flush=True)
             time.sleep(args.hold)
