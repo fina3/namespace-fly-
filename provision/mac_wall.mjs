@@ -40,13 +40,13 @@ async function bringUp(name, index) {
   const repo = `${home}/namespace-fly`, fly = `${home}/fly`;
   await d.shell(`mkdir -p ${repo} ${home}/fly-out; boxctl task mark fly-wall || true`);   // a background game loop is not 'activity': hold the box awake
   for (const f of ["fly_sim.py", "run_candidate.py", "live.html", "conditions.json", "shams.json"]) await d.fs.upload(join(REPO, f), `${repo}/${f}`);
-  for (const f of ["mac_setup.sh", "mac_loop.sh"]) await d.fs.upload(join(HERE, f), `${repo}/${f}`);
+  for (const f of ["mac_setup.sh", "mac_loop.sh", "mac_cycle.py"]) await d.fs.upload(join(HERE, f), `${repo}/${f}`);
   const t0 = Date.now();
   const setup = await d.shell(`bash ${repo}/mac_setup.sh 2>&1 | tail -1`);
   if (!setup.stdout.includes("SETUP_OK")) throw new Error(`${name}: setup failed: ${setup.stdout.slice(-400)}`);
   log(`${name}: DOOMFLY ready in ${Math.round((Date.now() - t0) / 1000)} s`);
   const seed = 41027 + index;
-  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
+  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; pkill -f mac_cycle.py; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
   log(`${name}: game loop started (seed ${seed})`);
   return d;
 }
