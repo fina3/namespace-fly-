@@ -20,6 +20,8 @@ if [ ! -x "$FLY/venv/bin/python" ]; then
     pillow==11.3.0 pyarrow==20.0.0 pandas==2.0.3 scipy==1.10.1
 fi
 PY=$FLY/venv/bin/python
+$PY -c 'import pygame' 2>/dev/null || uv pip install -q -p "$PY" pygame-ce==2.5.3     # the HUD window for the Live view
+[ -s "$FLY/Inter.ttf" ] || curl -sL -o "$FLY/Inter.ttf" 'https://github.com/google/fonts/raw/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf'
 cd "$FLY/doomfly"
 $PY - <<'PY'
 from pathlib import Path

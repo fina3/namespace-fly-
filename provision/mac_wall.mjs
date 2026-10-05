@@ -2,11 +2,13 @@
 // its screen in an endless loop (intact, DNp20 off, DNpe017 off, MeVP9 off, ...). The dashboard's
 // Instances -> Live grid then shows them side by side. Namespace compute only; no Anthropic API.
 //
-//   node mac_wall.mjs up <count> [--prefix fly-mac] [--size m] [--res 1600x1200]
+//   node mac_wall.mjs up <count> [--prefix fly-mac] [--size m] [--speed 7] [--hold 8] [--mode hud|window] [--res 1600x1200]
 //   node mac_wall.mjs shots [--prefix fly-mac]        # one screenshot per box into results/live-view/
 //   node mac_wall.mjs down [--prefix fly-mac]         # delete every box with the prefix
 //
 // Each box gets its own game seed (seed = 41027 + index), so the tiles don't play identical games.
+// The Live page refreshes about once a second, so by default the game runs at --speed 7 tics per wall
+// second (5x slow motion) inside our own HUD (--mode hud) rather than the raw ViZDoom window.
 import { createDevboxClient } from "@namespacelabs/sdk/devbox";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -17,6 +19,7 @@ const args = process.argv.slice(2);
 const action = args[0], count = Number(args[1]);
 const flag = (n, d) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : d; };
 const PREFIX = flag("--prefix", "fly-mac"), SIZE = flag("--size", "m"), RES = flag("--res", "1600x1200");
+const SPEED = flag("--speed", "7"), HOLD = flag("--hold", "8"), MODE = flag("--mode", "hud");
 const log = (m) => console.log(`${new Date().toISOString().slice(11, 19)} ${m}`);
 const OUT = join(REPO, "results/live-view"); mkdirSync(OUT, { recursive: true });
 
@@ -47,8 +50,8 @@ async function bringUp(name, index) {
   if (!setup.stdout.includes("SETUP_OK")) throw new Error(`${name}: setup failed: ${setup.stdout.slice(-400)}`);
   log(`${name}: DOOMFLY ready in ${Math.round((Date.now() - t0) / 1000)} s`);
   const seed = 41027 + index;
-  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; pkill -f mac_cycle.py; sleep 1; pkill -9 -x vizdoom; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
-  log(`${name}: game loop started (seed ${seed})`);
+  await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; pkill -f mac_cycle.py; sleep 1; pkill -9 -x vizdoom; sleep 1; (nohup bash ${repo}/mac_loop.sh ${fly} ${repo} ${seed} ${name} ${SPEED} ${HOLD} ${MODE} ${RES} > ${home}/fly-out/loop.log 2>&1 &); echo started`);
+  log(`${name}: game loop started (seed ${seed}, ${SPEED} tics/s, ${MODE})`);
   return d;
 }
 
@@ -72,7 +75,7 @@ try {
     for (const d of (await client.devboxes.list({ limit: 100 })).items)
       if (d.name.startsWith(PREFIX + "-")) { await client.devboxes.delete(d.id); log(`${d.name}: deleted`); }
   } else {
-    console.error("usage: node mac_wall.mjs up <count> | shots | down   [--prefix fly-mac] [--size m] [--res 1600x1200]");
+    console.error("usage: node mac_wall.mjs up <count> | shots | down   [--prefix fly-mac] [--size m] [--speed 7] [--hold 8] [--mode hud|window] [--res 1600x1200]");
     process.exitCode = 2;
   }
 } finally {

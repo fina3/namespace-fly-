@@ -1,12 +1,17 @@
 #!/bin/bash
 # Endless demo loop for a macOS Devbox's screen (started by mac_wall.mjs / mac_start_loop.mjs).
-# One python process keeps the brain loaded and cycles the knockout conditions; the window never closes.
-# Usage: mac_loop.sh <fly-home> <repo> <game-seed> [resolution]
-FLY=$1; REPO=$2; SEED=${3:-41027}; RES=${4:-1600x1200}
+# One python process keeps the brain loaded and cycles the knockout conditions; the picture never goes away.
+# Usage: mac_loop.sh <fly-home> <repo> <game-seed> <label> [speed] [hold] [hud|window] [resolution]
+FLY=$1; REPO=$2; SEED=${3:-41027}; LABEL=${4:-}; SPEED=${5:-7}; HOLD=${6:-8}; MODE=${7:-hud}; RES=${8:-1600x1200}
 # Leave cores for the screen-sharing service the Live page reads from: the brain uses one thread per
 # step anyway, and numpy/numba threads only add load on a 6-core box.
 export NUMBA_NUM_THREADS=2 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2
+case "$MODE" in
+  hud) EXTRA="--hud --font $FLY/Inter.ttf" ;;
+  *)   EXTRA="--resolution $RES" ;;
+esac
 while true; do
-  "$FLY/venv/bin/python" "$REPO/mac_cycle.py" --doomfly "$FLY/doomfly" --seed "$SEED" --resolution "$RES" >> "$HOME/fly-out/cycle.log" 2>&1
+  "$FLY/venv/bin/python" "$REPO/mac_cycle.py" --doomfly "$FLY/doomfly" --seed "$SEED" --label "$LABEL" \
+      --speed "$SPEED" --hold "$HOLD" $EXTRA >> "$HOME/fly-out/cycle.log" 2>&1
   sleep 1   # only reached if the process dies; restart it
 done
