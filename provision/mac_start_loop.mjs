@@ -12,7 +12,10 @@ if (!name) { console.error("usage: node mac_start_loop.mjs <devbox-name> [seed] 
 const client = createDevboxClient();
 try {
   const d = await client.devboxes.get(name);
-  const home = (await d.shell("echo $HOME")).stdout.trim();
+  if (d.info.state !== "running") { await d.start(); console.log(`started ${name}`); }
+  const home = (await d.shell("echo $HOME", { timeoutMs: 120000 })).stdout.trim();
+  // a background loop does not count as activity, so hold the box awake explicitly (cleared by mac_wall.mjs down / expire)
+  await d.shell("boxctl task mark fly-wall || true");
   for (const f of ["run_candidate.py", "fly_sim.py"]) await d.fs.upload(join(REPO, f), `${home}/namespace-fly/${f}`);
   await d.fs.upload(join(HERE, "mac_loop.sh"), `${home}/namespace-fly/mac_loop.sh`);
   await d.shell(`pkill -f mac_loop.sh; pkill -f run_candidate.py; sleep 1; mkdir -p ${home}/fly-out; `
