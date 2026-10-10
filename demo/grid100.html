@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Fly Brains</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Namespace: electric blue, film grain, faint white grid, lavender glow, white Inter. */
+    --bg: #1e34e8; --bg-deep: #1426c4; --glow: #b9a8ff; --border: rgba(255,255,255,.26); --text: #ffffff;
+    --muted: rgba(255,255,255,.68); --dim: rgba(255,255,255,.4); --track: rgba(6,12,90,.78);
+    --on: #ffffff; --warn: #ff8f80; --accent: #cdd4ff;
+    --b0: #ffffff; --b1: #c4b5ff; --b2: #ffd166; --b3: #7ee8ff;      /* stimulus strips s1-s4 */
+    --mono: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;   /* Inter everywhere */
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); overflow: hidden; font-variant-numeric: tabular-nums; font-feature-settings: "tnum", "cv11"; }
+  body { display: flex; flex-direction: column; padding: 14px 20px 10px; gap: 10px;
+         background:
+           radial-gradient(ellipse 68% 85% at 100% 0%, rgba(226,130,255,.58) 0%, rgba(170,140,255,.32) 40%, rgba(170,140,255,0) 75%),
+           repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 44px),
+           repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 44px),
+           linear-gradient(200deg, var(--bg) 0%, var(--bg) 45%, var(--bg-deep) 100%); }   /* pink glow upper right, deeper blue lower left, faint grid */
+  body.flat { background: var(--bg); }   /* ?flat : the one-colour version */
+
+  header { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .title { display: flex; align-items: center; gap: 16px; min-width: 0; }
+  .tag { flex: none; border: 1px solid rgba(255,255,255,.75); padding: .45em 1em; font-size: clamp(8px, .7vw, 12px); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+  h1 { font-size: clamp(16px, 1.75vw, 30px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; white-space: nowrap; }
+  h1 b { font-weight: 700; color: var(--text); }
+  h1 .sep { color: var(--dim); font-weight: 400; }
+  .meta { min-width: 0; flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  .meta b { color: var(--text); font-weight: 500; }
+  .meta .ns { color: var(--text); }
+
+  /* As big as the window allows: JS picks the column count that gives the largest 4:3 tiles for all 100 runs
+     and sets --tw (tile width). Rows wrap; a short last row is centred. */
+  /* Fixed 13 x 8 for a 16:9 frame: 100 tiles + the legend in the last 4 cells, every row full.
+     13 x 8 gives the largest 4:3 tiles of any grid that holds 100 at this aspect ratio. Sized in pure CSS
+     from the stage's own size (container units), so it never re-flows or falls back to another layout. */
+  .stage { flex: 1; min-height: 0; container-type: size; display: grid; place-items: center; }
+  .grid { --gap: clamp(4px, .55cqw, 9px);
+          --tw: min(calc((100cqw - 12 * var(--gap)) / 13), calc((100cqh - 7 * var(--gap)) / 8 * 4 / 3));
+          display: grid; grid-template-columns: repeat(13, var(--tw)); grid-auto-rows: calc(var(--tw) * 3 / 4); gap: var(--gap); }
+  .tile { position: relative; background: #000; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; min-height: 0; box-shadow: 0 8px 18px -10px rgba(4,8,70,.8);
+          opacity: 0; transform: scale(.94); transition: opacity .25s ease, transform .25s ease, filter .5s ease, border-color .4s; }
+  .tile.in { opacity: 1; transform: none; }
+  .tile canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; display: block; }
+  .tile .bar { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--box); }
+  .tile .lbl { position: absolute; left: 6%; top: 8%; right: 5%; font-weight: 600; display: flex; justify-content: space-between; gap: 6px; font-family: var(--mono); font-size: clamp(7px, calc(var(--tw) * .085), 13px); letter-spacing: .02em; color: rgba(255,255,255,.85); text-shadow: 0 1px 2px #000, 0 0 4px #000; white-space: nowrap; overflow: hidden; }
+  .tile .lbl span:first-child { overflow: hidden; text-overflow: ellipsis; }
+  .tile .lbl span:last-child { flex: none; font-size: .88em; }
+  .tile .lbl span:last-child { color: rgba(255,255,255,.5); }
+  .tile .out { position: absolute; left: 5%; right: 5%; bottom: 6%; height: clamp(6px, calc(var(--tw) * .05), 10px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .tile .out i { display: block; background: var(--track); border-radius: 2px; overflow: hidden; position: relative; }
+  .tile .out i::after { content: ""; position: absolute; inset: 0; width: var(--v, 0%); background: var(--on); border-radius: 2px; }
+  .tile .out i.lost { background: rgba(255,143,128,.6); }
+  .tile.knockout { border: 2px solid var(--warn); box-shadow: 0 0 16px -3px rgba(255,143,128,.75); }
+  .tile.knockout .lbl span:first-child { color: #ffd2cb; }
+  .tile.control { border: 2px solid #ffffff; box-shadow: 0 0 18px -2px rgba(255,255,255,.75); }
+  .tile.control .lbl span:first-child { color: var(--on); }
+  .tile.vision { border: 1px dashed rgba(255,255,255,.65); }
+  body.focus .tile.sham, body.focus .tile.vision { filter: brightness(.38) saturate(.35); }
+  body.focus .tile.knockout, body.focus .tile.control { transform: scale(1.04); z-index: 2; }
+
+  .legend { grid-column: span 4; display: flex; flex-direction: column; justify-content: center; gap: .55em; padding: 0 0 0 1.2em;
+            font-family: var(--mono); font-size: clamp(7px, calc(var(--tw) * .078), 12px); color: var(--muted); letter-spacing: .03em; white-space: nowrap; overflow: hidden; }
+  .legend div { display: flex; align-items: center; gap: .7em; }
+  .legend i { width: .95em; height: .95em; border-radius: 2px; display: inline-block; flex: none; }
+  .legend b { color: var(--text); font-weight: 500; }
+
+  footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--mono); font-size: clamp(8.5px, .75vw, 11px); color: var(--muted); letter-spacing: .05em; white-space: nowrap; }
+  footer b { color: var(--text); font-weight: 500; }
+  .chips { display: flex; gap: 14px; }
+  .chip { display: flex; align-items: center; gap: 6px; }
+  .chip i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .verdict { opacity: 0; transition: opacity .5s; color: var(--text); }
+  .verdict.show { opacity: 1; }
+  .verdict .g { color: var(--text); } .verdict .r { color: var(--warn); }
+</style>
+</head>
+<body>
+<script>if (location.search.includes('flat')) document.body.classList.add('flat');</script>
+<header>
+  <div class="title"><span class="tag">DOOMFLY</span><h1><b id="n-runs">100</b> simulated fly brains <span class="sep">·</span> <b id="n-boxes">100</b> Devboxes <span class="sep">·</span> one experiment</h1></div>
+  <div class="meta">
+    <span>MaleCNS v1.0 · <b>166,700</b> neurons · DOOMFLY</span>
+    <span class="ns">Namespace · <b>100</b> Devboxes · 4 vCPU · one run each</span>
+  </div>
+</header>
+
+<main class="stage"><section class="grid" id="grid"></section></main>
+
+<footer>
+  <div class="chips">
+    <span class="chip"><i style="background:var(--on)"></i><b id="n-control">4</b> intact</span>
+    <span class="chip"><i style="background:var(--warn)"></i><b id="n-knockout">16</b> knockouts</span>
+    <span class="chip"><i style="background:var(--dim)"></i><b id="n-sham">72</b> shams</span>
+    <span class="chip"><i style="border:1px dashed #fff"></i><b id="n-vision">8</b> vision controls</span>
+  </div>
+  <div class="verdict" id="verdict"></div>
+  <div>replay · first 10 s of each run · bars = <b>TURN MOVE FIRE</b></div>
+</footer>
+
+<script src="grid100-data.js"></script>
+<script>
+/* One tile per simulation of the 100-run experiment, one Devbox per run, in Devbox order (r001-r100). Bars are each run's own decoded commands, tic by tic.
+   This was the fixed-camera experiment: every run on a stimulus saw identical frames, so tiles on the same
+   stimulus share footage and differ only in what the brain did with it. */
+const LOOP = 10000, TICK = 1000 / 35;
+const BOXC = ['var(--b0)', 'var(--b1)', 'var(--b2)', 'var(--b3)'];      // strip colour = which stimulus the box ran
+const STIMS = Object.keys(GRID.stimuli);
+const stimIx = s => STIMS.indexOf(s);
+const boxNo = r => r.box.replace('knockouts-100-', '');
+const SHORT = { 'BLANK SCREEN': 'BLANK', 'FROZEN FRAME': 'FROZEN', 'BOTH DNs −': 'BOTH DNs −' };   // tile labels must fit a small tile
+const tileLabel = r => SHORT[r.label] ?? r.label;
+const runs = GRID.runs.slice().sort((a, b) => a.box.localeCompare(b.box));
+if (runs.length !== 100 || new Set(runs.map(r => r.box)).size !== 100) console.error('expected 100 runs on 100 Devboxes, got', runs.length);
+
+const sheets = {};                       // one sprite sheet per stimulus: 350 frames, 25 columns
+for (const s of Object.keys(GRID.stimuli)) { const im = new Image(); im.src = `stim-${s}.jpg`; sheets[s] = im; }
+const FW = 128, FH = 96, COLS = 25;
+
+const grid = document.getElementById('grid');
+const tiles = runs.map(r => {
+  const el = document.createElement('div');
+  el.className = 'tile ' + r.kind;
+  el.style.setProperty('--box', BOXC[stimIx(r.stim)]);
+  el.title = `${r.label} · ${r.stim} · Devbox ${r.box} (${r.box_id})`;
+  el.innerHTML = `<canvas width="${FW}" height="${FH}"></canvas><div class="bar"></div>
+    <div class="lbl"><span>${tileLabel(r)}</span><span>${boxNo(r)}</span></div>
+    <div class="out"><i class="${r.turn120 ? '' : 'lost'}"></i><i class="${r.move120 ? '' : 'lost'}"></i><i class="${r.fire120 ? '' : 'lost'}"></i></div>`;
+  grid.appendChild(el);
+  return { r, el, ctx: el.querySelector('canvas').getContext('2d'), bars: el.querySelectorAll('.out i') };
+});
+const legend = document.createElement('div');                       // fills the 4 spare cells after r100
+legend.className = 'legend';
+grid.appendChild(legend);
+
+legend.innerHTML = STIMS.map((s, i) => {
+  const mine = runs.filter(r => r.stim === s), st = GRID.stimuli[s];
+  return `<div><i style="background:${BOXC[i]}"></i><b>${boxNo(mine[0])}–${boxNo(mine[mine.length - 1])}</b> ${s} · seed ${st.seed} · ${st.sweep}°/tic</div>`;
+}).join('');
+document.getElementById('n-runs').textContent = runs.length;
+document.getElementById('n-boxes').textContent = new Set(runs.map(r => r.box)).size;
+for (const k of ['control', 'knockout', 'sham', 'vision']) document.getElementById('n-' + k).textContent = GRID.counts[k];
+// Verdict computed from each run's 120 s means: a command counts as lost when its mean is exactly zero.
+const anyLost = r => !(r.turn120 && r.move120 && r.fire120);
+const shamOk = runs.filter(r => r.kind === 'sham' && !anyLost(r)).length, nSham = GRID.counts.sham;
+const koLost = runs.filter(r => r.kind === 'knockout' && anyLost(r)).length, nKo = GRID.counts.knockout;
+document.getElementById('verdict').innerHTML =
+  `<span class="g">${shamOk} of ${nSham} shams: all commands intact</span> · <span class="r">${koLost} of ${nKo} knockouts: at least one command silenced</span>`;
+
+const verdict = document.getElementById('verdict');
+let start = performance.now(), last = -1;
+function frame(now) {
+  const t = (now - start) % LOOP;
+  const i = Math.min(GRID.tics - 1, Math.floor(t / TICK));
+  tiles.forEach((k, n) => k.el.classList.toggle('in', t >= 150 + n * 12));
+  document.body.classList.toggle('focus', t >= 6200 && t < 9300);
+  verdict.classList.toggle('show', t >= 6200);
+  if (i !== last) {
+    for (const k of tiles) {
+      const im = sheets[k.r.stim];
+      if (im.complete && im.naturalWidth) {
+        if (k.r.arm === 'blank-vision') { k.ctx.fillStyle = '#000'; k.ctx.fillRect(0, 0, FW, FH); }   // this brain was shown black
+        else {
+          const f = k.r.arm === 'frozen-vision' ? 0 : i;                                              // this one saw frame 1 forever
+          k.ctx.drawImage(im, (f % COLS) * FW, Math.floor(f / COLS) * FH, FW, FH, 0, 0, FW, FH);
+        }
+      }
+      k.bars[0].style.setProperty('--v', (k.r.turn.charCodeAt(i) - 48) / 9 * 100 + '%');
+      k.bars[1].style.setProperty('--v', (k.r.move.charCodeAt(i) - 48) / 9 * 100 + '%');
+      k.bars[2].style.setProperty('--v', k.r.fire[i] === '1' ? '100%' : '0%');
+    }
+    last = i;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+const restart = () => { start = performance.now(); last = -1; };
+addEventListener('click', restart);
+addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') restart(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restart(); });
+</script>
+</body>
+</html>
